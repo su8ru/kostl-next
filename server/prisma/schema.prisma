@@ -12,3 +12,45 @@ model Task {
   label String
   done  Boolean @default(false)
 }
+
+// No.xx or xxT or xxK
+model Operation {
+  id     String
+  day    Day
+  trains Train[]
+
+  @@id([id, day])
+}
+
+// xxxx or xxxxT or xxxxK
+model Train {
+  id            String
+  day           Day
+  operation     Operation    @relation(fields: [operationId], references: [id])
+  operationId   String
+  type          Type?        @relation(fields: [typeId], references: [id])
+  typeId        String?
+  destination   Destination? @relation(fields: [destinationId], references: [id])
+  destinationId String?
+
+  @@id([id, day])
+}
+
+model Destination {
+  id      String  @id
+  name    String
+  keio_id String? @unique
+  odpt_id String? @unique
+}
+
+model Type {
+  id      String  @id
+  name    String
+  keio_id String? @unique
+  odpt_id String? @unique
+}
+
+enum Day {
+  WEEKDAY
+  HOLIDAY
+}
