@@ -1,15 +1,15 @@
-import { AuthHeader, UserInfo } from '$/types'
+import { AuthHeader, UserInfo } from "$/types";
 
 export type Methods = {
   get: {
-    reqHeaders: AuthHeader
-    resBody: UserInfo
-  }
+    reqHeaders: AuthHeader;
+    resBody: UserInfo;
+  };
 
   post: {
-    reqHeaders: AuthHeader
-    reqFormat: FormData
-    reqBody: { icon: Blob }
-    resBody: UserInfo
-  }
-}
+    reqHeaders: AuthHeader;
+    reqFormat: FormData;
+    reqBody: { icon: Blob };
+    resBody: UserInfo;
+  };
+};
