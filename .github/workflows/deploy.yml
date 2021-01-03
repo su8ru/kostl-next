@@ -13,14 +13,14 @@ jobs:
         with:
           node-version: 14
       - name: prepare .ssh dir
-        run: mkdir -p .ssh && chmod 700 .ssh
+        run: mkdir -p ~/.ssh && chmod 700 ~/.ssh
       - name: prepare ssh key
-        run: echo "$SSH_KEY" > .ssh/id_rsa && chmod 600 .ssh/id_rsa
+        run: echo "$SSH_KEY" > ~/.ssh/id_rsa && chmod 600 ~/.ssh/id_rsa
         env:
           SSH_KEY: ${{ secrets.SSH_KEY }}
       - name: prepare ssh config
         run: |
-          cat <<EOF > .ssh/config
+          cat <<EOF > ~/.ssh/config
           Host server
             HostName              $SSH_HOST
             Port                  $SSH_PORT
@@ -37,7 +37,7 @@ jobs:
       - name: set permission
         run: chmod -R 775 * && sudo groupadd -f docker && sudo useradd deploy -g docker && sudo chown -R deploy:docker *
       - name: push with rsync
-        run: rsync -rlptgoD -O -v --delete --exclude ".git/" --exclude "server/.env" * server:$DIR
+        run: rsync -rlptgoD -O -v --delete --exclude ".git/" --exclude "server/.env" -e "ssh -F /home/runner/.ssh/config" * server:$DIR
         env:
           DIR: ${{ secrets.DEPLOY_DIR }}
 
@@ -56,7 +56,6 @@ jobs:
           envs: DIR
           script_stop: true
           script: |
-            source .bashrc
             cd $DIR
             docker-compose build --no-cache
             docker-compose up -d
