@@ -1,7 +1,20 @@
 version: "3.8"
 
 services:
-  app:
+  api.next.kostl.info:
     build: .
-    ports:
-      - "8080:8080"
+    restart: on-failure
+    container_name: api.next.kostl.info
+    environment:
+      VIRTUAL_HOST: api.next.kostl.info
+      LETSENCRYPT_HOST: api.next.kostl.info
+      LETSENCRYPT_EMAIL: s@su8ru.dev
+    networks:
+      - front_bridge
+      - back_bridge
+
+networks:
+  front_bridge:
+    external: true
+  back_bridge:
+    external: true
