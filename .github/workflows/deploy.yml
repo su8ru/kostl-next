@@ -85,7 +85,7 @@ jobs:
           script_stop: true
           script: |
             cd $DIR
-            docker-compose build --no-cache
+            docker-compose build
             docker-compose up -d
         env:
           DIR: ${{ secrets.DEPLOY_DIR }}
