@@ -41,33 +41,23 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: prepare .ssh dir
-        run: mkdir -p ~/.ssh && chmod 700 ~/.ssh
+        run: mkdir -p .ssh && chmod 700 .ssh
       - name: prepare ssh key
-        run: echo "$SSH_KEY" > ~/.ssh/id_rsa && chmod 600 ~/.ssh/id_rsa
+        run: echo "$SSH_KEY" > .ssh/id_rsa && chmod 600 .ssh/id_rsa
         env:
           SSH_KEY: ${{ secrets.SSH_KEY }}
-      - name: prepare ssh config
-        run: |
-          cat <<EOF > ~/.ssh/config
-          Host server
-            HostName              $SSH_HOST
-            Port                  $SSH_PORT
-            User                  $SSH_USER
-            IdentityFile          ~/.ssh/id_rsa
-            IdentitiesOnly        yes
-            StrictHostKeyChecking no
-            UserKnownHostsFile    /dev/null
-          EOF
-        env:
-          SSH_HOST: ${{ secrets.SSH_HOST }}
-          SSH_PORT: ${{ secrets.SSH_PORT }}
-          SSH_USER: ${{ secrets.SSH_USER }}
       - name: set permission
         run: chmod -R 775 * && sudo groupadd -f docker && sudo useradd deploy -g docker && sudo chown -R deploy:docker *
       - name: push with rsync
-        run: rsync -rlptgoD -O -v --delete --exclude ".git/" --exclude "server/.env" -e "ssh -F /home/runner/.ssh/config" * server:$DIR
+        run: |
+          rsync -rlptgoD -O --delete --exclude ".git/" --exclude "server/.env" \
+          -e "ssh -i .ssh/id_rsa -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -p ${SSH_PORT}" \
+          * $SSH_USER@$SSH_HOST:$DIR
         env:
           DIR: ${{ secrets.DEPLOY_DIR }}
+          SSH_HOST: ${{ secrets.SSH_HOST }}
+          SSH_USER: ${{ secrets.SSH_USER }}
+          SSH_PORT: ${{ secrets.SSH_PORT }}
 
   docker:
     name: build and up
