@@ -1,8 +1,8 @@
-import type { ArticleInfo } from '$/service/article'
+import type { ArticleInfo } from "$/service/article";
 
 export type Methods = {
   get: {
-    query: { search?: string }
-    resBody: ArticleInfo[]
-  }
-}
+    query: { search?: string };
+    resBody: ArticleInfo[];
+  };
+};

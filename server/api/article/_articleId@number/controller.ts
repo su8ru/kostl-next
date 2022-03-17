@@ -1,5 +1,5 @@
-import { getArticle } from '$/service/article'
-import { defineController } from './$relay'
+import { getArticle } from "$/service/article";
+import { defineController } from "./$relay";
 
 export default defineController(() => ({
   get: ({ params: { articleId } }) =>
@@ -7,7 +7,7 @@ export default defineController(() => ({
       article
         ? {
             status: 200 as const,
-            body: article
+            body: article,
           }
-        : { status: 404 as const })(getArticle(articleId))
-}))
+        : { status: 404 as const })(getArticle(articleId)),
+}));

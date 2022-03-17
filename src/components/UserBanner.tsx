@@ -1,59 +1,59 @@
-import { useState, useCallback } from 'react'
-import styles from '~/styles/UserBanner.module.css'
-import { apiClient } from '~/utils/apiClient'
-import type { UserInfo } from '$/types'
-import type { ChangeEvent } from 'react'
-import Link from 'next/link'
-import { pagesPath } from '~/utils/$path'
-import { useRouter } from 'next/router'
+import { useState, useCallback } from "react";
+import styles from "~/styles/UserBanner.module.css";
+import { apiClient } from "~/utils/apiClient";
+import type { UserInfo } from "$/types";
+import type { ChangeEvent } from "react";
+import Link from "next/link";
+import { pagesPath } from "~/utils/$path";
+import { useRouter } from "next/router";
 
 const UserBanner = () => {
-  const router = useRouter()
-  const [search, setSearch] = useState('')
-  const [isLoggedIn, setIsLoggedIn] = useState(false)
-  const [token, setToken] = useState('')
-  const [userInfo, setUserInfo] = useState({} as UserInfo)
+  const router = useRouter();
+  const [search, setSearch] = useState("");
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [token, setToken] = useState("");
+  const [userInfo, setUserInfo] = useState({} as UserInfo);
 
   const editIcon = useCallback(
     async (e: ChangeEvent<HTMLInputElement>) => {
-      if (!e.target.files?.length) return
+      if (!e.target.files?.length) return;
 
       setUserInfo(
         await apiClient.user.$post({
           headers: { authorization: token },
-          body: { icon: e.target.files[0] }
+          body: { icon: e.target.files[0] },
         })
-      )
+      );
     },
     [token]
-  )
+  );
 
   const login = useCallback(async () => {
-    const id = prompt('Enter the user id (See server/.env)')
-    const pass = prompt('Enter the user pass (See server/.env)')
-    if (!id || !pass) return alert('Login failed')
+    const id = prompt("Enter the user id (See server/.env)");
+    const pass = prompt("Enter the user pass (See server/.env)");
+    if (!id || !pass) return alert("Login failed");
 
-    let newToken = ''
+    let newToken = "";
 
     try {
       newToken = `Bearer ${
         (await apiClient.token.$post({ body: { id, pass } })).token
-      }`
-      setToken(newToken)
+      }`;
+      setToken(newToken);
     } catch (e) {
-      return alert('Login failed')
+      return alert("Login failed");
     }
 
     setUserInfo(
       await apiClient.user.$get({ headers: { authorization: newToken } })
-    )
-    setIsLoggedIn(true)
-  }, [])
+    );
+    setIsLoggedIn(true);
+  }, []);
 
   const logout = useCallback(() => {
-    setToken('')
-    setIsLoggedIn(false)
-  }, [])
+    setToken("");
+    setIsLoggedIn(false);
+  }, []);
 
   return (
     <div>
@@ -68,14 +68,14 @@ const UserBanner = () => {
         </div>
         <form
           onSubmit={(e) => {
-            e.preventDefault()
+            e.preventDefault();
             router.push(
               pagesPath.article.$url({
                 query: {
-                  search
-                }
+                  search,
+                },
               })
-            )
+            );
           }}
         >
           <input
@@ -103,7 +103,7 @@ const UserBanner = () => {
       </div>
       <div className={styles.padding} />
     </div>
-  )
-}
+  );
+};
 
-export default UserBanner
+export default UserBanner;

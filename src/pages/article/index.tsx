@@ -1,24 +1,24 @@
-import { useCallback, useState } from 'react'
-import useAspidaSWR from '@aspida/swr'
-import { NextPage } from 'next'
-import { useRouter } from 'next/router'
-import Head from 'next/head'
-import Link from 'next/link'
-import Layout from '~/components/Layout'
-import { pagesPath } from '~/utils/$path'
-import { apiClient } from '~/utils/apiClient'
+import { useCallback, useState } from "react";
+import useAspidaSWR from "@aspida/swr";
+import { NextPage } from "next";
+import { useRouter } from "next/router";
+import Head from "next/head";
+import Link from "next/link";
+import Layout from "~/components/Layout";
+import { pagesPath } from "~/utils/$path";
+import { apiClient } from "~/utils/apiClient";
 
 export type OptionalQuery = {
-  search: string
-}
+  search: string;
+};
 
 const ArticleList: NextPage = () => {
-  const router = useRouter()
-  const query = router.query as Partial<OptionalQuery>
-  const search = query.search ? query.search.trim() : ''
+  const router = useRouter();
+  const query = router.query as Partial<OptionalQuery>;
+  const search = query.search ? query.search.trim() : "";
   const { data: articleList } = useAspidaSWR(apiClient.article, {
-    query: { search }
-  })
+    query: { search },
+  });
   return (
     <Layout>
       <Head>
@@ -54,7 +54,7 @@ const ArticleList: NextPage = () => {
         <span>Loading...</span>
       )}
     </Layout>
-  )
-}
+  );
+};
 
-export default ArticleList
+export default ArticleList;

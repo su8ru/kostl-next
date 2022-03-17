@@ -1,11 +1,11 @@
-import React, { FC, ReactNode } from 'react'
-import styles from '~/styles/Layout.module.css'
-import { staticPath } from '~/utils/$path'
-import UserBanner from './UserBanner'
+import React, { FC, ReactNode } from "react";
+import styles from "~/styles/Layout.module.css";
+import { staticPath } from "~/utils/$path";
+import UserBanner from "./UserBanner";
 
 type LayoutProps = {
-  children: ReactNode
-}
+  children: ReactNode;
+};
 
 const Layout: FC<LayoutProps> = ({ children }) => {
   return (
@@ -18,7 +18,7 @@ const Layout: FC<LayoutProps> = ({ children }) => {
           target="_blank"
           rel="noopener noreferrer"
         >
-          Powered by{' '}
+          Powered by{" "}
           <img
             src={staticPath.vercel_svg}
             alt="Vercel Logo"
@@ -27,7 +27,7 @@ const Layout: FC<LayoutProps> = ({ children }) => {
         </a>
       </footer>
     </div>
-  )
-}
+  );
+};
 
-export default Layout
+export default Layout;

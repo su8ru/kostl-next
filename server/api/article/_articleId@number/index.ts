@@ -1,7 +1,7 @@
-import type { ArticleInfo } from '$/service/article'
+import type { ArticleInfo } from "$/service/article";
 
 export type Methods = {
   get: {
-    resBody: ArticleInfo
-  }
-}
+    resBody: ArticleInfo;
+  };
+};

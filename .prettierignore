@@ -6,3 +6,4 @@ server/migration
 server/index.js
 server/lambda.js
 server/lambda_migration.js
+$.ts
