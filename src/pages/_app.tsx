@@ -5,6 +5,7 @@ import { Box, ChakraProvider, Flex } from "@chakra-ui/react";
 import Header from "~/components/Header";
 import Footer from "~/components/Footer";
 import { useEffect } from "react";
+import "~/aseets/global.scss";
 
 const MyApp = ({ Component, pageProps }: AppProps) => {
   useEffect(() => {
@@ -23,9 +24,14 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
         <link rel="icon" href={staticPath.favicon_png} />
       </Head>
       <ChakraProvider>
-        <Flex minW="100%" minH="var(--100vh)" direction="column">
+        <Flex
+          minW="100%"
+          minH="var(--100vh)"
+          direction="column"
+          alignItems="center"
+        >
           <Header />
-          <Box as="main" flexGrow="1">
+          <Box as="main" flexGrow="1" pt="10" pb="10">
             <Component {...pageProps} />
           </Box>
           <Footer />

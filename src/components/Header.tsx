@@ -5,8 +5,10 @@ const Header: React.VFC = () => {
     <Flex
       as="header"
       h="10"
-      pos="sticky"
+      pos="fixed"
       top="0"
+      left="0"
+      right="0"
       justifyContent="center"
       bg="linear-gradient(0deg,#00205b 46%,#fff 0,#fff 54%,#ab035c 0)"
       boxShadow="lg"
