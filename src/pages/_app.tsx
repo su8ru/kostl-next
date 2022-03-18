@@ -1,19 +1,43 @@
 import type { AppProps } from "next/app";
 import Head from "next/head";
 import { staticPath } from "~/utils/$path";
-import { ChakraProvider } from "@chakra-ui/react";
+import { Box, ChakraProvider, Flex } from "@chakra-ui/react";
+import Header from "~/components/Header";
+import Footer from "~/components/Footer";
+import { useEffect } from "react";
 
 const MyApp = ({ Component, pageProps }: AppProps) => {
+  useEffect(() => {
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    window.addEventListener("orientationchange", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+      window.removeEventListener("orientationchange", handleResize);
+    };
+  }, []);
+
   return (
     <>
       <Head>
         <link rel="icon" href={staticPath.favicon_png} />
       </Head>
       <ChakraProvider>
-        <Component {...pageProps} />
+        <Flex minW="100%" minH="var(--100vh)" direction="column">
+          <Header />
+          <Box as="main" flexGrow="1">
+            <Component {...pageProps} />
+          </Box>
+          <Footer />
+        </Flex>
       </ChakraProvider>
     </>
   );
 };
 
 export default MyApp;
+
+const handleResize = () => {
+  const height = window.innerHeight;
+  document.documentElement.style.setProperty("--100vh", `${height}px`);
+};
