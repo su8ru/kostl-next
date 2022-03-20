@@ -1,9 +1,10 @@
 import useAspidaSWR from "@aspida/swr";
 import { trafficApiClient } from "~/utils/apiClient";
-import { Box, SimpleGrid, Text } from "@chakra-ui/react";
+import { SimpleGrid, Text } from "@chakra-ui/react";
 import { getGridAreaKeio } from "~/utils/gridArea";
 import { groupBySection } from "~/utils/groupBySection";
 import { useMemo } from "react";
+import Section from "~/components/Section";
 
 const LineKeio: React.VFC = () => {
   const { data, error } = useAspidaSWR(trafficApiClient.keio, {
@@ -23,11 +24,7 @@ const LineKeio: React.VFC = () => {
       templateColumns="50px 10px 50px 50px 10px 50px 50px 10px 50px 10px 50px 10px 50px 50px 10px 50px 50px 10px 50px"
     >
       {sections.map(([gridArea, trains]) => (
-        <Box key={gridArea} gridArea={gridArea}>
-          {trains.map(({ id }) => (
-            <Box>{id}</Box>
-          ))}
-        </Box>
+        <Section key={gridArea} gridArea={gridArea} trains={trains} />
       ))}
     </SimpleGrid>
   );
