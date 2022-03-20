@@ -1,12 +1,11 @@
 import { NextPage } from "next";
 import { Box } from "@chakra-ui/react";
+import LineKeio from "~/components/LineKeio";
 
 const Page: NextPage = () => {
   return (
     <Box>
-      <Box width="1024px">
-        <img src="https://gravatar.su8ru.dev?s=1024" />
-      </Box>
+      <LineKeio />
     </Box>
   );
 };
