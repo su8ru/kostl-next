@@ -35,7 +35,10 @@ const parseKeio = (raw: Body): { timestamp: string; trains: Train[] } => {
   // 駅間走行中
   trains.push(
     ...(raw.TB ?? [])
-      .filter(({ id, sn }) => sn !== "I" && id.substring(1, 2) !== "1")
+      .filter(
+        ({ id, sn }) =>
+          sn !== "I" && id.substring(1, 2) !== "1" && id !== "D001"
+      )
       .flatMap(({ id, ps }: TB) =>
         ps.map<Train>((train) => {
           const { direction, section } = sectionIdToSection(id);
