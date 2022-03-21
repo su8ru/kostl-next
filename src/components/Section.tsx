@@ -1,4 +1,4 @@
-import { Train as TrainType } from "~/traffic-api/@types";
+import { Train as TrainType } from "$/types/train";
 import { Flex } from "@chakra-ui/react";
 import Train from "~/components/Train";
 
@@ -9,7 +9,7 @@ export interface Props {
 
 const Section: React.VFC<Props> = ({ gridArea, trains }) => {
   return (
-    <Flex gridArea={gridArea} direction="column">
+    <Flex gridArea={gridArea} direction="column" justifyContent="center">
       {trains.map((train) => (
         <Train key={train.id} train={train} />
       ))}
