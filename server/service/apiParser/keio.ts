@@ -12,8 +12,8 @@ const parseKeio = (raw: Body): { timestamp: string; trains: Train[] } => {
   trains.push(
     ...(raw.TS ?? [])
       .filter(({ id, sn }) => sn !== "I" && id.substring(1, 2) !== "1")
-      .flatMap(({ id, ps }: TS) => {
-        return ps.map<Train>((train) => ({
+      .flatMap(({ id, ps }: TS) =>
+        ps.map<Train>((train) => ({
           id: train.tr.trim(),
           type: train.sy_tr,
           direction: (shouldReverse(id, +train.bs) ? !+train.ki : +train.ki)
@@ -26,10 +26,10 @@ const parseKeio = (raw: Body): { timestamp: string; trains: Train[] } => {
             id: sectionIdToNumber(id),
             type: "Sta",
             // "2S", "3S" などの対策
-            track: parseInt(train.bs, 10),
+            track: parseInt(train.bs, 10) === 10 ? 0 : parseInt(train.bs, 10),
           },
-        }));
-      })
+        }))
+      )
   );
 
   // 駅間走行中
