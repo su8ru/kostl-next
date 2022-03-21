@@ -41,6 +41,8 @@ jobs:
   deploy:
     name: Deploy
     runs-on: ubuntu-latest
+    environment:
+      name: Server
     needs: test
     steps:
       - uses: actions/checkout@v2
@@ -73,6 +75,8 @@ jobs:
   docker:
     name: build and up
     runs-on: ubuntu-latest
+    environment:
+      name: Server
     needs: deploy
     steps:
       - name: build & up -d
