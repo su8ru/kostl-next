@@ -63,7 +63,7 @@ jobs:
         run: chmod -R 775 * && sudo groupadd -f docker && sudo useradd deploy -g docker && sudo chown -R deploy:docker *
       - name: push with rsync
         run: |
-          rsync -rlptgoD -O --delete --exclude ".git/" --exclude "server/.env" \
+          rsync -rlptgoD -O --delete --exclude ".git/" \
           -e "ssh -i .ssh/id_rsa -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -p ${SSH_PORT}" \
           * $SSH_USER@$SSH_HOST:$DIR
         env:
