@@ -61,9 +61,9 @@ const _getGridColumnKeio = (section: Section): number => {
       // 新線
       if (2 <= id && id <= 3) return _calcColumn(1, COLUMN_BRANCH, track);
       // 本線 2面4線
-      if ([4, 8, 14, 18, 23, 24, 33].includes(id))
+      if ([4, 8, 14, 18, 24, 33].includes(id))
         return _calcColumn(2, COLUMN_MAIN, track);
-      // 高幡不動
+      // 東府中・高幡不動
       if ([23, 29].includes(id)) return _calcColumn(3, COLUMN_MAIN, track);
       return _calcColumn(1, COLUMN_MAIN, track);
     }
@@ -93,7 +93,7 @@ const _calcColumn = (
   column: number,
   track: number
 ): number => {
-  if (trackCount >= 3 && trackCount - track >= 2) {
+  if (trackCount == 3 && track === 1) {
     return column + trackCount - track + 2;
   }
   return column + trackCount - track + (track <= trackCount ? 1 : 0);
