@@ -30,6 +30,15 @@ export const getGridAreaKeio: GetGridArea = (section, direction) => {
   return `${row} / ${column}`;
 };
 
+export const getGridAreaToei: GetGridArea = (section, direction) => {
+  const { id } = section;
+
+  const row = 43 - id * 2;
+  const column = COLUMN_BRANCH + (direction === "West" ? 1 : -3);
+
+  return `${row} / ${column} / ${row + 1} / ${column + 3}`;
+};
+
 const _getGridRowKeio = (section: Section): number => {
   const { id } = section;
 

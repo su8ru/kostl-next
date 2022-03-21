@@ -9,7 +9,7 @@ import LineBorderY from "~/components/LineBorderY";
 import LineBorderX from "~/components/LineBorderX";
 import StationLabel from "~/components/StationLabel";
 
-const LineKeio: React.VFC = () => {
+const KeioLine: React.VFC = () => {
   const { data } = useAspidaSWR(apiClient.traffic._key("keio"), {
     refreshInterval: 5000,
   });
@@ -153,4 +153,4 @@ const stationsTakao = [
   "高尾山口",
 ] as const;
 
-export default LineKeio;
+export default KeioLine;

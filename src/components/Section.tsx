@@ -13,8 +13,9 @@ const Section: React.VFC<Props> = ({ gridArea, trains }) => {
       gridArea={gridArea}
       direction={trains[0].direction === "East" ? "column" : "column-reverse"}
       justifyContent="center"
+      alignItems={trains[0].direction === "East" ? "flex-end" : "flex-start"}
       spacing="4px"
-      m="2px"
+      p="2px"
     >
       {trains.map((train) => (
         <Train key={train.id} train={train} />
