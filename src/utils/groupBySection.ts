@@ -1,4 +1,4 @@
-import { Train } from "~/traffic-api/@types";
+import { Train } from "$/types/train";
 import { GetGridArea } from "~/utils/gridArea";
 
 export const groupBySection = (

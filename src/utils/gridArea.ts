@@ -1,4 +1,4 @@
-import { Section, TrainDirection } from "~/traffic-api/@types";
+import { Section, TrainDirection } from "$/types/train";
 
 const COLUMN_MAIN = 5;
 const COLUMN_SUB = 15;
@@ -23,9 +23,9 @@ export const getGridAreaKeio: GetGridArea = (section, direction) => {
   const column = _getGridColumnKeio(section);
 
   if (id === 1 && type === "Way" && track === 2)
-    return `${row} / ${column} / ${row + 4} / ${column}`;
+    return `${row} / ${column} / ${row + 5} / ${column}`;
   if (id === 4 && type === "Way" && track === 1)
-    return `${row - 4} / ${column} / ${row} / ${column}`;
+    return `${row - 4} / ${column} / ${row + 1} / ${column}`;
 
   return `${row} / ${column}`;
 };
@@ -38,9 +38,9 @@ const _getGridRowKeio = (section: Section): number => {
   // 相模原線
   if (35 <= id && id <= 45) return (id - 16) * 2 - 1;
   // 競馬場線
-  if (id === 46) return 24;
+  if (id === 46) return 24 * 2 - 1;
   // 動物園線
-  if (id === 47) return 25;
+  if (id === 47) return 28 * 2 - 1;
   // 高尾線
   if (48 <= id && id <= 53) return (id - 14) * 2 - 1;
 
@@ -64,7 +64,7 @@ const _getGridColumnKeio = (section: Section): number => {
       if ([4, 8, 14, 18, 23, 24, 33].includes(id))
         return _calcColumn(2, COLUMN_MAIN, track);
       // 高幡不動
-      if (id === 29) return _calcColumn(3, COLUMN_MAIN, track);
+      if ([23, 29].includes(id)) return _calcColumn(3, COLUMN_MAIN, track);
       return _calcColumn(1, COLUMN_MAIN, track);
     }
     // 競馬場線・動物園線
@@ -93,5 +93,8 @@ const _calcColumn = (
   column: number,
   track: number
 ): number => {
+  if (trackCount >= 3 && trackCount - track >= 2) {
+    return column + trackCount - track + 2;
+  }
   return column + trackCount - track + (track <= trackCount ? 1 : 0);
 };
