@@ -7,8 +7,4 @@ module.exports = [
       process.env.API_BASE_PATH || ""
     }`,
   },
-  {
-    input: "src/traffic-api",
-    baseURL: "https://kostl-traffic-api.su8ru.workers.dev",
-  },
 ];

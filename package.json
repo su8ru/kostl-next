@@ -41,7 +41,6 @@
     "framer-motion": "^6",
     "frourio": "^0.27.1",
     "next": "^12.0.10",
-    "node-fetch": "^2.6.1",
     "pathpida": "^0.18.0",
     "prisma": "^3.9.1",
     "react": "^17.0.2",

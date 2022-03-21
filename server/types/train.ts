@@ -10,14 +10,15 @@ export type Train = {
   section: Section;
 };
 
+export type SectionType = "Sta" | "Way" | "WayB";
+
 export type Section = {
   id: number;
-  type: "Sta" | "Way" | "WayB";
+  type: SectionType;
   track: number;
 };
 
-export type TrafficResponse = {
-  fromKV: boolean;
+export type Traffic = {
   timestamp: string;
   trains: Train[];
 };

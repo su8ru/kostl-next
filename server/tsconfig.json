@@ -16,6 +16,7 @@
     "skipLibCheck": true,
     "strict": true,
     "strictPropertyInitialization": false,
-    "target": "es6"
+    "target": "es6",
+    "typeRoots": ["types"]
   }
 }

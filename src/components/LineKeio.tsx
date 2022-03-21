@@ -1,5 +1,5 @@
 import useAspidaSWR from "@aspida/swr";
-import { trafficApiClient } from "~/utils/apiClient";
+import { apiClient } from "~/utils/apiClient";
 import { SimpleGrid, Text } from "@chakra-ui/react";
 import { getGridAreaKeio } from "~/utils/gridArea";
 import { groupBySection } from "~/utils/groupBySection";
@@ -7,7 +7,7 @@ import { useMemo } from "react";
 import Section from "~/components/Section";
 
 const LineKeio: React.VFC = () => {
-  const { data, error } = useAspidaSWR(trafficApiClient.keio, {
+  const { data, error } = useAspidaSWR(apiClient.traffic._key("keio"), {
     refreshInterval: 5000,
   });
 

@@ -28,6 +28,23 @@
   dependencies:
     text-decoding "^1.0.0"
 
+"@kvs/memorystorage@^2.1.1":
+  version "2.1.1"
+  resolved "https://registry.yarnpkg.com/@kvs/memorystorage/-/memorystorage-2.1.1.tgz#ca9a6a2b056cb5e8a85dd607605f35b28d23e1e4"
+  integrity sha512-k5yCOAuUl/Xel+ggpeOBKA9rMQI4WSWP0+PeISnG7jt1rPScfBs2Nq8v5FtwV+i40fLdRFTSRCW8lsx9ws6q4w==
+
+"@kvs/storage@^2.1.1":
+  version "2.1.1"
+  resolved "https://registry.yarnpkg.com/@kvs/storage/-/storage-2.1.1.tgz#6268c66ae6a28536dc44bc9b80d55013a364549b"
+  integrity sha512-/X8m0xn5KXZc09wF5P/HMTaxnQp8OJ7hFlHmRojfQcaMDxWDZEFdZBV2K14MXOUCA2PQto2i5eEh1GbtOS30rA==
+  dependencies:
+    "@kvs/types" "^2.1.1"
+
+"@kvs/types@^2.1.1":
+  version "2.1.1"
+  resolved "https://registry.yarnpkg.com/@kvs/types/-/types-2.1.1.tgz#c05f2155af38a56f0848d248ee9ad5c5a9fe38ef"
+  integrity sha512-HRDt5IeTE7BZYCey3ZhTWzpYtv5mhXU8Nx3dHD99sXoovbakSy7BEcIWckHZf+4kwC3oyhr9Ee3lsQFOacTz3Q==
+
 "@lukeed/ms@^2.0.0":
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/@lukeed/ms/-/ms-2.0.0.tgz#cacd4fcb81b1b285f21f8c7e3650874ef9383f1b"
@@ -389,6 +406,11 @@ dateformat@^3.0.3:
   version "3.0.3"
   resolved "https://registry.yarnpkg.com/dateformat/-/dateformat-3.0.3.tgz#a6e37499a4d9a9cf85ef5872044d62901c9889ae"
   integrity sha512-jyCETtSl3VMZMWeRo7iY1FL19ges1t55hMo5yaam4Jrsm5EPL89UQkoQRyiI+Yf4k8r2ZpdngkV8hr1lIdjb3Q==
+
+dayjs@^1.11.0:
+  version "1.11.0"
+  resolved "https://registry.yarnpkg.com/dayjs/-/dayjs-1.11.0.tgz#009bf7ef2e2ea2d5db2e6583d2d39a4b5061e805"
+  integrity sha512-JLC809s6Y948/FuCZPm5IX8rRhQwOiyMb2TfVVQEixG7P8Lm/gt5S7yoQZmC8x1UehI9Pb7sksEt4xx14m+7Ug==
 
 debounce@^1.0.0:
   version "1.2.1"
@@ -801,7 +823,7 @@ fastify-multipart@^5.3.0:
     secure-json-parse "^2.4.0"
     stream-wormhole "^1.1.0"
 
-fastify-plugin@^3.0.0:
+fastify-plugin@^3.0.0, fastify-plugin@^3.0.1:
   version "3.0.1"
   resolved "https://registry.yarnpkg.com/fastify-plugin/-/fastify-plugin-3.0.1.tgz#79e84c29f401020f38b524f59f2402103fd21ed2"
   integrity sha512-qKcDXmuZadJqdTm6vlCqioEbyewF60b/0LOFCcYN1B6BIZGlYJumWWOYs70SFYLDAH4YqdE1cxH/RKMG7rFxgA==
@@ -1412,6 +1434,13 @@ node-dev@^7.1.0:
     resolve "^1.0.0"
     semver "^7.3.5"
 
+node-fetch@^2.6.1:
+  version "2.6.7"
+  resolved "https://registry.yarnpkg.com/node-fetch/-/node-fetch-2.6.7.tgz#24de9fba827e3b4ae44dc8b20256a379160052ad"
+  integrity sha512-ZjMPFEfVx5j+y2yF35Kzx5sF7kDzxuDj6ziH4FFbOp87zKDZNx8yExJIb05OGF4Nlt9IHFIMBkRl41VdvcNdbQ==
+  dependencies:
+    whatwg-url "^5.0.0"
+
 node-notifier@^8.0.1:
   version "8.0.2"
   resolved "https://registry.yarnpkg.com/node-notifier/-/node-notifier-8.0.2.tgz#f3167a38ef0d2c8a866a83e318c1ba0efeb702c5"
@@ -1987,6 +2016,11 @@ toidentifier@1.0.1:
   resolved "https://registry.yarnpkg.com/toidentifier/-/toidentifier-1.0.1.tgz#3be34321a88a820ed1bd80dfaa33e479fbb8dd35"
   integrity sha512-o5sSPKEkg/DIQNmH43V0/uerLrpzVedkUh8tGNvaeXpfpuwjKenlSox/2O/BTlZUtEe+JG7s5YhEz608PlAHRA==
 
+tr46@~0.0.3:
+  version "0.0.3"
+  resolved "https://registry.yarnpkg.com/tr46/-/tr46-0.0.3.tgz#8184fd347dac9cdc185992f3a6622e14b9d9ab6a"
+  integrity sha1-gYT9NH2snNwYWZLzpmIuFLnZq2o=
+
 ts-loader@~8.2.0:
   version "8.2.0"
   resolved "https://registry.yarnpkg.com/ts-loader/-/ts-loader-8.2.0.tgz#6a3aeaa378aecda543e2ed2c332d3123841d52e0"
@@ -2081,6 +2115,19 @@ velona@^0.7.0:
   version "0.7.0"
   resolved "https://registry.yarnpkg.com/velona/-/velona-0.7.0.tgz#9f1f5b4c9095959977fcc292f30600866b34ee97"
   integrity sha512-+lFXKHJxj7mK3OnYKLHGijf+LCPvv8Mphvy3JETAGvKbn2179dQcOxvlYggOzYUfVHSn9kWmerivMZBtz3eN0Q==
+
+webidl-conversions@^3.0.0:
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/webidl-conversions/-/webidl-conversions-3.0.1.tgz#24534275e2a7bc6be7bc86611cc16ae0a5654871"
+  integrity sha1-JFNCdeKnvGvnvIZhHMFq4KVlSHE=
+
+whatwg-url@^5.0.0:
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/whatwg-url/-/whatwg-url-5.0.0.tgz#966454e8765462e37644d3626f6742ce8b70965d"
+  integrity sha1-lmRU6HZUYuN2RNNib2dCzotwll0=
+  dependencies:
+    tr46 "~0.0.3"
+    webidl-conversions "^3.0.0"
 
 which-boxed-primitive@^1.0.2:
   version "1.0.2"
