@@ -7,6 +7,7 @@ import { useMemo } from "react";
 import Section from "~/components/Section";
 import LineBorderY from "~/components/LineBorderY";
 import LineBorderX from "~/components/LineBorderX";
+import StationLabel from "~/components/StationLabel";
 
 const LineKeio: React.VFC = () => {
   const { data } = useAspidaSWR(apiClient.traffic._key("keio"), {
@@ -23,16 +24,28 @@ const LineKeio: React.VFC = () => {
   return (
     <SimpleGrid
       templateRows="repeat(77, minmax(50px, auto))"
-      templateColumns="100px 10px 50px 50px 10px 50px 50px 10px 50px 10px 50px 10px 50px 50px 10px 50px 50px 10px 100px"
+      templateColumns="130px 10px 54px 54px 10px 54px 54px 10px 54px 10px 54px 10px 54px 54px 10px 54px 54px 10px 130px"
     >
+      {[...Array(39)].map((_, index) => (
+        <Flex
+          key={index}
+          gridArea={`${index * 2 + 1} / 1 / ${index * 2 + 2} / 20`}
+          alignItems="center"
+        >
+          <Box bg="#f5f5f5" h="8px" w="100%" />
+        </Flex>
+      ))}
+
       <LineBorderY gridArea="1 / 5 / 68 / 6" />
       <LineBorderY gridArea="1 / 10 / 7 / 11" />
-      <LineBorderY gridArea="46 / 10 / 48 / 11" />
-      <LineBorderY gridArea="55 / 10 / 57 / 11" />
+      <LineBorderY gridArea="45 / 10 / 48 / 11" />
+      <LineBorderY gridArea="55 / 10 / 58 / 11" />
       <LineBorderY gridArea="36 / 15 / 58 / 16" />
       <LineBorderY gridArea="66 / 15 / 78 / 16" />
       <LineBorderX gridArea="7 / 9 / 8 / 11" align="top" round="right" />
       <LineBorderX gridArea="35 / 9 / 36 / 16" align="bottom" round="right" />
+      <LineBorderX gridArea="44 / 9 / 45 / 11" align="bottom" round="right" />
+      <LineBorderX gridArea="58 / 9 / 59 / 11" align="top" round="right" />
       <LineBorderX gridArea="65 / 9 / 66 / 16" align="bottom" round="right" />
 
       {sections.map(([gridArea, trains]) => (
@@ -40,20 +53,44 @@ const LineKeio: React.VFC = () => {
       ))}
 
       {stationsMain.map((name, index) => (
-        <Box key={index} gridArea={`${index * 2 + 1} / 1`}>
-          {name}
-        </Box>
+        <StationLabel
+          key={index}
+          name={name}
+          gridArea={`${index * 2 + 1} / 1`}
+        />
       ))}
       {stationsSagami.map((name, index) => (
-        <Box key={index} gridArea={`${index * 2 + 37} / 19`}>
-          {name}
-        </Box>
+        <StationLabel
+          key={index}
+          name={name}
+          gridArea={`${index * 2 + 37} / 19`}
+        />
       ))}
       {stationsTakao.map((name, index) => (
-        <Box key={index} gridArea={`${index * 2 + 67} / 19`}>
-          {name}
-        </Box>
+        <StationLabel
+          key={index}
+          name={name}
+          gridArea={`${index * 2 + 67} / 19`}
+        />
       ))}
+      <Flex
+        alignItems="flex-start"
+        justifyContent="center"
+        gridArea="48 / 9 / 49 / 12"
+      >
+        <Text fontSize="sm" fontWeight="500" mt="1">
+          府中競馬正門前
+        </Text>
+      </Flex>
+      <Flex
+        alignItems="flex-end"
+        justifyContent="center"
+        gridArea="54 / 9 / 55 / 12"
+      >
+        <Text fontSize="sm" fontWeight="500" mb="1">
+          多摩動物公園
+        </Text>
+      </Flex>
     </SimpleGrid>
   );
 };

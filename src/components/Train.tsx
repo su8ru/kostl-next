@@ -20,6 +20,9 @@ const Train: React.VFC<Props> = ({
         color="#fff"
         fontWeight="500"
         py="1"
+        border="2px"
+        borderColor="#fff"
+        boxShadow="base"
         direction={direction === "East" ? "column" : "column-reverse"}
         bg={typeColorList[+type]}
         borderTopRadius={direction === "East" ? "md" : "sm"}
