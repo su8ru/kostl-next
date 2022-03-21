@@ -6,6 +6,7 @@ import Header from "~/components/Header";
 import Footer from "~/components/Footer";
 import { useEffect } from "react";
 import "~/aseets/global.scss";
+import theme from "~/utils/theme";
 
 const MyApp = ({ Component, pageProps }: AppProps) => {
   useEffect(() => {
@@ -27,7 +28,7 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
           content="width=device-width,initial-scale=1,user-scalable=no,viewport-fit=cover,user-scalable=no"
         />
       </Head>
-      <ChakraProvider>
+      <ChakraProvider theme={theme}>
         <Flex
           minW="100%"
           minH="var(--100vh)"
