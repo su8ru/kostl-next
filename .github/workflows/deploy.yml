@@ -1,0 +1,92 @@
+name: deploy
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  test:
+    name: Test
+    runs-on: ubuntu-latest
+    env:
+      API_SERVER_PORT: 8080
+      API_ORIGIN: http://localhost:8080
+      API_BASE_PATH: /
+    steps:
+      - uses: actions/checkout@v2
+      - name: setup Node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: 14
+      - uses: actions/cache@v2
+        id: client-yarn-cache
+        with:
+          path: "node_modules"
+          key: client-yarn-${{ hashFiles('yarn.lock') }}
+      - uses: actions/cache@v2
+        id: server-yarn-cache
+        with:
+          path: "server/node_modules"
+          key: server-yarn-${{ hashFiles('server/yarn.lock') }}
+      - run: yarn install
+        if: steps.client-yarn-cache.outputs.cache-hit != 'true'
+      - run: yarn install --cwd server
+        if: steps.server-yarn-cache.outputs.cache-hit != 'true'
+      - run: yarn run lint
+      - run: |
+          sudo systemctl start mysql.service
+          echo "API_DATABASE_URL=mysql://root:root@localhost:3306/test" > server/prisma/.env
+      - run: yarn run typecheck
+
+  deploy:
+    name: Deploy
+    runs-on: ubuntu-latest
+    needs: test
+    steps:
+      - uses: actions/checkout@v2
+      - name: prepare server/.env
+        run: |
+          cat<<EOF > server/.env
+          API_BASE_PATH=/api
+          API_ORIGIN=https://api.next.kostl.info
+          API_ODPT_TOKEN=${{ secrets.ODPT_TOKEN }}
+          EOF
+      - name: prepare .ssh dir
+        run: mkdir -p .ssh && chmod 700 .ssh
+      - name: prepare ssh key
+        run: echo "$SSH_KEY" > .ssh/id_rsa && chmod 600 .ssh/id_rsa
+        env:
+          SSH_KEY: ${{ secrets.SSH_KEY }}
+      - name: set permission
+        run: chmod -R 775 * && sudo groupadd -f docker && sudo useradd deploy -g docker && sudo chown -R deploy:docker *
+      - name: push with rsync
+        run: |
+          rsync -rlptgoD -O --delete --exclude ".git/" --exclude "server/.env" \
+          -e "ssh -i .ssh/id_rsa -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -p ${SSH_PORT}" \
+          * $SSH_USER@$SSH_HOST:$DIR
+        env:
+          DIR: ${{ secrets.DEPLOY_DIR }}
+          SSH_HOST: ${{ secrets.SSH_HOST }}
+          SSH_USER: ${{ secrets.SSH_USER }}
+          SSH_PORT: ${{ secrets.SSH_PORT }}
+
+  docker:
+    name: build and up
+    runs-on: ubuntu-latest
+    needs: deploy
+    steps:
+      - name: build & up -d
+        uses: appleboy/ssh-action@master
+        with:
+          host:     ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          key:      ${{ secrets.SSH_KEY }}
+          port:     ${{ secrets.SSH_PORT }}
+          envs: DIR
+          script_stop: true
+          script: |
+            cd $DIR
+            docker-compose build
+            docker-compose up -d
+        env:
+          DIR: ${{ secrets.DEPLOY_DIR }}
