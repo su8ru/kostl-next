@@ -22,6 +22,10 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
     <>
       <Head>
         <link rel="icon" href={staticPath.favicon_png} />
+        <meta
+          name="viewport"
+          content="width=device-width,initial-scale=1,user-scalable=no,viewport-fit=cover,user-scalable=no"
+        />
       </Head>
       <ChakraProvider>
         <Flex
