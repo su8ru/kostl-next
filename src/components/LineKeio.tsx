@@ -1,10 +1,12 @@
 import useAspidaSWR from "@aspida/swr";
 import { apiClient } from "~/utils/apiClient";
-import { Box, SimpleGrid, Text } from "@chakra-ui/react";
+import { Box, Flex, SimpleGrid, Text } from "@chakra-ui/react";
 import { getGridAreaKeio } from "~/utils/gridArea";
 import { groupBySection } from "~/utils/groupBySection";
 import { useMemo } from "react";
 import Section from "~/components/Section";
+import LineBorderY from "~/components/LineBorderY";
+import LineBorderX from "~/components/LineBorderX";
 
 const LineKeio: React.VFC = () => {
   const { data, error } = useAspidaSWR(apiClient.traffic._key("keio"), {
@@ -23,6 +25,16 @@ const LineKeio: React.VFC = () => {
       templateRows="repeat(77, minmax(50px, auto))"
       templateColumns="100px 10px 50px 50px 10px 50px 50px 10px 50px 10px 50px 10px 50px 50px 10px 50px 50px 10px 100px"
     >
+      <LineBorderY gridArea="1 / 5 / 68 / 6" />
+      <LineBorderY gridArea="1 / 10 / 7 / 11" />
+      <LineBorderY gridArea="46 / 10 / 48 / 11" />
+      <LineBorderY gridArea="55 / 10 / 57 / 11" />
+      <LineBorderY gridArea="36 / 15 / 58 / 16" />
+      <LineBorderY gridArea="66 / 15 / 78 / 16" />
+      <LineBorderX gridArea="7 / 9 / 8 / 11" align="top" round="right" />
+      <LineBorderX gridArea="35 / 9 / 36 / 16" align="bottom" round="right" />
+      <LineBorderX gridArea="65 / 9 / 66 / 16" align="bottom" round="right" />
+
       {sections.map(([gridArea, trains]) => (
         <Section key={gridArea} gridArea={gridArea} trains={trains} />
       ))}
