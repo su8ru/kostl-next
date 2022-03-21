@@ -25,7 +25,7 @@ const parseToei = (
       }) => ({
         id,
         type: type?.split(".").pop(),
-        direction: direction?.split(".").pop(),
+        direction: direction?.split(":").pop(),
         dest: destinations?.[0].split(".").pop(),
         delay,
         toStation: toStation?.split(".").pop(),
@@ -33,7 +33,7 @@ const parseToei = (
       })
     )
     // 希望の形式に変換
-    .map(
+    .map<Train>(
       ({
         id,
         type,
@@ -58,7 +58,8 @@ const parseToei = (
           ),
         };
       }
-    );
+    )
+    .filter(({ section: { id, type } }) => !(id === 1 && type === "Sta"));
 
   return { timestamp: date.format("YYYY.MM.DD HH:mm:ss"), trains };
 };
