@@ -1,4 +1,4 @@
-import { Text, Flex, Heading, Badge } from "@chakra-ui/react";
+import { Text, Flex, Heading } from "@chakra-ui/react";
 
 const Header: React.VFC = () => {
   return (

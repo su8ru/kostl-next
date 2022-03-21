@@ -1,4 +1,3 @@
-import fastify from "fastify";
 import { KvsMemoryStorage } from "@kvs/memorystorage";
 import { CacheSchema } from "$/types/kvs";
 

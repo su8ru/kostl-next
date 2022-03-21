@@ -1,5 +1,5 @@
 import { defineController } from "./$relay";
 
-export default defineController((fastify) => ({
-  get: () => ({ status: 200, body: fastify.hoge }),
+export default defineController(() => ({
+  get: () => ({ status: 200, body: "kostl back-end!" }),
 }));
