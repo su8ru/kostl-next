@@ -21,7 +21,7 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
   return (
     <>
       <Head>
-        <link rel="icon" href={staticPath.favicon_png} />
+        <link rel="icon" href={staticPath.favicon_ico} />
         <meta
           name="viewport"
           content="width=device-width,initial-scale=1,user-scalable=no,viewport-fit=cover,user-scalable=no"
