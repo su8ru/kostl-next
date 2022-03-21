@@ -9,7 +9,7 @@ import LineBorderY from "~/components/LineBorderY";
 import LineBorderX from "~/components/LineBorderX";
 
 const LineKeio: React.VFC = () => {
-  const { data, error } = useAspidaSWR(apiClient.traffic._key("keio"), {
+  const { data } = useAspidaSWR(apiClient.traffic._key("keio"), {
     refreshInterval: 5000,
   });
 

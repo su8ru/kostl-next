@@ -29,8 +29,8 @@ const Train: React.VFC<Props> = ({
         <Text fontSize="sm">{destListKeio[dest] ?? "-"}</Text>
       </Flex>
       {delay > 0 && (
-        <Text color="#cf167c" fontWeight="900">
-          +{delay}
+        <Text color="#cf167c" fontWeight="900" fontSize="sm">
+          + {delay}
         </Text>
       )}
     </Flex>

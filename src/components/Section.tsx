@@ -1,5 +1,5 @@
 import { Train as TrainType } from "$/types/train";
-import { Flex } from "@chakra-ui/react";
+import { Stack } from "@chakra-ui/react";
 import Train from "~/components/Train";
 
 export interface Props {
@@ -9,15 +9,17 @@ export interface Props {
 
 const Section: React.VFC<Props> = ({ gridArea, trains }) => {
   return (
-    <Flex
+    <Stack
       gridArea={gridArea}
       direction={trains[0].direction === "East" ? "column" : "column-reverse"}
       justifyContent="center"
+      spacing="4px"
+      m="2px"
     >
       {trains.map((train) => (
         <Train key={train.id} train={train} />
       ))}
-    </Flex>
+    </Stack>
   );
 };
 

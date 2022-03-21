@@ -119,7 +119,7 @@ const sectionIdToSection = (
 
   // 動物園線（上下が逆）
   if (sectionId === "D037")
-    return { direction: "East", section: { id: 47, type: "Way", track: 2 } };
+    return { direction: "East", section: { id: 47, type: "WayB", track: 2 } };
 
   return {
     direction: prefix === "U" ? "East" : "West",
