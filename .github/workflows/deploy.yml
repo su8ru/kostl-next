@@ -71,14 +71,6 @@ jobs:
           SSH_HOST: ${{ secrets.SSH_HOST }}
           SSH_USER: ${{ secrets.SSH_USER }}
           SSH_PORT: ${{ secrets.SSH_PORT }}
-
-  docker:
-    name: build and up
-    runs-on: ubuntu-latest
-    environment:
-      name: Server
-    needs: deploy
-    steps:
       - name: build & up -d
         uses: appleboy/ssh-action@master
         with:
