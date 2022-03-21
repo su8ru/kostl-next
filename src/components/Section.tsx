@@ -9,7 +9,11 @@ export interface Props {
 
 const Section: React.VFC<Props> = ({ gridArea, trains }) => {
   return (
-    <Flex gridArea={gridArea} direction="column" justifyContent="center">
+    <Flex
+      gridArea={gridArea}
+      direction={trains[0].direction === "East" ? "column" : "column-reverse"}
+      justifyContent="center"
+    >
       {trains.map((train) => (
         <Train key={train.id} train={train} />
       ))}
