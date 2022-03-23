@@ -36,7 +36,7 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
           alignItems="center"
         >
           <Header />
-          <Box as="main" flexGrow="1" pt="10" pb="10">
+          <Box as="main" flexGrow="1" pt="10" pb="20">
             <Component {...pageProps} />
           </Box>
           <Footer />
