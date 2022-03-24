@@ -21,9 +21,12 @@ const Header: React.VFC = () => {
         color="#fff"
         borderX="3px solid #fff"
       >
-        <Heading as="h1" fontSize="lg" mt="1" mr="3">
+        <Heading as="h1" fontSize="lg" mt="1" mr="1">
           こすとれ
         </Heading>
+        <Text fontSize="xs" mr="3">
+          BETA
+        </Text>
         <Text fontSize="md">KO･S Train Location</Text>
       </Flex>
     </Flex>
