@@ -7,6 +7,7 @@ import { Box, Flex, SimpleGrid } from "@chakra-ui/react";
 import Section from "~/components/Section";
 import LineBorderY from "~/components/LineBorderY";
 import StationLabel from "~/components/StationLabel";
+import UpdateTime from "~/components/UpdateTime";
 
 const ToeiLine: React.VFC = () => {
   const { data } = useAspidaSWR(apiClient.traffic._key("toei"), {
@@ -38,6 +39,8 @@ const ToeiLine: React.VFC = () => {
       {sections.map(([gridArea, trains]) => (
         <Section key={gridArea} gridArea={gridArea} trains={trains} />
       ))}
+
+      <UpdateTime timestamp={data?.timestamp} gridArea="1 / 16 / 2 / 20" />
 
       {stations.map((name, index) => (
         <StationLabel
