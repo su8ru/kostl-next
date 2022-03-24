@@ -1,5 +1,6 @@
-import React from "react";
-import { Box, Divider, Text } from "@chakra-ui/react";
+import NextLink from "next/link";
+import { Box, Divider, HStack, Link, Text, VStack } from "@chakra-ui/react";
+import { pagesPath } from "~/utils/$path";
 
 const Footer: React.VFC = () => {
   return (
@@ -12,12 +13,23 @@ const Footer: React.VFC = () => {
         left="0"
         right="0"
         bg="#fff"
-        h="10"
+        h="20"
       >
         <Divider />
-        <Box p="2">
-          <Text align="center">&copy; subaru 2022</Text>
-        </Box>
+        <VStack spacing="2" p="3">
+          <HStack>
+            <NextLink href={pagesPath.$url()} passHref>
+              <Link color="blue.500">在線</Link>
+            </NextLink>
+            <span>･</span>
+            <NextLink href={pagesPath.policy.$url()} passHref>
+              <Link color="blue.500">利用規約</Link>
+            </NextLink>
+          </HStack>
+          <Box>
+            <Text align="center">&copy; subaru 2022</Text>
+          </Box>
+        </VStack>
       </Box>
     </>
   );
