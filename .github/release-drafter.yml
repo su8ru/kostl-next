@@ -37,9 +37,9 @@ template: |
   $CHANGES
 
 autolabeler:
-  - label: feature
+  - label: enhancement
     branch:
-      - '/^feature[/-].+/'
+      - '/(feature|improve)[/-].+/'
   - label: bug
     branch:
       - '/^bugfix[/-].+/'
@@ -52,6 +52,3 @@ autolabeler:
   - label: documentation
     branch:
       - '/documentation[/-].+/'
-  - label: enhancement
-    branch:
-      - '/(enhancement|improve)[/-].+/'
