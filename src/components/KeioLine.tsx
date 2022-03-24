@@ -8,6 +8,7 @@ import Section from "~/components/Section";
 import LineBorderY from "~/components/LineBorderY";
 import LineBorderX from "~/components/LineBorderX";
 import StationLabel from "~/components/StationLabel";
+import UpdateTime from "~/components/UpdateTime";
 
 const KeioLine: React.VFC = () => {
   const { data } = useAspidaSWR(apiClient.traffic._key("keio"), {
@@ -18,8 +19,6 @@ const KeioLine: React.VFC = () => {
     () => (data ? groupBySection(data.trains, getGridAreaKeio) : []),
     [data?.trains]
   );
-
-  if (!data) return <Text>Loading...</Text>;
 
   return (
     <SimpleGrid
@@ -51,6 +50,8 @@ const KeioLine: React.VFC = () => {
       {sections.map(([gridArea, trains]) => (
         <Section key={gridArea} gridArea={gridArea} trains={trains} />
       ))}
+
+      <UpdateTime timestamp={data?.timestamp} gridArea="1 / 16 / 2 / 20" />
 
       {stationsMain.map((name, index) => (
         <StationLabel
