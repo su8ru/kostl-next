@@ -48,7 +48,7 @@ const parseToei = (
           id,
           type: type === "Express" ? "2" : "6",
           direction,
-          delay: delay ?? 0,
+          delay: delay ? delay / 60 : 0,
           dest: destToId(dest ?? "ERROR"),
           length: null,
           section: stationToSection(
