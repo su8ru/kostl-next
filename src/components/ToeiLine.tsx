@@ -36,7 +36,12 @@ const ToeiLine: React.VFC = () => {
       <LineBorderY gridArea="1 / 10 / 41 / 11" color="toei" />
 
       {sections.map(([gridArea, trains]) => (
-        <Section key={gridArea} gridArea={gridArea} trains={trains} />
+        <Section
+          key={gridArea}
+          gridArea={gridArea}
+          type={trains[0].section.type === "Sta" ? "Sta" : "Way"}
+          trains={trains}
+        />
       ))}
 
       {stations.map((name, index) => (

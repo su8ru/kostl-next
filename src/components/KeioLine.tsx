@@ -49,7 +49,12 @@ const KeioLine: React.VFC = () => {
       <LineBorderX gridArea="65 / 9 / 66 / 16" align="bottom" round="right" />
 
       {sections.map(([gridArea, trains]) => (
-        <Section key={gridArea} gridArea={gridArea} trains={trains} />
+        <Section
+          key={gridArea}
+          gridArea={gridArea}
+          type={trains[0].section.type === "Sta" ? "Sta" : "Way"}
+          trains={trains}
+        />
       ))}
 
       {stationsMain.map((name, index) => (
