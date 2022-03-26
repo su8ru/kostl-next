@@ -114,7 +114,7 @@ const sectionIdToSection = (
   if (sectionId === "S027")
     return { direction: "West", section: { id: 29, type: "WayB", track: 1 } };
   // 北野
-  if (sectionId === "S033")
+  if (sectionId === "S031")
     return { direction: "East", section: { id: 33, type: "WayB", track: 2 } };
 
   // 動物園線（上下が逆）
