@@ -1,5 +1,10 @@
 FROM node:15
 
+ARG PORT
+ARG API_BASE_PATH
+ARG API_ODPT_TOKEN
+ARG API_ORIGIN
+
 RUN mkdir /src
 RUN mkdir /src/server
 
@@ -10,5 +15,5 @@ RUN yarn install --cwd ./server
 
 COPY . .
 
-EXPOSE 8080
+EXPOSE $PORT
 CMD yarn build:server && yarn start:server
