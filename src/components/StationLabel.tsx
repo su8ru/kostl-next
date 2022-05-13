@@ -8,7 +8,7 @@ interface Props {
 const StationLabel: React.VFC<Props> = ({ name, gridArea }) => {
   return (
     <Flex gridArea={gridArea} alignItems="center">
-      <Text fontSize="sm" fontWeight="500" mb="8">
+      <Text fontSize="sm" fontWeight="500" mb="8" color="gray">
         {name}
       </Text>
     </Flex>

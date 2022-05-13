@@ -10,8 +10,10 @@ const Page: NextPage = () => {
       <Head>
         <title>こすとれ - KO･S Train Location</title>
       </Head>
-      <ToeiLine />
-      <KeioLine />
+      <Box p="4">
+        <ToeiLine />
+        <KeioLine />
+      </Box>
     </Box>
   );
 };
