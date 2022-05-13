@@ -11,12 +11,9 @@ const bgColor = {
 } as const;
 
 const LineBorderY: React.VFC<Props> = ({ gridArea, color }) => (
-  <Box
-    gridArea={gridArea}
-    bg={bgColor[color ?? "keio"]}
-    borderX="2px"
-    borderColor="#fff"
-  />
+  <Box gridArea={gridArea} bg="#fff">
+    <Box bg={bgColor[color ?? "keio"]} w="6px" mx="2px" h="100%" />
+  </Box>
 );
 
 export default LineBorderY;
