@@ -3,8 +3,11 @@ import { Box } from "@chakra-ui/react";
 import KeioLine from "~/components/KeioLine";
 import ToeiLine from "~/components/ToeiLine";
 import Head from "next/head";
+import useRestoreScroll from "~/hooks/useRestoreScroll";
 
 const Page: NextPage = () => {
+  useRestoreScroll(0, 2200);
+
   return (
     <Box>
       <Head>
