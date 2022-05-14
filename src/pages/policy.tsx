@@ -66,6 +66,9 @@ const Policy: NextPage = () => {
           の実行はブラウザの機能により停止することが可能ですが、その場合当サイトは情報提供を行えません。
         </Text>
       </Box>
+      <Box as="section" mt="12">
+        <Text mt="4">&copy; subaru 2020</Text>
+      </Box>
     </Box>
   );
 };
