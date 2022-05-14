@@ -3,13 +3,18 @@ import OdptTrain from "$/types/toeiApi";
 import { destListKeio, destListToei } from "$/service/data";
 import dayjs from "dayjs";
 import minMax from "dayjs/plugin/minMax";
+import timezone from "dayjs/plugin/timezone";
+import utc from "dayjs/plugin/utc";
 
 dayjs.extend(minMax);
+dayjs.extend(timezone);
+dayjs.extend(utc);
+dayjs.tz.setDefault("Asia/Tokyo");
 
 const parseToei = (
   raw: OdptTrain[]
 ): { timestamp: string; trains: Train[] } => {
-  const date = dayjs();
+  let date = dayjs(0);
 
   const trains: Train[] = raw
     // 不要な部分を削ぎ落とし
@@ -22,15 +27,20 @@ const parseToei = (
         "odpt:delay": delay,
         "odpt:toStation": toStation,
         "odpt:fromStation": fromStation,
-      }) => ({
-        id,
-        type: type?.split(".").pop(),
-        direction: direction?.split(":").pop(),
-        dest: destinations?.[0].split(".").pop(),
-        delay,
-        toStation: toStation?.split(".").pop(),
-        fromStation: fromStation?.split(".").pop(),
-      })
+        "dc:date": updateDate,
+      }) => {
+        date = dayjs.max(date, dayjs(updateDate, "Asia/Tokyo"));
+
+        return {
+          id,
+          type: type?.split(".").pop(),
+          direction: direction?.split(":").pop(),
+          dest: destinations?.[0].split(".").pop(),
+          delay,
+          toStation: toStation?.split(".").pop(),
+          fromStation: fromStation?.split(".").pop(),
+        };
+      }
     )
     // 希望の形式に変換
     .map<Train>(
@@ -61,7 +71,7 @@ const parseToei = (
     )
     .filter(({ section: { id, type } }) => !(id === 1 && type === "Sta"));
 
-  return { timestamp: date.format("YYYY.MM.DD HH:mm:ss"), trains };
+  return { timestamp: date.format(), trains };
 };
 
 const destToId = (dest: string): string => {
