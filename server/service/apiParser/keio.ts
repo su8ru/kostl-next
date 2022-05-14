@@ -37,7 +37,9 @@ const parseKeio = (raw: Body): { timestamp: string; trains: Train[] } => {
     ...(raw.TB ?? [])
       .filter(
         ({ id, sn }) =>
-          sn !== "I" && id.substring(1, 2) !== "1" && id !== "D001"
+          sn !== "I" &&
+          id.substring(1, 2) !== "1" &&
+          !["D001", "D033"].includes(id)
       )
       .flatMap(({ id, ps }: TB) =>
         ps.map<Train>((train) => {
