@@ -2,8 +2,13 @@ import Body, { Dt, TB, TS } from "$/types/keioApi";
 import { Section, SectionType, Train, TrainDirection } from "$/types/train";
 import dayjs from "dayjs";
 import arraySupport from "dayjs/plugin/arraySupport";
+import timezone from "dayjs/plugin/timezone";
+import utc from "dayjs/plugin/utc";
 
 dayjs.extend(arraySupport);
+dayjs.extend(timezone);
+dayjs.extend(utc);
+dayjs.tz.setDefault("Asia/Tokyo");
 
 const parseKeio = (raw: Body): { timestamp: string; trains: Train[] } => {
   const trains: Train[] = [];
@@ -137,9 +142,9 @@ const dtToTime = (dt: Dt[]): string => {
   if (dt.length) {
     const _dt: Dt = dt[0];
     const m = dayjs([+_dt.yy, +_dt.mt - 1, +_dt.dy, +_dt.hh, +_dt.mm, +_dt.ss]);
-    return m.format("YYYY.MM.DD HH:mm:ss");
+    return m.format();
   }
-  return dayjs().format("YYYY.MM.DD HH:mm:ss");
+  return dayjs().format();
 };
 
 export default parseKeio;
