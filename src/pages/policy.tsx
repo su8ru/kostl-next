@@ -1,5 +1,5 @@
 import { NextPage } from "next";
-import { Box, ListItem, Text, UnorderedList } from "@chakra-ui/react";
+import { Box, Link, ListItem, Text, UnorderedList } from "@chakra-ui/react";
 import H2 from "~/components/docs/H2";
 import H3 from "~/components/docs/H3";
 import Head from "next/head";
@@ -69,6 +69,47 @@ const Policy: NextPage = () => {
           閲覧にあたり、閲覧者のデバイスを利用して情報提供を目的とした処理を行います。JavaScript
           の実行はブラウザの機能により停止することが可能ですが、その場合当サイトは情報提供を行えません。
         </Text>
+        <H3>Google Analytics の使用について</H3>
+        <Text mt="4" lineHeight="1.75">
+          当サイトでは、アクセス解析のため、Google
+          によるアクセス解析ツール「Google Analytics」を使用しています。この
+          Google Analytics はデータの収集のために Cookie
+          を使用しています。このデータは匿名で収集されており、個人を特定するものではありません。
+        </Text>
+        <Text mt="4" lineHeight="1.75">
+          Google Analytics によって情報が収集され使用される詳細は、Google
+          による説明ページでご確認ください。
+        </Text>
+        <UnorderedList spacing="3" mt="4">
+          <ListItem>
+            <Link
+              href="https://marketingplatform.google.com/about/analytics/terms/jp/"
+              target="_blank"
+              rel="noopener"
+            >
+              Google Analytics 利用規約
+            </Link>
+          </ListItem>
+          <ListItem>
+            <Link
+              href="https://policies.google.com/technologies/partner-sites?hl=ja"
+              target="_blank"
+              rel="noopener"
+            >
+              Google のサービスを使用するサイトやアプリから収集した情報の Google
+              による使用
+            </Link>
+          </ListItem>
+          <ListItem>
+            <Link
+              href="https://policies.google.com/privacy?hl=ja"
+              target="_blank"
+              rel="noopener"
+            >
+              Google プライバシー ポリシー
+            </Link>
+          </ListItem>
+        </UnorderedList>
       </Box>
       <Box as="section" mt="12">
         <Text mt="4">&copy; subaru 2020</Text>
