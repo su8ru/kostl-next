@@ -16,7 +16,7 @@ const Train: React.VFC<Props> = ({
     >
       <Flex
         alignItems="center"
-        w="50px"
+        w="54px"
         color="#fff"
         fontWeight="500"
         py="1"
