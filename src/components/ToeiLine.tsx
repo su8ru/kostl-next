@@ -51,7 +51,7 @@ const ToeiLine: React.VFC = () => {
         <StationLabel
           key={index}
           name={name}
-          gridArea={`${index * 2 + 1} / 1`}
+          gridArea={`${index * 2 + 1} / 5 / ${index * 2 + 2} / 8`}
         />
       ))}
     </SimpleGrid>
