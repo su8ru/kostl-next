@@ -2,10 +2,14 @@ import { NextPage } from "next";
 import { Box, ListItem, Text, UnorderedList } from "@chakra-ui/react";
 import H2 from "~/components/docs/H2";
 import H3 from "~/components/docs/H3";
+import Head from "next/head";
 
 const Policy: NextPage = () => {
   return (
     <Box maxW="3xl" w="100%" mx="auto" px="8" pb="8">
+      <Head>
+        <title>利用規約 - こすとれ</title>
+      </Head>
       <Box as="section" mt="12">
         <H2>README</H2>
         <H3>対応路線</H3>
