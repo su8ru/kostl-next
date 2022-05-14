@@ -1,14 +1,16 @@
 import type { AppProps } from "next/app";
 import Head from "next/head";
-import { staticPath } from "~/utils/$path";
 import { Box, ChakraProvider, Flex } from "@chakra-ui/react";
 import Header from "~/components/Header";
 import Footer from "~/components/Footer";
 import { useEffect } from "react";
 import "~/aseets/global.scss";
 import theme from "~/utils/theme";
+import usePageView from "~/hooks/usePageView";
 
 const MyApp = ({ Component, pageProps }: AppProps) => {
+  usePageView();
+
   useEffect(() => {
     handleResize();
     window.addEventListener("resize", handleResize);
@@ -22,7 +24,6 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
   return (
     <>
       <Head>
-        <link rel="icon" href={staticPath.favicon_ico} />
         <meta
           name="viewport"
           content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0"
