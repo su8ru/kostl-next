@@ -1,38 +1,34 @@
-import NextLink from "next/link";
-import { Box, Divider, HStack, Link, Text, VStack } from "@chakra-ui/react";
+import { Box } from "@chakra-ui/react";
+import BottomNav from "~/components/BottomNav/BottomNav";
+import { BsDiagram2, BsFileEarmarkText, BsGear } from "react-icons/bs";
 import { pagesPath } from "~/utils/$path";
 
-const Footer: React.VFC = () => {
-  return (
-    <>
-      <Box
-        as="footer"
-        w="100%"
-        pos="fixed"
-        bottom="0"
-        left="0"
-        right="0"
-        bg="#fff"
-        h="20"
-      >
-        <Divider />
-        <VStack spacing="2" p="3">
-          <HStack>
-            <NextLink href={pagesPath.$url()} passHref>
-              <Link color="blue.500">在線</Link>
-            </NextLink>
-            <span>･</span>
-            <NextLink href={pagesPath.policy.$url()} passHref>
-              <Link color="blue.500">利用規約</Link>
-            </NextLink>
-          </HStack>
-          <Box>
-            <Text align="center">&copy; subaru 2022</Text>
-          </Box>
-        </VStack>
-      </Box>
-    </>
-  );
-};
+const Footer: React.VFC = () => (
+  <Box
+    as="footer"
+    pos="fixed"
+    width="min-content"
+    bottom="0"
+    left="50%"
+    right="0"
+    transform="translateX(-50%)"
+    m="2"
+    bgColor="white"
+    borderRadius="lg"
+    boxShadow="0 5px 10px rgba(0, 0, 0, 0.1)"
+  >
+    <BottomNav
+      items={[
+        { label: "在線", href: pagesPath.$url(), icon: BsDiagram2 },
+        {
+          label: "利用規約",
+          href: pagesPath.policy.$url(),
+          icon: BsFileEarmarkText,
+        },
+        { label: "設定", href: pagesPath.settings.$url(), icon: BsGear },
+      ]}
+    />
+  </Box>
+);
 
 export default Footer;

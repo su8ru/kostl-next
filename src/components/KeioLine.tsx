@@ -23,7 +23,7 @@ const KeioLine: React.VFC = () => {
   return (
     <SimpleGrid
       templateRows="repeat(77, minmax(50px, auto))"
-      templateColumns="130px 10px 54px 54px 10px 54px 54px 10px 54px 10px 54px 10px 54px 54px 10px 54px 54px 10px 130px"
+      templateColumns="90px 10px 58px 58px 10px 58px 58px 10px 58px 10px 58px 10px 58px 58px 10px 58px 58px 10px 90px"
     >
       {[...Array(39)].map((_, index) => (
         <Flex
@@ -46,6 +46,20 @@ const KeioLine: React.VFC = () => {
       <LineBorderX gridArea="44 / 9 / 45 / 11" align="bottom" round="right" />
       <LineBorderX gridArea="58 / 9 / 59 / 11" align="top" round="right" />
       <LineBorderX gridArea="65 / 9 / 66 / 16" align="bottom" round="right" />
+
+      <Box
+        gridArea="45 / 9 / 48 / 12"
+        boxShadow="inset 0 2px 6px 0 rgba(0, 0, 0, 0.1)"
+        borderRadius="md"
+        h="calc(100% + 6px)"
+        mt="-6px"
+      />
+      <Box
+        gridArea="55 / 9 / 58 / 12"
+        boxShadow="inset 0 2px 6px 0 rgba(0, 0, 0, 0.1)"
+        borderRadius="md"
+        h="calc(100% + 6px)"
+      />
 
       {sections.map(([gridArea, trains]) => (
         <Section
@@ -84,7 +98,7 @@ const KeioLine: React.VFC = () => {
         justifyContent="center"
         gridArea="48 / 9 / 49 / 12"
       >
-        <Text fontSize="sm" fontWeight="500" mt="1">
+        <Text fontSize="sm" fontWeight="500" mt="1" color="gray">
           府中競馬正門前
         </Text>
       </Flex>
@@ -93,7 +107,7 @@ const KeioLine: React.VFC = () => {
         justifyContent="center"
         gridArea="54 / 9 / 55 / 12"
       >
-        <Text fontSize="sm" fontWeight="500" mb="1">
+        <Text fontSize="sm" fontWeight="500" mb="1" color="gray">
           多摩動物公園
         </Text>
       </Flex>

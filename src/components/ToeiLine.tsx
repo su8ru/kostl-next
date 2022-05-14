@@ -22,7 +22,7 @@ const ToeiLine: React.VFC = () => {
   return (
     <SimpleGrid
       templateRows="repeat(40, minmax(58px, auto))"
-      templateColumns="130px 10px 54px 54px 10px 54px 54px 10px 54px 10px 54px 10px 54px 54px 10px 54px 54px 10px 130px"
+      templateColumns="90px 10px 58px 58px 10px 58px 58px 10px 58px 10px 58px 10px 58px 58px 10px 58px 58px 10px 90px"
     >
       {[...Array(20)].map((_, index) => (
         <Flex
@@ -51,7 +51,7 @@ const ToeiLine: React.VFC = () => {
         <StationLabel
           key={index}
           name={name}
-          gridArea={`${index * 2 + 1} / 1`}
+          gridArea={`${index * 2 + 1} / 5 / ${index * 2 + 2} / 8`}
         />
       ))}
     </SimpleGrid>
