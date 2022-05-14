@@ -27,7 +27,7 @@ const Header: React.VFC = () => {
         <Text fontSize="xs" mr="3">
           BETA
         </Text>
-        <Text fontSize="md">KO･S Train Location</Text>
+        <Text fontSize="xs">KO･S Train Location</Text>
       </Flex>
     </Flex>
   );
