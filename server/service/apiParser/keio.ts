@@ -141,7 +141,10 @@ const sectionIdToSection = (
 const dtToTime = (dt: Dt[]): string => {
   if (dt.length) {
     const _dt: Dt = dt[0];
-    const m = dayjs([+_dt.yy, +_dt.mt - 1, +_dt.dy, +_dt.hh, +_dt.mm, +_dt.ss]);
+    const m = dayjs.tz(
+      [+_dt.yy, +_dt.mt - 1, +_dt.dy, +_dt.hh, +_dt.mm, +_dt.ss],
+      "Asia/Tokyo"
+    );
     return m.format();
   }
   return dayjs().format();
