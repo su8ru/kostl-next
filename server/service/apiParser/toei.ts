@@ -71,7 +71,9 @@ const parseToei = (
     )
     .filter(({ section: { id, type } }) => !(id === 1 && type === "Sta"));
 
-  return { timestamp: date.format(), trains };
+  if (date.unix() === 0) date = dayjs();
+
+  return { timestamp: date.local().format(), trains };
 };
 
 const destToId = (dest: string): string => {
