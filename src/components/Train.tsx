@@ -1,7 +1,6 @@
 import { Flex, Text } from "@chakra-ui/react";
 import { Train, TrainDirection, TypeChange } from "$/types/train";
 import { destListKeio, stationNameCapitalList } from "$/service/data";
-import valueToKey from "~/utils/valueToKey";
 
 export interface Props {
   train: Train;

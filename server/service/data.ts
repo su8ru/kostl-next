@@ -1,4 +1,4 @@
-export const destListKeio: { [key: string]: string } = {
+export const destListKeio: Record<string, string> = {
   "001": "K新宿",
   "002": "笹塚",
   "006": "桜上水",
@@ -34,7 +34,7 @@ export const destListKeio: { [key: string]: string } = {
   "999": "-",
 };
 
-export const stationNameList: { [key: string]: string } = {
+export const stationNameList: Record<string, string> = {
   "001": "新宿",
   "016": "調布",
   "027": "高幡不動",
@@ -51,7 +51,7 @@ export const stationNameList: { [key: string]: string } = {
   "999": "-",
 };
 
-export const stationNameCapitalList: { [key: string]: string } = {
+export const stationNameCapitalList: Record<string, string> = {
   "001": "新",
   "016": "調",
   "027": "高",
@@ -68,19 +68,19 @@ export const stationNameCapitalList: { [key: string]: string } = {
   "999": "-",
 };
 
-export const typeList = {
-  1: "特急",
-  2: "急行",
-  3: "快速",
-  4: "準特急",
-  5: "区間急行",
-  6: "各駅停車",
-  9: "京王ライナー",
-  10: "臨時",
-  11: "Mt.TAKAO号",
-} as { [key: number]: string };
+export const typeList: Record<string, string> = {
+  "1": "特急",
+  "2": "急行",
+  "3": "快速",
+  "4": "準特急",
+  "5": "区間急行",
+  "6": "各駅停車",
+  "9": "京王ライナー",
+  "10": "臨時",
+  "11": "Mt.TAKAO号",
+};
 
-export const destListToei = {
+export const destListToei: Record<string, string> = {
   Shinjuku: "N新宿",
   Sasazuka: "笹塚",
   Sakurajosui: "桜上水",
@@ -97,4 +97,4 @@ export const destListToei = {
   Mizue: "瑞江",
   Ojima: "大島",
   Iwamotocho: "岩本町",
-} as { [key: string]: string };
+};

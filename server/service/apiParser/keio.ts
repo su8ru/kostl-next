@@ -7,6 +7,7 @@ import {
   TypeChange,
 } from "$/types/train";
 import { stationNameList, typeList } from "$/service/data";
+import valueToKey from "$/utils/valueToKey";
 import dayjs from "dayjs";
 import arraySupport from "dayjs/plugin/arraySupport";
 import timezone from "dayjs/plugin/timezone";
@@ -84,15 +85,9 @@ const parseInf = (
   const arr = inf.split(removeRegExp);
   if (arr.length === 5) {
     const [, _dest, _newType, _newDest] = arr;
-    const dest = Object.keys(stationNameList).find(
-      (key) => stationNameList[key] === _dest
-    );
-    const newDest = Object.keys(stationNameList).find(
-      (key) => stationNameList[key] === _newDest
-    );
-    const newType = Object.keys(typeList).find(
-      (key) => typeList[+key] === _newType
-    );
+    const dest = valueToKey(stationNameList, _dest);
+    const newDest = valueToKey(stationNameList, _newDest);
+    const newType = valueToKey(typeList, _newType);
     if (dest && newDest && newType)
       return { dest, typeChange: { type: newType, dest: newDest } };
   }

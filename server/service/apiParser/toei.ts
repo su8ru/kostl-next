@@ -5,6 +5,7 @@ import dayjs from "dayjs";
 import minMax from "dayjs/plugin/minMax";
 import timezone from "dayjs/plugin/timezone";
 import utc from "dayjs/plugin/utc";
+import valueToKey from "$/utils/valueToKey";
 
 dayjs.extend(minMax);
 dayjs.extend(timezone);
@@ -78,11 +79,7 @@ const parseToei = (
 
 const destToId = (dest: string): string => {
   const destJa = destListToei[dest] ?? "ERROR";
-  return (
-    Object.keys(destListKeio).filter(
-      (key) => destListKeio[key] === destJa
-    )[0] ?? "999"
-  );
+  return valueToKey(destListKeio, destJa) ?? "999";
 };
 
 const stationToSection = (
