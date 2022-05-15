@@ -1,5 +1,12 @@
 import Body, { Dt, TB, TS } from "$/types/keioApi";
-import { Section, SectionType, Train, TrainDirection } from "$/types/train";
+import {
+  Section,
+  SectionType,
+  Train,
+  TrainDirection,
+  TypeChange,
+} from "$/types/train";
+import { stationNameList, typeList } from "$/service/data";
 import dayjs from "dayjs";
 import arraySupport from "dayjs/plugin/arraySupport";
 import timezone from "dayjs/plugin/timezone";
@@ -17,22 +24,26 @@ const parseKeio = (raw: Body): { timestamp: string; trains: Train[] } => {
     ...(raw.TS ?? [])
       .filter(({ id, sn }) => sn !== "I" && id.substring(1, 2) !== "1")
       .flatMap(({ id, ps }: TS) =>
-        ps.map<Train>((train) => ({
-          id: train.tr.trim(),
-          type: train.sy_tr,
-          direction: (shouldReverse(id, +train.bs) ? !+train.ki : +train.ki)
-            ? "West"
-            : "East",
-          delay: +train.dl ?? 0,
-          dest: train.ik_tr,
-          length: +train.sr,
-          section: {
-            id: sectionIdToNumber(id),
-            type: "Sta",
-            // "2S", "3S" などの対策
-            track: parseInt(train.bs, 10) === 10 ? 0 : parseInt(train.bs, 10),
-          },
-        }))
+        ps.map<Train>((train) => {
+          const { dest, typeChange } = parseInf(train.inf);
+          return {
+            id: train.tr.trim(),
+            type: train.sy_tr,
+            direction: (shouldReverse(id, +train.bs) ? !+train.ki : +train.ki)
+              ? "West"
+              : "East",
+            delay: +train.dl ?? 0,
+            dest: dest ?? train.ik_tr,
+            length: +train.sr,
+            section: {
+              id: sectionIdToNumber(id),
+              type: "Sta",
+              // "2S", "3S" などの対策
+              track: parseInt(train.bs, 10) === 10 ? 0 : parseInt(train.bs, 10),
+            },
+            ...(typeChange ? { typeChanges: [typeChange] } : {}),
+          };
+        })
       )
   );
 
@@ -48,20 +59,44 @@ const parseKeio = (raw: Body): { timestamp: string; trains: Train[] } => {
       .flatMap(({ id, ps }: TB) =>
         ps.map<Train>((train) => {
           const { direction, section } = sectionIdToSection(id);
+          const { dest, typeChange } = parseInf(train.inf);
           return {
             id: train.tr.trim(),
             type: train.sy_tr,
             direction,
             delay: +train.dl ?? 0,
-            dest: train.ik_tr,
+            dest: dest ?? train.ik_tr,
             length: +train.sr,
             section,
+            ...(typeChange ? { typeChanges: [typeChange] } : {}),
           };
         })
       )
   );
 
   return { timestamp: dtToTime(raw.up[0].dt), trains };
+};
+
+const parseInf = (
+  inf: string
+): { dest: string | null; typeChange: TypeChange | null } => {
+  const removeRegExp = /この列車は|駅で|\s|行きとなります。/;
+  const arr = inf.split(removeRegExp);
+  if (arr.length === 5) {
+    const [, _dest, _newType, _newDest] = arr;
+    const dest = Object.keys(stationNameList).find(
+      (key) => stationNameList[key] === _dest
+    );
+    const newDest = Object.keys(stationNameList).find(
+      (key) => stationNameList[key] === _newDest
+    );
+    const newType = Object.keys(typeList).find(
+      (key) => typeList[+key] === _newType
+    );
+    if (dest && newDest && newType)
+      return { dest, typeChange: { type: newType, dest: newDest } };
+  }
+  return { dest: null, typeChange: null };
 };
 
 const shouldReverse = (sectionId: string, track: number): boolean => {
