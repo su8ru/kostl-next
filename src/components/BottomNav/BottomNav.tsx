@@ -1,13 +1,15 @@
-import { HStack } from "@chakra-ui/react";
+import { ComponentWithAs, HStack, IconProps } from "@chakra-ui/react";
 import BottomNavItem from "~/components/BottomNav/BottomNavItem";
-import { IconType } from "react-icons";
 import { UrlObject } from "url";
+import * as React from "react";
 
 export type Props = {
   items: ReadonlyArray<{
     label: string;
     href: UrlObject;
-    icon: IconType;
+    icon:
+      | ((props: React.SVGAttributes<SVGElement>) => JSX.Element)
+      | ComponentWithAs<"svg", IconProps>;
   }>;
 };
 
