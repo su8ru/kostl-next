@@ -1,4 +1,4 @@
-export const destListKeio = {
+export const destListKeio: Record<string, string> = {
   "001": "K新宿",
   "002": "笹塚",
   "006": "桜上水",
@@ -32,47 +32,55 @@ export const destListKeio = {
   "401": "[高山]",
   "402": "[橋本]",
   "999": "-",
-  "701": "セ　橋",
-  "702": "新　セ",
-  "751": "調　橋",
-  "752": "新　調",
-  "801": "高　八",
-  "802": "新　高",
-  "811": "高　山",
-  "812": "新　高",
-  "851": "調　八",
-  "852": "新　調",
-  "861": "調　山",
-  "862": "新　調",
-  "891": "Ｎ　本",
-  "892": "本　Ｎ",
-} as { [key: string]: string };
+};
 
-export const capitalMap = new Map<string, string>([
-  ["新", "新宿"],
-  ["調", "調布"],
-  ["高", "高幡不動"],
-  ["八", "京王八王子"],
-  ["山", "高尾山口"],
-  ["セ", "京王多摩センター"],
-  ["橋", "橋本"],
-  ["Ｎ", "新線新宿"],
-  ["本", "本八幡"],
-]);
+export const stationNameList: Record<string, string> = {
+  "001": "新宿",
+  "016": "調布",
+  "027": "高幡不動",
+  "031": "北野",
+  "032": "京王八王子",
+  "033": "新線新宿",
+  "036": "府中競馬正門前",
+  "037": "多摩動物公園",
+  "043": "高尾山口",
+  "050": "京王多摩センター",
+  "054": "橋本",
+  "114": "大島",
+  "120": "本八幡",
+  "999": "-",
+};
 
-export const typeList = {
-  1: "特急",
-  2: "急行",
-  3: "快速",
-  4: "準特急",
-  5: "区間急行",
-  6: "各駅停車",
-  9: "京王ライナー",
-  10: "臨時",
-  11: "Mt.TAKAO号",
-} as { [key: number]: string };
+export const stationNameCapitalList: Record<string, string> = {
+  "001": "新",
+  "016": "調",
+  "027": "高",
+  "031": "北",
+  "032": "八",
+  "033": "新",
+  "036": "馬",
+  "037": "動",
+  "043": "山",
+  "050": "セ",
+  "054": "橋",
+  "114": "島",
+  "120": "本",
+  "999": "-",
+};
 
-export const destListToei = {
+export const typeList: Record<string, string> = {
+  "1": "特急",
+  "2": "急行",
+  "3": "快速",
+  "4": "準特急",
+  "5": "区間急行",
+  "6": "各駅停車",
+  "9": "京王ライナー",
+  "10": "臨時",
+  "11": "Mt.TAKAO号",
+};
+
+export const destListToei: Record<string, string> = {
   Shinjuku: "N新宿",
   Sasazuka: "笹塚",
   Sakurajosui: "桜上水",
@@ -89,4 +97,4 @@ export const destListToei = {
   Mizue: "瑞江",
   Ojima: "大島",
   Iwamotocho: "岩本町",
-} as { [key: string]: string };
+};

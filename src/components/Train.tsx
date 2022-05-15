@@ -1,13 +1,13 @@
 import { Flex, Text } from "@chakra-ui/react";
-import { Train } from "$/types/train";
-import { destListKeio } from "$/service/data";
+import { Train, TrainDirection, TypeChange } from "$/types/train";
+import { destListKeio, stationNameCapitalList } from "$/service/data";
 
 export interface Props {
   train: Train;
 }
 
 const Train: React.VFC<Props> = ({
-  train: { id, type, dest, delay, direction },
+  train: { id, type, dest, delay, direction, typeChanges },
 }) => {
   return (
     <Flex
@@ -24,12 +24,12 @@ const Train: React.VFC<Props> = ({
         borderColor="#fff"
         boxShadow="base"
         direction={direction === "East" ? "column" : "column-reverse"}
-        bg={typeColorList[+type]}
+        bg={getType(type, direction, typeChanges)}
         borderTopRadius={direction === "East" ? "md" : "sm"}
         borderBottomRadius={direction === "East" ? "sm" : "md"}
       >
         <Text fontSize="sm">{id}</Text>
-        <Text fontSize="sm">{destListKeio[dest] ?? "-"}</Text>
+        <Text fontSize="sm">{getDest(dest, typeChanges)}</Text>
       </Flex>
       {delay > 0 && (
         <Text color="#cf167c" fontWeight="900" fontSize="sm">
@@ -41,6 +41,32 @@ const Train: React.VFC<Props> = ({
 };
 
 export default Train;
+
+const getDest = (dest: string, typeChanges?: TypeChange[]): string => {
+  if (typeChanges && typeChanges.length) {
+    const { dest: newDest } = typeChanges[0];
+    // eslint-disable-next-line no-irregular-whitespace
+    return `${stationNameCapitalList[dest]}　${stationNameCapitalList[newDest]}`;
+  }
+  return destListKeio[dest] ?? "-";
+};
+
+const getType = (
+  type: string,
+  direction: TrainDirection,
+  typeChanges?: TypeChange[]
+): string => {
+  if (typeChanges && typeChanges.length) {
+    const { type: newType } = typeChanges[0];
+    const colorL = typeColorList[+type];
+    const colorR = typeColorList[+newType];
+    const perL = "60%";
+    const perR = "62%";
+    const tilt = direction === "West" ? "82deg" : "98deg";
+    return `linear-gradient(${tilt}, ${colorL} ${perL}, ${colorR} ${perR})`;
+  }
+  return typeColorList[+type];
+};
 
 const typeColorList: { [key: number]: string } = {
   1: "#cf167c",

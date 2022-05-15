@@ -8,6 +8,12 @@ export type Train = {
   dest: string;
   length: number | null;
   section: Section;
+  typeChanges?: TypeChange[];
+};
+
+export type TypeChange = {
+  type: string;
+  dest: string;
 };
 
 export type SectionType = "Sta" | "Way" | "WayB";
