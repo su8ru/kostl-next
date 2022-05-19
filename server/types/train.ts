@@ -4,6 +4,7 @@ export type Train = {
   id: string;
   type: string;
   direction: TrainDirection;
+  operationId: string | null;
   delay: number;
   dest: string;
   length: number | null;

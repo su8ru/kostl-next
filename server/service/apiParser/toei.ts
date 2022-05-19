@@ -13,7 +13,8 @@ dayjs.extend(utc);
 dayjs.tz.setDefault("Asia/Tokyo");
 
 const parseToei = (
-  raw: OdptTrain[]
+  raw: OdptTrain[],
+  operationDict: Record<string, { operationId: string }>
 ): { timestamp: string; trains: Train[] } => {
   let date = dayjs(0);
 
@@ -59,6 +60,7 @@ const parseToei = (
           id,
           type: type === "Express" ? "2" : "6",
           direction,
+          operationId: operationDict[id]?.operationId ?? null,
           delay: delay ? delay / 60 : 0,
           dest: destToId(dest ?? "ERROR"),
           length: null,
