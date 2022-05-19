@@ -22,7 +22,7 @@ const KeioLine: React.VFC = () => {
 
   return (
     <SimpleGrid
-      templateRows="repeat(77, minmax(50px, auto))"
+      templateRows="repeat(77, minmax(79px, auto))"
       templateColumns="90px 10px 58px 58px 10px 58px 58px 10px 58px 10px 58px 10px 58px 58px 10px 58px 58px 10px 90px"
     >
       {[...Array(39)].map((_, index) => (

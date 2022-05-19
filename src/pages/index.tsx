@@ -6,7 +6,7 @@ import Head from "next/head";
 import useRestoreScroll from "~/hooks/useRestoreScroll";
 
 const Page: NextPage = () => {
-  useRestoreScroll(0, 2200);
+  useRestoreScroll(0, 3000);
 
   return (
     <Box>

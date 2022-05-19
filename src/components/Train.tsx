@@ -7,7 +7,7 @@ export interface Props {
 }
 
 const Train: React.VFC<Props> = ({
-  train: { id, type, dest, delay, direction, typeChanges },
+  train: { id, type, dest, operationId, delay, direction, typeChanges },
 }) => {
   return (
     <Flex
@@ -29,6 +29,7 @@ const Train: React.VFC<Props> = ({
         borderBottomRadius={direction === "East" ? "sm" : "md"}
       >
         <Text fontSize="sm">{id}</Text>
+        <Text fontSize="sm">{operationId ?? "-"}</Text>
         <Text fontSize="sm">{getDest(dest, typeChanges)}</Text>
       </Flex>
       {delay > 0 && (
