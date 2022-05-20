@@ -13,6 +13,7 @@
     "generate:frourio": "frourio",
     "generate:prisma": "prisma generate",
     "migrate:dev": "prisma migrate dev",
+    "migrate:deploy": "prisma migrate deploy",
     "migrate:dev:createonly": "prisma migrate dev --create-only",
     "migrate:reset": "prisma migrate reset",
     "seed": "prisma db seed --preview-feature",
