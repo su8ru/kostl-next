@@ -13,14 +13,6 @@ jobs:
       name: Server
     steps:
       - uses: actions/checkout@v2
-      - name: prepare server/.env
-        run: |
-          cat<<EOF > server/.env
-          API_BASE_PATH=/api
-          API_ORIGIN=https://api.next.kostl.info
-          API_ODPT_TOKEN=${{ secrets.ODPT_TOKEN }}
-          API_DATABASE_URL=${{ secrets.DATABASE_URL }}
-          EOF
       - name: prepare .ssh dir
         run: mkdir -p .ssh && chmod 700 .ssh
       - name: prepare ssh key
@@ -31,7 +23,7 @@ jobs:
         run: chmod -R 775 * && sudo groupadd -f docker && sudo useradd deploy -g docker && sudo chown -R deploy:docker *
       - name: push with rsync
         run: |
-          rsync -rlptgoD -O --delete --exclude ".git/" \
+          rsync -rlptgoD -O --delete --exclude ".git/" --exclude "server/.env" \
           -e "ssh -i .ssh/id_rsa -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -p ${SSH_PORT}" \
           * $SSH_USER@$SSH_HOST:$DIR
         env:
