@@ -1,5 +1,10 @@
 import { Traffic } from "$/types/train";
 
+type TrafficCache = { timestamp: number; data: Traffic };
+type CalendarCache = { day: string; calendar: "WEEKDAY" | "HOLIDAY" };
+
 export type CacheSchema = {
-  [key in "keio" | "toei"]: { timestamp: number; data: Traffic };
+  keio: TrafficCache;
+  toei: TrafficCache;
+  calendar: CalendarCache;
 };

@@ -7,8 +7,35 @@ generator client {
   provider = "prisma-client-js"
 }
 
-model User {
-  id    Int     @id @default(autoincrement())
-  email String  @unique
-  name  String?
+model Train {
+  id          String
+  operation   Operation    @relation(fields: [operationId, day], references: [id, day])
+  operationId String
+  day         Day
+  depTime     String
+  typeChanges TypeChange[]
+
+  @@id([id, day])
+}
+
+enum Day {
+  WEEKDAY
+  HOLIDAY
+}
+
+model Operation {
+  id     String
+  day    Day
+  trains Train[]
+
+  @@id([id, day])
+}
+
+model TypeChange {
+  id        Int     @id @default(autoincrement())
+  stationId String
+  typeId    String
+  Train     Train   @relation(fields: [trainId, trainDay], references: [id, day])
+  trainId   String
+  trainDay  Day
 }

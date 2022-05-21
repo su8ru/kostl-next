@@ -17,7 +17,10 @@ dayjs.extend(arraySupport);
 dayjs.extend(timezone);
 dayjs.extend(utc);
 
-const parseKeio = (raw: Body): { timestamp: string; trains: Train[] } => {
+const parseKeio = (
+  raw: Body,
+  operationDict: Record<string, { operationId: string }>
+): { timestamp: string; trains: Train[] } => {
   const trains: Train[] = [];
 
   // 駅停車中
@@ -33,6 +36,7 @@ const parseKeio = (raw: Body): { timestamp: string; trains: Train[] } => {
             direction: (shouldReverse(id, +train.bs) ? !+train.ki : +train.ki)
               ? "West"
               : "East",
+            operationId: operationDict[train.tr.trim()]?.operationId ?? null,
             delay: +train.dl ?? 0,
             dest: dest ?? train.ik_tr,
             length: +train.sr,
@@ -65,6 +69,7 @@ const parseKeio = (raw: Body): { timestamp: string; trains: Train[] } => {
             id: train.tr.trim(),
             type: train.sy_tr,
             direction,
+            operationId: operationDict[train.tr.trim()]?.operationId ?? null,
             delay: +train.dl ?? 0,
             dest: dest ?? train.ik_tr,
             length: +train.sr,
