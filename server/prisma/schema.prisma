@@ -9,9 +9,9 @@ generator client {
 
 model Train {
   id          String
-  day         Day
-  operation   Operation    @relation(fields: [operationId], references: [id])
+  operation   Operation    @relation(fields: [operationId, day], references: [id, day])
   operationId String
+  day         Day
   depTime     String
   typeChanges TypeChange[]
 
@@ -24,8 +24,11 @@ enum Day {
 }
 
 model Operation {
-  id     String  @id
+  id     String
+  day    Day
   trains Train[]
+
+  @@id([id, day])
 }
 
 model TypeChange {
