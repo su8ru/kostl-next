@@ -4,6 +4,7 @@ import fetch from "node-fetch";
 import { API_ODPT_TOKEN } from "$/service/envValues";
 import { FastifyInstance } from "fastify";
 import dayjs from "dayjs";
+import { Operation } from "$/types/operation";
 
 const prisma = new PrismaClient();
 
@@ -14,13 +15,11 @@ export default defineController((fastify) => ({
     if (!day)
       return { status: 500, body: "The response from ODPT was invalid." };
 
-    const ops = await prisma.operation.findMany({
+    const allOperations = await prisma.operation.findMany({
       select: {
         id: true,
+        day: true,
         trains: {
-          where: {
-            day,
-          },
           select: {
             id: true,
             depTime: true,
@@ -32,9 +31,24 @@ export default defineController((fastify) => ({
       },
     });
 
+    const groupedOperations = allOperations.reduce<{
+      weekday: Operation[];
+      holiday: Operation[];
+    }>(
+      (grouped, operation) =>
+        Object.assign(grouped, {
+          [operation.day.toLowerCase() as "weekday" | "holiday"]: [
+            ...(grouped[operation.day.toLowerCase() as "weekday" | "holiday"] ||
+              []),
+            operation,
+          ],
+        }),
+      { weekday: [], holiday: [] }
+    );
+
     return {
       status: 200,
-      body: ops,
+      body: groupedOperations,
     };
   },
 }));
