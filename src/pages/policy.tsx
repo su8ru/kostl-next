@@ -1,8 +1,17 @@
 import { NextPage } from "next";
-import { Box, Link, ListItem, Text, UnorderedList } from "@chakra-ui/react";
+import {
+  Box,
+  Divider,
+  Icon,
+  Link,
+  ListItem,
+  Text,
+  UnorderedList,
+} from "@chakra-ui/react";
 import H2 from "~/components/docs/H2";
 import H3 from "~/components/docs/H3";
 import Head from "next/head";
+import { BsBoxArrowUpRight } from "react-icons/bs";
 
 const Policy: NextPage = () => {
   return (
@@ -11,39 +20,70 @@ const Policy: NextPage = () => {
         <title>利用規約 - こすとれ</title>
       </Head>
       <Box as="section" mt="12">
-        <H2>README</H2>
+        <H2>about</H2>
         <H3>対応路線</H3>
-        <UnorderedList spacing="3" mt="4">
+        <UnorderedList spacing="2" mt="4">
           <ListItem>
             京王電鉄：京王線・京王新線・京王相模原線・京王競馬場線・京王動物園線・京王高尾線
+            <Text lineHeight="1.5" color="gray">
+              ＊井の頭線への対応も予定しています。
+            </Text>
           </ListItem>
-          <ListItem>都営地下鉄：新宿線（新宿～新宿三丁目駅間以東）</ListItem>
+          <ListItem>
+            都営地下鉄：新宿線全線
+            <Text lineHeight="1.5" color="gray">
+              ＊新宿駅の在線情報は京王電鉄からの情報を使用します。
+            </Text>
+          </ListItem>
         </UnorderedList>
         <H3>提供情報</H3>
-        <UnorderedList spacing="3" mt="4">
-          <ListItem>列車番号：公式に提供される列車番号を使用</ListItem>
-          <ListItem>種別：公式に提供される種別を使用</ListItem>
-          <ListItem>行き先：公式に提供される行き先を使用</ListItem>
+        <UnorderedList spacing="2" mt="4">
+          <ListItem>列車番号：公式の列車番号を使用</ListItem>
+          <ListItem>
+            列車種別：公式の列車種別を使用
+            <Text lineHeight="1.5" color="gray">
+              ＊種別変更については後述
+            </Text>
+          </ListItem>
+          <ListItem>行き先：公式の行き先を使用</ListItem>
           <ListItem>
             運用番号：
-            <UnorderedList spacing="3" mt="3">
-              <ListItem>T・K 運用：公式に使用されている運用番号</ListItem>
-              <ListItem>
-                京王線運用：非公式の運用番号
-                <Text lineHeight="1.75">
-                  ＊公式に使用されている運用番号を用いることは禁止します。
-                </Text>
-              </ListItem>
+            <UnorderedList spacing="2" mt="2">
+              <ListItem>T・K 運用：公式の運用番号</ListItem>
+              <ListItem>京王線運用：非公式の運用番号</ListItem>
             </UnorderedList>
           </ListItem>
         </UnorderedList>
         <H3>途中駅における種別変更</H3>
-        <Text mt="4">未対応（対応予定あり）</Text>
+        <Text mt="4">公式に提供されている種別変更にのみ対応しています。</Text>
+        <Text mt="4">対応していない例:</Text>
+        <UnorderedList spacing="2" mt="3">
+          <ListItem>
+            都営新宿線から京王線への直通列車の、新線新宿駅での種別変更の表示
+          </ListItem>
+          <ListItem>京王線内での種別変更の、都営新宿線内での表示</ListItem>
+          <ListItem>種別変更後の表示</ListItem>
+        </UnorderedList>
+        <H3>連絡先</H3>
+        <UnorderedList spacing="2" mt="4">
+          <ListItem>
+            Twitter:{" "}
+            <Link href="https://twitter.com/su8ru_" isExternal color="blue.500">
+              @su8ru_ <Icon as={BsBoxArrowUpRight} />
+            </Link>
+          </ListItem>
+          <ListItem>
+            Email:{" "}
+            <Link href="mailto:contact@su8ru.dev" isExternal color="blue.500">
+              contact@su8ru.dev <Icon as={BsBoxArrowUpRight} />
+            </Link>
+          </ListItem>
+        </UnorderedList>
       </Box>
       <Box as="section" mt="12">
         <H2>利用規約</H2>
         <Text mt="4" lineHeight="1.75" align="right">
-          2022 年 3 月 24 日 制定
+          2022 年 6 月 1 日 制定
         </Text>
         <H3>概要</H3>
         <Text mt="4" lineHeight="1.75">
@@ -111,8 +151,18 @@ const Policy: NextPage = () => {
           </ListItem>
         </UnorderedList>
       </Box>
+      <Divider my="12" />
       <Box as="section" mt="12">
-        <Text mt="4">&copy; subaru 2020</Text>
+        <Text mt="4">&copy; subaru 2022</Text>
+        <Text mt="2">
+          <Link
+            href="https://github.com/su8ru/kostl-next"
+            isExternal
+            color="blue.500"
+          >
+            su8ru/kostl-next
+          </Link>
+        </Text>
       </Box>
     </Box>
   );
