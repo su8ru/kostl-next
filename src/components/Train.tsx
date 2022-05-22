@@ -1,14 +1,34 @@
 import { Flex, Text } from "@chakra-ui/react";
 import { Train, TrainDirection, TypeChange } from "$/types/train";
 import { destListKeio, stationNameCapitalList } from "$/service/data";
+import { useRecoilValue } from "recoil";
+import trainItemsSettingState from "~/states/atoms/trainItemsSettingState";
+import { TrainItem } from "~/types/settings";
 
 export interface Props {
   train: Train;
 }
 
 const Train: React.VFC<Props> = ({
-  train: { id, type, dest, operationId, delay, direction, typeChanges },
+  train: { id, type, dest, operationId, delay, direction, typeChanges, length },
 }) => {
+  const trainItemsSetting = useRecoilValue(trainItemsSettingState);
+
+  const itemIdToValue = (itemId: TrainItem): string => {
+    switch (itemId) {
+      case "trainId":
+        return id;
+      case "operationId":
+        return operationId ?? "-";
+      case "destination":
+        return getDest(dest, typeChanges);
+      case "carId":
+        return "-";
+      case "carCount":
+        return length?.toString() ?? "-";
+    }
+  };
+
   return (
     <Flex
       alignItems="center"
@@ -28,9 +48,11 @@ const Train: React.VFC<Props> = ({
         borderTopRadius={direction === "East" ? "md" : "sm"}
         borderBottomRadius={direction === "East" ? "sm" : "md"}
       >
-        <Text fontSize="sm">{id}</Text>
-        <Text fontSize="sm">{operationId ?? "-"}</Text>
-        <Text fontSize="sm">{getDest(dest, typeChanges)}</Text>
+        {trainItemsSetting.map((itemId) => (
+          <Text fontSize="sm" key={itemId}>
+            {itemIdToValue(itemId)}
+          </Text>
+        ))}
       </Flex>
       {delay > 0 && (
         <Text color="#cf167c" fontWeight="900" fontSize="sm">
