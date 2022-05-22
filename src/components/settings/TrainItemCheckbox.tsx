@@ -18,7 +18,7 @@ const TrainItemCheckbox: React.VFC<Props> = ({
   moveDown,
 }) => {
   return (
-    <Flex p="1" w="48">
+    <Flex p="1">
       <Checkbox isChecked={isChecked} onChange={onClick}>
         {itemName[itemId]}
       </Checkbox>

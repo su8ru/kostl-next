@@ -1,8 +1,9 @@
-import { Box } from "@chakra-ui/react";
+import { Box, Divider } from "@chakra-ui/react";
 import { useRecoilState } from "recoil";
 import trainItemsSettingState from "~/states/atoms/trainItemsSettingState";
 import { TrainItem, trainItemArray } from "~/types/settings";
 import TrainItemCheckbox from "~/components/settings/TrainItemCheckbox";
+import Train from "~/components/Train";
 
 const TrainItemList: React.VFC = () => {
   const [trainItemsSetting, setTrainItemsSetting] = useRecoilState(
@@ -34,7 +35,7 @@ const TrainItemList: React.VFC = () => {
   };
 
   return (
-    <Box>
+    <Box w="48">
       {trainItemsSetting.map((itemId, index, array) => (
         <TrainItemCheckbox
           itemId={itemId}
@@ -47,6 +48,7 @@ const TrainItemList: React.VFC = () => {
           }
         />
       ))}
+      <Divider mb="1" />
       {trainItemArray
         .filter((itemId) => !trainItemsSetting.includes(itemId))
         .map((itemId) => (

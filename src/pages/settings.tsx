@@ -1,9 +1,10 @@
 import { NextPage } from "next";
-import { Box, Text } from "@chakra-ui/react";
+import { Box, Flex, Text } from "@chakra-ui/react";
 import H2 from "~/components/docs/H2";
 import H3 from "src/components/docs/H3";
 import Head from "next/head";
 import TrainItemList from "~/components/settings/TrainItemList";
+import ExampleTrain from "~/components/ExampleTrain";
 
 const Settings: NextPage = () => {
   return (
@@ -18,9 +19,15 @@ const Settings: NextPage = () => {
           列車アイコンに表示する項目を設定できます。チェックボックスで表示の有無を、右の上下ボタンで表示順序を設定できます。
         </Text>
         <Text mt="4">「行き先」は一番下にするのがおすすめです。</Text>
-        <Box mt="4">
+        <Flex
+          mt="4"
+          alignItems="center"
+          justifyContent="space-between"
+          wrap="wrap"
+        >
           <TrainItemList />
-        </Box>
+          <ExampleTrain />
+        </Flex>
       </Box>
     </Box>
   );
