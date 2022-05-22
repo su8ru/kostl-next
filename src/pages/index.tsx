@@ -4,9 +4,12 @@ import KeioLine from "~/components/KeioLine";
 import ToeiLine from "~/components/ToeiLine";
 import Head from "next/head";
 import useRestoreScroll from "~/hooks/useRestoreScroll";
+import { useRecoilValue } from "recoil";
+import trainItemsSettingState from "~/states/atoms/trainItemsSettingState";
 
 const Page: NextPage = () => {
-  useRestoreScroll(0, 3000);
+  const trainItemsSetting = useRecoilValue(trainItemsSettingState);
+  useRestoreScroll(0, 1000, trainItemsSetting.length);
 
   return (
     <Box>

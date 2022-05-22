@@ -9,11 +9,14 @@ import LineBorderY from "~/components/LineBorderY";
 import LineBorderX from "~/components/LineBorderX";
 import StationLabel from "~/components/StationLabel";
 import UpdateTime from "~/components/UpdateTime";
+import { useRecoilValue } from "recoil";
+import trainItemsSettingState from "~/states/atoms/trainItemsSettingState";
 
 const KeioLine: React.VFC = () => {
   const { data } = useAspidaSWR(apiClient.traffic._key("keio"), {
     refreshInterval: 5000,
   });
+  const trainItemsSetting = useRecoilValue(trainItemsSettingState);
 
   const sections = useMemo(
     () => (data ? groupBySection(data.trains, getGridAreaKeio) : []),
@@ -22,7 +25,9 @@ const KeioLine: React.VFC = () => {
 
   return (
     <SimpleGrid
-      templateRows="repeat(77, minmax(79px, auto))"
+      templateRows={`repeat(77, minmax(${
+        trainItemsSetting.length * 21 + 12
+      }px, auto))`}
       templateColumns="90px 10px 58px 58px 10px 58px 58px 10px 58px 10px 58px 10px 58px 58px 10px 58px 58px 10px 90px"
     >
       {[...Array(39)].map((_, index) => (
