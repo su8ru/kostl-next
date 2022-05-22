@@ -1,6 +1,6 @@
 import { Box } from "@chakra-ui/react";
 import BottomNav from "~/components/BottomNav/BottomNav";
-import { BsFileEarmarkText, BsGear } from "react-icons/bs";
+import { BsGear, BsTextLeft } from "react-icons/bs";
 import { pagesPath } from "~/utils/$path";
 import { TrafficIcon } from "~/components/Icons";
 
@@ -26,7 +26,7 @@ const Footer: React.VFC = () => (
           {
             label: "利用規約",
             href: pagesPath.policy.$url(),
-            icon: BsFileEarmarkText,
+            icon: BsTextLeft,
           },
           {
             label: "設定",
