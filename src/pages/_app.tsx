@@ -7,6 +7,7 @@ import { useEffect } from "react";
 import "~/aseets/global.scss";
 import theme from "~/utils/theme";
 import usePageView from "~/hooks/usePageView";
+import { RecoilRoot } from "recoil";
 
 const MyApp = ({ Component, pageProps }: AppProps) => {
   usePageView();
@@ -30,18 +31,20 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
         />
       </Head>
       <ChakraProvider theme={theme}>
-        <Flex
-          minW="100%"
-          minH="var(--100vh)"
-          direction="column"
-          alignItems="center"
-        >
-          <Header />
-          <Box as="main" flexGrow="1" pt="10" pb="20" overflowX="auto">
-            <Component {...pageProps} />
-          </Box>
-          <Footer />
-        </Flex>
+        <RecoilRoot>
+          <Flex
+            minW="100%"
+            minH="var(--100vh)"
+            direction="column"
+            alignItems="center"
+          >
+            <Header />
+            <Box as="main" flexGrow="1" pt="10" pb="20" overflowX="auto">
+              <Component {...pageProps} />
+            </Box>
+            <Footer />
+          </Flex>
+        </RecoilRoot>
       </ChakraProvider>
     </>
   );

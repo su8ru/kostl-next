@@ -1,14 +1,34 @@
 import { Flex, Text } from "@chakra-ui/react";
 import { Train, TrainDirection, TypeChange } from "$/types/train";
 import { destListKeio, stationNameCapitalList } from "$/service/data";
+import { useRecoilValue } from "recoil";
+import trainItemsSettingState from "~/states/atoms/trainItemsSettingState";
+import { TrainItem } from "~/types/settings";
 
 export interface Props {
   train: Train;
 }
 
 const Train: React.VFC<Props> = ({
-  train: { id, type, dest, operationId, delay, direction, typeChanges },
+  train: { id, type, dest, operationId, delay, direction, typeChanges, length },
 }) => {
+  const trainItemsSetting = useRecoilValue(trainItemsSettingState);
+
+  const itemIdToValue = (itemId: TrainItem): string => {
+    switch (itemId) {
+      case "trainId":
+        return id;
+      case "operationId":
+        return operationId ?? "-";
+      case "destination":
+        return getDest(dest, typeChanges);
+      case "carId":
+        return "-";
+      case "carCount":
+        return length?.toString() ?? "-";
+    }
+  };
+
   return (
     <Flex
       alignItems="center"
@@ -28,9 +48,11 @@ const Train: React.VFC<Props> = ({
         borderTopRadius={direction === "East" ? "md" : "sm"}
         borderBottomRadius={direction === "East" ? "sm" : "md"}
       >
-        <Text fontSize="sm">{id}</Text>
-        <Text fontSize="sm">{operationId ?? "-"}</Text>
-        <Text fontSize="sm">{getDest(dest, typeChanges)}</Text>
+        {trainItemsSetting.map((itemId) => (
+          <Text fontSize="sm" key={itemId}>
+            {itemIdToValue(itemId)}
+          </Text>
+        ))}
       </Flex>
       {delay > 0 && (
         <Text color="#cf167c" fontWeight="900" fontSize="sm">
@@ -71,14 +93,14 @@ const getType = (
 
 const typeColorList: { [key: number]: string } = {
   1: "#cf167c",
-  2: "#05B08D",
-  3: "#0F4E8C",
-  4: "#F79328",
-  5: "#D3C427",
+  2: "#05b08d",
+  3: "#0f4e8c",
+  4: "#f79328",
+  5: "#d3c427",
   6: "#808285",
   7: "#808285",
   8: "#808285",
-  9: "linear-gradient(90deg, #d5007f 0%, #d5007f 10%, #000 10%, #000 90%, #d5007f 90%, #d5007f 100%)",
+  9: "linear-gradient(90deg, #d5007f 10%, #000 10%, #000 90%, #d5007f 90%)",
   10: "#808285",
-  11: "#57A100",
+  11: "linear-gradient(90deg, #57a100 10%, #000 10%, #000 90%, #57a100 90%)",
 };
