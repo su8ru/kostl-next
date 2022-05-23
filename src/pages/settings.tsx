@@ -1,12 +1,24 @@
 import { NextPage } from "next";
-import { Box, Flex, Text } from "@chakra-ui/react";
+import {
+  Box,
+  Code,
+  Divider,
+  Flex,
+  ListItem,
+  Text,
+  UnorderedList,
+} from "@chakra-ui/react";
 import H2 from "~/components/docs/H2";
 import H3 from "src/components/docs/H3";
 import Head from "next/head";
 import TrainItemList from "~/components/settings/TrainItemList";
 import ExampleTrain from "~/components/ExampleTrain";
+import useAspidaSWR from "@aspida/swr";
+import { apiClient } from "~/utils/apiClient";
 
 const Settings: NextPage = () => {
+  const { data } = useAspidaSWR(apiClient.calendar);
+
   return (
     <Box maxW="3xl" w="100%" mx="auto" px="8" pb="8" textAlign="left">
       <Head>
@@ -28,6 +40,19 @@ const Settings: NextPage = () => {
           <TrainItemList />
           <ExampleTrain />
         </Flex>
+      </Box>
+      <Divider my="12" />
+      <Box as="section" mt="12">
+        <H2>デバッグ情報</H2>
+        <H3>日付・曜日</H3>
+        <UnorderedList spacing="2" mt="3">
+          <ListItem>
+            date: <Code>{data?.date ?? "-"}</Code>
+          </ListItem>
+          <ListItem>
+            day: <Code>{data?.day ?? "-"}</Code>
+          </ListItem>
+        </UnorderedList>
       </Box>
     </Box>
   );
