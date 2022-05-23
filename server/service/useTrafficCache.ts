@@ -10,7 +10,7 @@ import useCalendarCache from "$/service/useCalendarCache";
 
 const prisma = new PrismaClient();
 
-const cacheHandler = async (
+const useTrafficCache = async (
   fastify: FastifyInstance,
   key: "keio" | "toei",
   apiUrl: string,
@@ -50,4 +50,4 @@ const cacheHandler = async (
   await fastify.kvs.set(key, { timestamp, data });
   return { fromKV: false, ...data };
 };
-export default cacheHandler;
+export default useTrafficCache;

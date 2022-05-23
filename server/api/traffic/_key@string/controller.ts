@@ -1,5 +1,5 @@
 import { defineController } from "./$relay";
-import cacheHandler from "$/service/cacheHandler";
+import useTrafficCache from "$/service/useTrafficCache";
 import { API_ODPT_TOKEN } from "$/service/envValues";
 
 const apiUrl = {
@@ -10,7 +10,9 @@ const apiUrl = {
 export default defineController((fastify) => ({
   get: async ({ params: { key } }) => {
     if (key !== "keio" && key !== "toei") return { status: 400 };
-    const data = await cacheHandler(fastify, key, apiUrl[key]);
-    return { status: 200, body: data };
+    return {
+      status: 200,
+      body: await useTrafficCache(fastify, key, apiUrl[key]),
+    };
   },
 }));
