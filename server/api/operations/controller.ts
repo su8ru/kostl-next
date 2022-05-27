@@ -14,6 +14,8 @@ export default defineController(() => ({
           select: {
             id: true,
             depTime: true,
+            depSta: true,
+            arrSta: true,
           },
           orderBy: {
             depTime: "asc",

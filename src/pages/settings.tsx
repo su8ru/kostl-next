@@ -1,9 +1,11 @@
 import { NextPage } from "next";
+import NextLink from "next/link";
 import {
   Box,
   Code,
   Divider,
   Flex,
+  Link,
   ListItem,
   Text,
   UnorderedList,
@@ -15,6 +17,7 @@ import TrainItemList from "~/components/settings/TrainItemList";
 import ExampleTrain from "~/components/ExampleTrain";
 import useAspidaSWR from "@aspida/swr";
 import { apiClient } from "~/utils/apiClient";
+import { pagesPath } from "~/utils/$path";
 
 const Settings: NextPage = () => {
   const { data } = useAspidaSWR(apiClient.calendar);
@@ -51,6 +54,14 @@ const Settings: NextPage = () => {
           </ListItem>
           <ListItem>
             day: <Code>{data?.day ?? "-"}</Code>
+          </ListItem>
+        </UnorderedList>
+        <H3>運用一覧</H3>
+        <UnorderedList spacing="2" mt="3">
+          <ListItem>
+            <NextLink href={pagesPath.operations.$url()} passHref>
+              <Link>運用一覧ページ</Link>
+            </NextLink>
           </ListItem>
         </UnorderedList>
       </Box>

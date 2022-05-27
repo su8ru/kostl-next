@@ -13,6 +13,8 @@ model Train {
   operationId String
   day         Day
   depTime     String
+  depSta      String        @default("999")
+  arrSta      String        @default("999")
   typeChanges TypeChange[]
 
   @@id([id, day])
