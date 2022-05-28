@@ -120,7 +120,7 @@ const toAltOperationId = (
   const num = parseInt(operationId);
   const char = operationId.slice(-1);
   const owner = trainOwner.slice(0, 1);
-  if (char !== owner) return `${num}${owner.toLowerCase()}${char}`;
+  if (char !== owner) return `${num}${char.toLowerCase()}${owner}`;
   return operationId;
 };
 
