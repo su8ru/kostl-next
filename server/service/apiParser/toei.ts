@@ -29,6 +29,7 @@ const parseToei = (
         "odpt:delay": delay,
         "odpt:toStation": toStation,
         "odpt:fromStation": fromStation,
+        "odpt:trainOwner": trainOwner,
         "dc:date": updateDate,
       }) => {
         date = dayjs.max(date, dayjs(updateDate, "Asia/Tokyo"));
@@ -41,6 +42,7 @@ const parseToei = (
           delay,
           toStation: toStation?.split(".").pop(),
           fromStation: fromStation?.split(".").pop(),
+          trainOwner: trainOwner?.split(":").pop(),
         };
       }
     )
@@ -54,13 +56,17 @@ const parseToei = (
         delay,
         toStation,
         fromStation,
+        trainOwner,
       }) => {
         const direction = _direction === "Westbound" ? "West" : "East";
         return {
           id,
           type: type === "Express" ? "2" : "6",
           direction,
-          operationId: operationDict[id]?.operationId ?? null,
+          operationId: toAltOperationId(
+            operationDict[id]?.operationId,
+            trainOwner
+          ),
           delay: delay ? delay / 60 : 0,
           dest: destToId(dest ?? "ERROR"),
           length: null,
@@ -103,6 +109,19 @@ const stationToSection = (
       type: "Sta",
       track: direction === "West" ? 1 : 2,
     };
+};
+
+const toAltOperationId = (
+  operationId: string | undefined,
+  trainOwner?: string
+): string | null => {
+  if (!operationId) return null;
+  if (!trainOwner) return operationId;
+  const num = parseInt(operationId);
+  const char = operationId.slice(-1);
+  const owner = trainOwner.slice(0, 1);
+  if (char !== owner) return `${num}${owner.toLowerCase()}${char}`;
+  return operationId;
 };
 
 const toeiStations: ReadonlyArray<string> = [

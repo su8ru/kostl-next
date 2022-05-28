@@ -49,7 +49,12 @@ const Policy: NextPage = () => {
           <ListItem>
             運用番号：
             <UnorderedList spacing="2" mt="2">
-              <ListItem>T・K 運用：公式の運用番号</ListItem>
+              <ListItem>
+                T・K 運用：公式の運用番号
+                <Text lineHeight="1.5" color="gray">
+                  ＊代走は都営線内のみ対応
+                </Text>
+              </ListItem>
               <ListItem>京王線運用：非公式の運用番号</ListItem>
             </UnorderedList>
           </ListItem>
