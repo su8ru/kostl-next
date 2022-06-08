@@ -13,6 +13,7 @@ import {
 import H2 from "~/components/docs/H2";
 import H3 from "src/components/docs/H3";
 import Head from "next/head";
+import User from "~/components/settings/User";
 import TrainItemList from "~/components/settings/TrainItemList";
 import ExampleTrain from "~/components/ExampleTrain";
 import useAspidaSWR from "@aspida/swr";
@@ -29,20 +30,34 @@ const Settings: NextPage = () => {
       </Head>
       <Box as="section" mt="12">
         <H2>設定</H2>
-        <H3>表示項目</H3>
-        <Text mt="4">
-          列車アイコンに表示する項目を設定できます。チェックボックスで表示の有無を、右の上下ボタンで表示順序を設定できます。
-        </Text>
-        <Text mt="4">「行き先」は一番下にするのがおすすめです。</Text>
-        <Flex
-          mt="4"
-          alignItems="center"
-          justifyContent="space-between"
-          wrap="wrap"
-        >
-          <TrainItemList />
-          <ExampleTrain />
-        </Flex>
+        <Box as="section" mt="8">
+          <H3>表示項目</H3>
+          <Text mt="4">
+            列車アイコンに表示する項目を設定できます。チェックボックスで表示の有無を、右の上下ボタンで表示順序を設定できます。
+          </Text>
+          <Text mt="4">「行き先」は一番下にするのがおすすめです。</Text>
+          <Flex
+            mt="4"
+            alignItems="center"
+            justifyContent="space-between"
+            wrap="wrap"
+          >
+            <TrainItemList />
+            <ExampleTrain />
+          </Flex>
+        </Box>
+        <Box as="section" mt="8">
+          <H3>アカウント</H3>
+          <Text mt="4">
+            Google
+            アカウントでログインすることで、運用情報を投稿できるようになります。
+          </Text>
+          <User />
+          <Text color="gray" fontSize="sm" mt="4">
+            アプリ内ブラウザからはログインできないことがあります。Chrome または
+            Safari の使用を推奨しています。
+          </Text>
+        </Box>
       </Box>
       <Divider my="12" />
       <Box as="section" mt="12">
