@@ -1,10 +1,9 @@
-import path from "path";
 import Fastify, { FastifyServerFactory } from "fastify";
 import fp from "fastify-plugin";
-import helmet from "fastify-helmet";
-import cors from "fastify-cors";
-import fastifyStatic from "fastify-static";
-import { API_BASE_PATH } from "$/service/envValues";
+import helmet from "@fastify/helmet";
+import cors from "@fastify/cors";
+import cookie from "@fastify/cookie";
+import { API_BASE_PATH, CLIENT_ORIGIN } from "$/service/envValues";
 import server from "$/$server";
 import { kvsMemoryStorage } from "@kvs/memorystorage";
 import { CacheSchema } from "$/types/kvs";
@@ -12,11 +11,18 @@ import { CacheSchema } from "$/types/kvs";
 export const init = (serverFactory?: FastifyServerFactory) => {
   const app = Fastify({ serverFactory });
   app.register(helmet);
-  app.register(cors);
-  app.register(fastifyStatic, {
-    root: path.join(__dirname, "static"),
-    prefix: "/static/",
+  app.register(cors, {
+    credentials: true,
+    origin: (origin, cb) => {
+      const { hostname } = new URL(origin);
+      if (hostname === CLIENT_ORIGIN) {
+        cb(null, true);
+        return;
+      }
+      cb(new Error("Invalid hostname"), false);
+    },
   });
+  app.register(cookie, {});
   app.register(
     fp(async (app) => {
       const kvs = await kvsMemoryStorage<CacheSchema>({
