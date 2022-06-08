@@ -1,8 +1,8 @@
 import { Box } from "@chakra-ui/react";
 import BottomNav from "~/components/BottomNav/BottomNav";
-import { BsGear, BsTextLeft } from "react-icons/bs";
+import { BsGear, BsFileEarmarkText, BsCodeSquare } from "react-icons/bs";
 import { pagesPath } from "~/utils/$path";
-import { TrafficIcon } from "~/components/Icons";
+import { TrafficIcon, TrainIcon } from "~/components/Icons";
 
 const Footer: React.VFC = () => (
   <Box
@@ -23,10 +23,11 @@ const Footer: React.VFC = () => (
       <BottomNav
         items={[
           { label: "在線", href: pagesPath.$url(), icon: TrafficIcon },
+          { label: "運用投稿", href: pagesPath.units.$url(), icon: TrainIcon },
           {
             label: "利用規約",
             href: pagesPath.policy.$url(),
-            icon: BsTextLeft,
+            icon: BsFileEarmarkText,
           },
           {
             label: "設定",
