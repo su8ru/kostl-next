@@ -1,9 +1,18 @@
 import { NextPage } from "next";
 import Head from "next/head";
-import { Box, Text } from "@chakra-ui/react";
+import {
+  Box,
+  Tab,
+  TabList,
+  TabPanel,
+  TabPanels,
+  Tabs,
+  Text,
+} from "@chakra-ui/react";
 import H2 from "~/components/docs/H2";
 import H3 from "~/components/docs/H3";
 import UnitPostForm from "~/components/unitPosts/UnitPostForm";
+import UnitPostsList from "~/components/unitPosts/UnitPostsList";
 import UnitPostsTable from "~/components/unitPosts/UnitPostsTable";
 import useAspidaSWR from "@aspida/swr";
 import { apiClient } from "~/utils/apiClient";
@@ -28,10 +37,20 @@ const Page: NextPage = () => {
           </Box>
         </Box>
         <Box as="section" mt="8">
-          <H3>投稿一覧</H3>
-          <Box mt="4">
-            <UnitPostsTable unitPosts={unitPosts ?? []} />
-          </Box>
+          <Tabs isFitted>
+            <TabList>
+              <Tab>運用一覧</Tab>
+              <Tab>投稿一覧</Tab>
+            </TabList>
+            <TabPanels>
+              <TabPanel p="0" pt="4">
+                <UnitPostsList unitPosts={unitPosts ?? []} />
+              </TabPanel>
+              <TabPanel p="0" pt="4">
+                <UnitPostsTable unitPosts={unitPosts ?? []} />
+              </TabPanel>
+            </TabPanels>
+          </Tabs>
         </Box>
       </Box>
     </Box>
