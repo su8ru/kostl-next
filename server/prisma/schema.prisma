@@ -41,3 +41,12 @@ model TypeChange {
   trainId   String
   trainDay  Day
 }
+
+model UnitPost {
+  id          Int       @id @default(autoincrement())
+  operationId String
+  unitId      String
+  uid         String
+  createdAt   DateTime  @default(now())
+  disabledAt  DateTime?
+}

@@ -38,12 +38,35 @@ const useTrafficCache = async (
     trains.map(({ id, operationId }) => [id, { operationId }])
   );
 
+  const unitPosts = await prisma.unitPost.findMany({
+    select: {
+      operationId: true,
+      unitId: true,
+    },
+    where: {
+      disabledAt: {
+        equals: null,
+      },
+    },
+  });
+  const unitDict: Record<string, string> = Object.fromEntries(
+    unitPosts.map(({ operationId, unitId }) => [operationId, unitId])
+  );
+
   const res = await fetch(apiUrl);
   const data = await (async () => {
     if (key === "keio")
-      return await parseKeio((await res.json()) as Body, operationDict);
+      return await parseKeio(
+        (await res.json()) as Body,
+        operationDict,
+        unitDict
+      );
     if (key === "toei")
-      return await parseToei((await res.json()) as OdptTrain[], operationDict);
+      return await parseToei(
+        (await res.json()) as OdptTrain[],
+        operationDict,
+        unitDict
+      );
     return { timestamp: "", trains: [] };
   })();
   const timestamp = new Date().getTime();

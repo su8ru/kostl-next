@@ -3,7 +3,7 @@ import fp from "fastify-plugin";
 import helmet from "@fastify/helmet";
 import cors from "@fastify/cors";
 import cookie from "@fastify/cookie";
-import { API_BASE_PATH, CLIENT_ORIGIN } from "$/service/envValues";
+import { API_BASE_PATH } from "$/service/envValues";
 import server from "$/$server";
 import { kvsMemoryStorage } from "@kvs/memorystorage";
 import { CacheSchema } from "$/types/kvs";
@@ -13,14 +13,7 @@ export const init = (serverFactory?: FastifyServerFactory) => {
   app.register(helmet);
   app.register(cors, {
     credentials: true,
-    origin: (origin, cb) => {
-      const { hostname } = new URL(origin);
-      if (hostname === CLIENT_ORIGIN) {
-        cb(null, true);
-        return;
-      }
-      cb(new Error("Invalid hostname"), false);
-    },
+    origin: true,
   });
   app.register(cookie, {});
   app.register(
