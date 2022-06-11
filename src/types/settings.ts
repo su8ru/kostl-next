@@ -5,6 +5,6 @@ export const trainItemArray = [
   "trainId",
   "operationId",
   "destination",
-  "carId",
+  "unitId",
   "carCount",
 ] as const;

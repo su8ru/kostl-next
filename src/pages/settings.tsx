@@ -50,7 +50,7 @@ const Settings: NextPage = () => {
           <H3>アカウント</H3>
           <Text mt="4">
             Google
-            アカウントでログインすることで、運用情報を投稿できるようになります。
+            アカウントでログインすることで、編成運用情報を投稿できるようになります。
           </Text>
           <User />
           <Text color="gray" fontSize="sm" mt="4">
