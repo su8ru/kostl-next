@@ -12,6 +12,7 @@ const Header: React.VFC = () => {
       justifyContent="center"
       bg="linear-gradient(0deg,#00205b 46%,#fff 0,#fff 54%,#ab035c 0)"
       boxShadow="lg"
+      zIndex="sticky"
     >
       <Flex
         alignItems="baseline"

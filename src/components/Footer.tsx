@@ -13,6 +13,7 @@ const Footer: React.VFC = () => (
     left="50%"
     right="0"
     transform="translateX(-50%)"
+    zIndex="sticky"
   >
     <Box
       bgColor="white"
