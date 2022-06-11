@@ -64,7 +64,7 @@ const UnitPostPreviewModal: React.VFC<Props> = ({
   };
 
   return (
-    <Modal isOpen={isOpen} onClose={onClose} isCentered>
+    <Modal isOpen={isOpen} onClose={onClose} isCentered scrollBehavior="inside">
       <ModalOverlay />
       <ModalContent>
         <ModalHeader>投稿プレビュー</ModalHeader>
