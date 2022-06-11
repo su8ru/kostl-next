@@ -12,8 +12,8 @@ import {
 import H2 from "~/components/docs/H2";
 import H3 from "~/components/docs/H3";
 import UnitPostForm from "~/components/unitPosts/UnitPostForm";
-import UnitPostsList from "~/components/unitPosts/UnitPostsList";
-import UnitPostsTable from "~/components/unitPosts/UnitPostsTable";
+import OperationsUnitPostsList from "~/components/unitPosts/OperationsUnitPostsList";
+import AllUnitPostsList from "~/components/unitPosts/AllUnitPostsList";
 import useAspidaSWR from "@aspida/swr";
 import { apiClient } from "~/utils/apiClient";
 
@@ -44,10 +44,10 @@ const Page: NextPage = () => {
             </TabList>
             <TabPanels>
               <TabPanel p="0" pt="4">
-                <UnitPostsList unitPosts={unitPosts ?? []} />
+                <OperationsUnitPostsList unitPosts={unitPosts ?? []} />
               </TabPanel>
               <TabPanel p="0" pt="4">
-                <UnitPostsTable unitPosts={unitPosts ?? []} />
+                <AllUnitPostsList unitPosts={unitPosts ?? []} />
               </TabPanel>
             </TabPanels>
           </Tabs>

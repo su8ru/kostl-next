@@ -6,7 +6,7 @@ export type Props = {
   unitPosts: UnitPost[];
 };
 
-const UnitPostsTable: React.VFC<Props> = ({ unitPosts }) => {
+const AllUnitPostsList: React.VFC<Props> = ({ unitPosts }) => {
   return (
     <Table size="sm">
       <Thead>
@@ -33,4 +33,4 @@ const UnitPostsTable: React.VFC<Props> = ({ unitPosts }) => {
   );
 };
 
-export default UnitPostsTable;
+export default AllUnitPostsList;

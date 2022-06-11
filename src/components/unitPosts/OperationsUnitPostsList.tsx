@@ -9,7 +9,7 @@ export type Props = {
   unitPosts: UnitPost[];
 };
 
-const UnitPostsList: React.VFC<Props> = ({ unitPosts }) => {
+const OperationsUnitPostsList: React.VFC<Props> = ({ unitPosts }) => {
   const { data: calendar } = useAspidaSWR(apiClient.calendar);
   const { data: operations } = useAspidaSWR(apiClient.operations);
   const validPosts = unitPosts.filter(({ disabledAt }) => disabledAt === null);
@@ -51,4 +51,4 @@ const UnitPostsList: React.VFC<Props> = ({ unitPosts }) => {
   );
 };
 
-export default UnitPostsList;
+export default OperationsUnitPostsList;
