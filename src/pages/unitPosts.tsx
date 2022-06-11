@@ -15,11 +15,12 @@ import H3 from "~/components/docs/H3";
 import UnitPostForm from "~/components/unitPosts/UnitPostForm";
 import OperationsUnitPostsList from "~/components/unitPosts/OperationsUnitPostsList";
 import AllUnitPostsList from "~/components/unitPosts/AllUnitPostsList";
+import User from "~/components/settings/User";
+import PageWrapper from "~/components/PageWrapper";
 import useAspidaSWR from "@aspida/swr";
 import { apiClient } from "~/utils/apiClient";
 import { getFirebaseAuth } from "~/utils/firebaseAuth";
 import { useAuthState } from "react-firebase-hooks/auth";
-import User from "~/components/settings/User";
 
 const auth = getFirebaseAuth();
 
@@ -28,7 +29,7 @@ const Page: NextPage = () => {
   const { data: unitPosts, mutate } = useAspidaSWR(apiClient.units);
 
   return (
-    <Box maxW="3xl" w="100%" mx="auto" px="8" pb="8" textAlign="left">
+    <PageWrapper>
       <Head>
         <title>運用情報 - こすとれ</title>
       </Head>
@@ -64,17 +65,17 @@ const Page: NextPage = () => {
               <Tab>投稿一覧</Tab>
             </TabList>
             <TabPanels>
-              <TabPanel p="0" pt="4">
+              <TabPanel p="0" pt="4" overflowX="auto">
                 <OperationsUnitPostsList unitPosts={unitPosts ?? []} />
               </TabPanel>
-              <TabPanel p="0" pt="4">
+              <TabPanel p="0" pt="4" overflowX="auto">
                 <AllUnitPostsList unitPosts={unitPosts ?? []} />
               </TabPanel>
             </TabPanels>
           </Tabs>
         </Box>
       </Box>
-    </Box>
+    </PageWrapper>
   );
 };
 

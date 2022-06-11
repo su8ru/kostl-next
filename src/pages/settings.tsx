@@ -16,6 +16,7 @@ import Head from "next/head";
 import User from "~/components/settings/User";
 import TrainItemList from "~/components/settings/TrainItemList";
 import ExampleTrain from "~/components/ExampleTrain";
+import PageWrapper from "~/components/PageWrapper";
 import useAspidaSWR from "@aspida/swr";
 import { apiClient } from "~/utils/apiClient";
 import { pagesPath } from "~/utils/$path";
@@ -24,7 +25,7 @@ const Settings: NextPage = () => {
   const { data } = useAspidaSWR(apiClient.calendar);
 
   return (
-    <Box maxW="3xl" w="100%" mx="auto" px="8" pb="8" textAlign="left">
+    <PageWrapper>
       <Head>
         <title>設定 - こすとれ</title>
       </Head>
@@ -80,7 +81,7 @@ const Settings: NextPage = () => {
           </ListItem>
         </UnorderedList>
       </Box>
-    </Box>
+    </PageWrapper>
   );
 };
 

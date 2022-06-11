@@ -11,12 +11,13 @@ import {
 } from "@chakra-ui/react";
 import H2 from "~/components/docs/H2";
 import H3 from "~/components/docs/H3";
+import PageWrapper from "~/components/PageWrapper";
 import Head from "next/head";
 import { BsBoxArrowUpRight } from "react-icons/bs";
 
 const Policy: NextPage = () => {
   return (
-    <Box maxW="3xl" w="100%" mx="auto" px="8" pb="8">
+    <PageWrapper>
       <Head>
         <title>利用規約 - こすとれ</title>
       </Head>
@@ -188,7 +189,7 @@ const Policy: NextPage = () => {
           </Link>
         </Text>
       </Box>
-    </Box>
+    </PageWrapper>
   );
 };
 
