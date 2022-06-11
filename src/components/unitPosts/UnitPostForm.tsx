@@ -10,6 +10,7 @@ import {
 } from "@chakra-ui/react";
 import UnitPostRuleModal from "~/components/unitPosts/UnitPostRuleModal";
 import UnitPostPreviewModal from "~/components/unitPosts/UnitPostPreviewModal";
+import normalizeOperationId from "$/utils/notmalizeOperationId";
 import { UnitPostBody } from "$/types/unit";
 
 type Props = {
@@ -94,6 +95,6 @@ const valueToUnitPosts = (value: string): UnitPostBody[] => {
   const lines = value.split("\n").filter((line) => line);
   return lines.map<UnitPostBody>((line) => {
     const fields = line.split(" ");
-    return { operationId: fields[0], unitId: fields[1] };
+    return { operationId: normalizeOperationId(fields[0]), unitId: fields[1] };
   });
 };

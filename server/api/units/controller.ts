@@ -2,6 +2,7 @@ import { defineController, defineHooks } from "./$relay";
 import { PrismaClient } from "@prisma/client";
 import firebaseAdmin from "$/service/firebaseAdmin";
 import { UnitPost } from "$/types/unit";
+import normalizeOperationId from "$/utils/notmalizeOperationId";
 import dayjs from "dayjs";
 
 const prisma = new PrismaClient();
@@ -50,7 +51,7 @@ export default defineController(() => ({
     });
     await prisma.unitPost.createMany({
       data: unitPosts.map(({ operationId, unitId }) => ({
-        operationId,
+        operationId: normalizeOperationId(operationId),
         unitId,
         uid,
       })),
