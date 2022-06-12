@@ -10,7 +10,8 @@ const ExampleTrain: React.VFC = () => (
         dest: "033",
         direction: "East",
         delay: 0,
-        length: 10,
+        carCount: 10,
+        unitId: "9730F",
         operationId: "69K",
         typeChanges: [
           {
@@ -32,7 +33,8 @@ const ExampleTrain: React.VFC = () => (
         dest: "027",
         direction: "West",
         delay: 1,
-        length: 10,
+        carCount: 10,
+        unitId: "8712F",
         operationId: "No.1",
         typeChanges: [
           {
