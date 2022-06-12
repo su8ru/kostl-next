@@ -3,10 +3,12 @@ import fp from "fastify-plugin";
 import helmet from "@fastify/helmet";
 import cors from "@fastify/cors";
 import cookie from "@fastify/cookie";
+import cron from "fastify-cron";
 import { API_BASE_PATH } from "$/service/envValues";
 import server from "$/$server";
 import { kvsMemoryStorage } from "@kvs/memorystorage";
 import { CacheSchema } from "$/types/kvs";
+import { clearUnitPosts } from "$/service/cron";
 
 export const init = (serverFactory?: FastifyServerFactory) => {
   const app = Fastify({ serverFactory });
@@ -16,6 +18,18 @@ export const init = (serverFactory?: FastifyServerFactory) => {
     origin: true,
   });
   app.register(cookie, {});
+  app.register(cron, {
+    jobs: [
+      {
+        cronTime: "0 4 * * *",
+        timeZone: "Asia/Tokyo",
+        onTick: async () => {
+          await clearUnitPosts();
+        },
+        start: true,
+      },
+    ],
+  });
   app.register(
     fp(async (app) => {
       const kvs = await kvsMemoryStorage<CacheSchema>({
