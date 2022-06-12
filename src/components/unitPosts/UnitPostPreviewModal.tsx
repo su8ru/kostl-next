@@ -54,6 +54,9 @@ const UnitPostPreviewModal: React.VFC<Props> = ({
           status: "success",
           duration: 5000,
           isClosable: true,
+          containerStyle: {
+            marginBottom: "calc(64px + env(safe-area-inset-bottom, 0))",
+          },
         });
         clearForm();
         onClose();

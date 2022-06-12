@@ -19,7 +19,7 @@ const Footer: React.VFC = () => (
       bgColor="white"
       borderRadius="lg"
       boxShadow="0 5px 10px rgba(0, 0, 0, 0.1)"
-      mb="4"
+      mb="calc(12px + env(safe-area-inset-bottom, 0))"
     >
       <BottomNav
         items={[
