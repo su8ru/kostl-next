@@ -4,20 +4,19 @@ import { Box, Flex, SimpleGrid, Text } from "@chakra-ui/react";
 import { getGridAreaKeio } from "~/utils/gridArea";
 import { groupBySection } from "~/utils/groupBySection";
 import { useMemo } from "react";
+import { useAtom } from "jotai";
+import { trainBoxHeightAtom } from "~/atoms";
 import Section from "~/components/Section";
 import LineBorderY from "~/components/LineBorderY";
 import LineBorderX from "~/components/LineBorderX";
 import StationLabel from "~/components/StationLabel";
 import UpdateTime from "~/components/UpdateTime";
-import { useRecoilValue } from "recoil";
-import trainItemsSettingState from "~/states/atoms/trainItemsSettingState";
 
 const KeioLine: React.VFC = () => {
   const { data } = useAspidaSWR(apiClient.traffic._key("keio"), {
     refreshInterval: 5000,
   });
-  const trainItemsSetting = useRecoilValue(trainItemsSettingState);
-
+  const [trainHeight] = useAtom(trainBoxHeightAtom);
   const sections = useMemo(
     () => (data ? groupBySection(data.trains, getGridAreaKeio) : []),
     [data?.trains]
@@ -25,9 +24,7 @@ const KeioLine: React.VFC = () => {
 
   return (
     <SimpleGrid
-      templateRows={`repeat(77, minmax(${
-        trainItemsSetting.length * 21 + 12
-      }px, auto))`}
+      templateRows={`repeat(77, minmax(${trainHeight}px, auto))`}
       templateColumns="90px 10px 58px 58px 10px 58px 58px 10px 58px 10px 58px 10px 58px 58px 10px 58px 58px 10px 90px"
     >
       {[...Array(39)].map((_, index) => (

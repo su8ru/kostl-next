@@ -1,6 +1,8 @@
 import useAspidaSWR from "@aspida/swr";
 import { apiClient } from "~/utils/apiClient";
 import { useMemo } from "react";
+import { useAtom } from "jotai";
+import { trainBoxHeightAtom } from "~/atoms";
 import { groupBySection } from "~/utils/groupBySection";
 import { getGridAreaToei } from "~/utils/gridArea";
 import { Box, Flex, SimpleGrid } from "@chakra-ui/react";
@@ -8,14 +10,12 @@ import Section from "~/components/Section";
 import LineBorderY from "~/components/LineBorderY";
 import StationLabel from "~/components/StationLabel";
 import UpdateTime from "~/components/UpdateTime";
-import { useRecoilValue } from "recoil";
-import trainItemsSettingState from "~/states/atoms/trainItemsSettingState";
 
 const ToeiLine: React.VFC = () => {
   const { data } = useAspidaSWR(apiClient.traffic._key("toei"), {
     refreshInterval: 5000,
   });
-  const trainItemsSetting = useRecoilValue(trainItemsSettingState);
+  const [trainHeight] = useAtom(trainBoxHeightAtom);
 
   const sections = useMemo(
     () => (data ? groupBySection(data.trains, getGridAreaToei) : []),
@@ -24,9 +24,7 @@ const ToeiLine: React.VFC = () => {
 
   return (
     <SimpleGrid
-      templateRows={`repeat(40, minmax(${
-        trainItemsSetting.length * 21 + 12
-      }px, auto))`}
+      templateRows={`repeat(40, minmax(${trainHeight}px, auto))`}
       templateColumns="90px 10px 58px 58px 10px 58px 58px 10px 58px 10px 58px 10px 58px 58px 10px 58px 58px 10px 90px"
     >
       {[...Array(20)].map((_, index) => (

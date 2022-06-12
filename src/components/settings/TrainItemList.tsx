@@ -1,12 +1,12 @@
 import { Box, Divider } from "@chakra-ui/react";
-import { useRecoilState } from "recoil";
-import trainItemsSettingState from "~/states/atoms/trainItemsSettingState";
+import { useAtom } from "jotai";
+import { trainItemsSettingAtom } from "~/atoms";
 import { TrainItem, trainItemArray } from "~/types/settings";
 import TrainItemCheckbox from "~/components/settings/TrainItemCheckbox";
 
 const TrainItemList: React.VFC = () => {
-  const [trainItemsSetting, setTrainItemsSetting] = useRecoilState(
-    trainItemsSettingState
+  const [trainItemsSetting, setTrainItemsSetting] = useAtom(
+    trainItemsSettingAtom
   );
 
   const onClick = (itemId: TrainItem) => {
