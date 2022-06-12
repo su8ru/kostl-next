@@ -3,7 +3,6 @@ import { useRecoilState } from "recoil";
 import trainItemsSettingState from "~/states/atoms/trainItemsSettingState";
 import { TrainItem, trainItemArray } from "~/types/settings";
 import TrainItemCheckbox from "~/components/settings/TrainItemCheckbox";
-import Train from "~/components/Train";
 
 const TrainItemList: React.VFC = () => {
   const [trainItemsSetting, setTrainItemsSetting] = useRecoilState(
