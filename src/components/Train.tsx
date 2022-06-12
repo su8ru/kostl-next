@@ -10,7 +10,17 @@ export interface Props {
 }
 
 const Train: React.VFC<Props> = ({
-  train: { id, type, dest, operationId, delay, direction, typeChanges, length },
+  train: {
+    id,
+    type,
+    dest,
+    operationId,
+    delay,
+    direction,
+    typeChanges,
+    carCount,
+    unitId,
+  },
 }) => {
   const trainItemsSetting = useRecoilValue(trainItemsSettingState);
 
@@ -22,10 +32,10 @@ const Train: React.VFC<Props> = ({
         return operationId ?? "-";
       case "destination":
         return getDest(dest, typeChanges);
-      case "carId":
-        return "-";
+      case "unitId":
+        return unitId ?? "-";
       case "carCount":
-        return length?.toString() ?? "-";
+        return carCount?.toString() ?? "-";
     }
   };
 

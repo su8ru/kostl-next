@@ -1,21 +1,34 @@
-import path from "path";
 import Fastify, { FastifyServerFactory } from "fastify";
 import fp from "fastify-plugin";
-import helmet from "fastify-helmet";
-import cors from "fastify-cors";
-import fastifyStatic from "fastify-static";
+import helmet from "@fastify/helmet";
+import cors from "@fastify/cors";
+import cookie from "@fastify/cookie";
+import cron from "fastify-cron";
 import { API_BASE_PATH } from "$/service/envValues";
 import server from "$/$server";
 import { kvsMemoryStorage } from "@kvs/memorystorage";
 import { CacheSchema } from "$/types/kvs";
+import { clearUnitPosts } from "$/service/cron";
 
 export const init = (serverFactory?: FastifyServerFactory) => {
   const app = Fastify({ serverFactory });
   app.register(helmet);
-  app.register(cors);
-  app.register(fastifyStatic, {
-    root: path.join(__dirname, "static"),
-    prefix: "/static/",
+  app.register(cors, {
+    credentials: true,
+    origin: true,
+  });
+  app.register(cookie, {});
+  app.register(cron, {
+    jobs: [
+      {
+        cronTime: "0 4 * * *",
+        timeZone: "Asia/Tokyo",
+        onTick: async () => {
+          await clearUnitPosts();
+        },
+        start: true,
+      },
+    ],
   });
   app.register(
     fp(async (app) => {

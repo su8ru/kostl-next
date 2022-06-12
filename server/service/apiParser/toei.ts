@@ -14,7 +14,8 @@ dayjs.tz.setDefault("Asia/Tokyo");
 
 const parseToei = (
   raw: OdptTrain[],
-  operationDict: Record<string, { operationId: string }>
+  operationDict: Record<string, { operationId: string }>,
+  unitDict: Record<string, string>
 ): { timestamp: string; trains: Train[] } => {
   let date = dayjs(0);
 
@@ -59,17 +60,19 @@ const parseToei = (
         trainOwner,
       }) => {
         const direction = _direction === "Westbound" ? "West" : "East";
+        const operationId = toAltOperationId(
+          operationDict[id]?.operationId,
+          trainOwner
+        );
         return {
           id,
           type: type === "Express" ? "2" : "6",
           direction,
-          operationId: toAltOperationId(
-            operationDict[id]?.operationId,
-            trainOwner
-          ),
+          operationId,
           delay: delay ? delay / 60 : 0,
           dest: destToId(dest ?? "ERROR"),
-          length: null,
+          carCount: null,
+          unitId: operationId ? unitDict[operationId] ?? null : null,
           section: stationToSection(
             fromStation ?? "ERROR",
             toStation ?? null,

@@ -7,7 +7,8 @@ export type Train = {
   operationId: string | null;
   delay: number;
   dest: string;
-  length: number | null;
+  carCount: number | null;
+  unitId: string | null;
   section: Section;
   typeChanges?: TypeChange[];
 };

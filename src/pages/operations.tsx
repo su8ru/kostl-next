@@ -13,12 +13,13 @@ import Head from "next/head";
 import useAspidaSWR from "@aspida/swr";
 import { apiClient } from "~/utils/apiClient";
 import OperationList from "~/components/operations/OperationList";
+import PageWrapper from "~/components/PageWrapper";
 
 const Operations: NextPage = () => {
   const { data } = useAspidaSWR(apiClient.operations);
 
   return (
-    <Box maxW="3xl" w="100%" mx="auto" pb="8" textAlign="left">
+    <PageWrapper>
       <Head>
         <title>運用一覧 - こすとれ</title>
       </Head>
@@ -39,7 +40,7 @@ const Operations: NextPage = () => {
           </TabPanels>
         </Tabs>
       </Box>
-    </Box>
+    </PageWrapper>
   );
 };
 

@@ -5,17 +5,19 @@ import {
   Icon,
   Link,
   ListItem,
+  OrderedList,
   Text,
   UnorderedList,
 } from "@chakra-ui/react";
 import H2 from "~/components/docs/H2";
 import H3 from "~/components/docs/H3";
+import PageWrapper from "~/components/PageWrapper";
 import Head from "next/head";
 import { BsBoxArrowUpRight } from "react-icons/bs";
 
 const Policy: NextPage = () => {
   return (
-    <Box maxW="3xl" w="100%" mx="auto" px="8" pb="8">
+    <PageWrapper>
       <Head>
         <title>利用規約 - こすとれ</title>
       </Head>
@@ -114,6 +116,24 @@ const Policy: NextPage = () => {
           閲覧にあたり、閲覧者のデバイスを利用して情報提供を目的とした処理を行います。JavaScript
           の実行はブラウザの機能により停止することが可能ですが、その場合当サイトは情報提供を行えません。
         </Text>
+        <H3>Firebase Authentication の使用について</H3>
+        <Text mt="4" lineHeight="1.75">
+          当サイトでは、ユーザーの認証管理のため、Google
+          による認証管理ツール「Firebase
+          Authentication」を使用しています。またこの認証情報をサーバーと共有するため
+          Cookie
+          を使用しています。当サイトでは、ユーザーのメールアドレスおよび表示名などの個人情報（当サイトと連携するサービスの登録情報を含みます）を収集することがあります。
+        </Text>
+        <Text mt="4" lineHeight="1.75">
+          当サイトにおいて個人情報を収集・利用する目的は、以下のとおりです。
+          <OrderedList spacing="2" mt="2">
+            <ListItem>ユーザーに自身の登録情報を表示する目的</ListItem>
+            <ListItem>ユーザーに連絡をする目的</ListItem>
+            <ListItem>不正行為を行うユーザーを管理する目的</ListItem>
+            <ListItem>その他上記の利用目的に付随する目的</ListItem>
+          </OrderedList>
+        </Text>
+        <Text mt="4" lineHeight="1.75"></Text>
         <H3>Google Analytics の使用について</H3>
         <Text mt="4" lineHeight="1.75">
           当サイトでは、アクセス解析のため、Google
@@ -169,7 +189,7 @@ const Policy: NextPage = () => {
           </Link>
         </Text>
       </Box>
-    </Box>
+    </PageWrapper>
   );
 };
 

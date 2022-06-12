@@ -19,7 +19,8 @@ dayjs.extend(utc);
 
 const parseKeio = (
   raw: Body,
-  operationDict: Record<string, { operationId: string }>
+  operationDict: Record<string, { operationId: string }>,
+  unitDict: Record<string, string>
 ): { timestamp: string; trains: Train[] } => {
   const trains: Train[] = [];
 
@@ -30,16 +31,21 @@ const parseKeio = (
       .flatMap(({ id, ps }: TS) =>
         ps.map<Train>((train) => {
           const { dest, typeChange } = parseInf(train.inf);
+          const operationId =
+            train.tr.trim() in operationDict
+              ? operationDict[train.tr.trim()]?.operationId
+              : null;
           return {
             id: train.tr.trim(),
             type: train.sy_tr,
             direction: (shouldReverse(id, +train.bs) ? !+train.ki : +train.ki)
               ? "West"
               : "East",
-            operationId: operationDict[train.tr.trim()]?.operationId ?? null,
+            operationId,
             delay: +train.dl ?? 0,
             dest: dest ?? train.ik_tr,
-            length: +train.sr,
+            carCount: +train.sr,
+            unitId: operationId ? unitDict[operationId] ?? null : null,
             section: {
               id: sectionIdToNumber(id),
               type: "Sta",
@@ -65,14 +71,19 @@ const parseKeio = (
         ps.map<Train>((train) => {
           const { direction, section } = sectionIdToSection(id);
           const { dest, typeChange } = parseInf(train.inf);
+          const operationId =
+            train.tr.trim() in operationDict
+              ? operationDict[train.tr.trim()]?.operationId
+              : null;
           return {
             id: train.tr.trim(),
             type: train.sy_tr,
             direction,
-            operationId: operationDict[train.tr.trim()]?.operationId ?? null,
+            operationId,
             delay: +train.dl ?? 0,
             dest: dest ?? train.ik_tr,
-            length: +train.sr,
+            carCount: +train.sr,
+            unitId: operationId ? unitDict[operationId] ?? null : null,
             section,
             ...(typeChange ? { typeChanges: [typeChange] } : {}),
           };
