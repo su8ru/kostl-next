@@ -16,7 +16,7 @@
     "generate:aspida": "aspida",
     "generate:pathpida": "pathpida --enableStatic",
     "generate:server": "npm run generate --prefix server",
-    "lint": "eslint --ext .ts,.js,.tsx . && prettier --check \"./**/*.{ts,js,tsx}\"",
+    "lint": "eslint --max-warnings 0 --ext .ts,.js,.tsx . && prettier --check \"./**/*.{ts,js,tsx}\"",
     "lint:fix": "eslint --ext .ts,.js,.tsx . --fix && prettier --write \"./**/*.{ts,js,tsx}\"",
     "migrate:dev": "npm run migrate:dev --prefix server",
     "migrate:deploy": "npm run migrate:deploy --prefix server",
