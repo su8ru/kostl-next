@@ -1,8 +1,8 @@
 import { Flex, Text } from "@chakra-ui/react";
 import { Train, TrainDirection, TypeChange } from "$/types/train";
 import { destListKeio, stationNameCapitalList } from "$/service/data";
-import { useRecoilValue } from "recoil";
-import trainItemsSettingState from "~/states/atoms/trainItemsSettingState";
+import { useAtom } from "jotai";
+import { trainItemsSettingAtom } from "~/atoms";
 import { TrainItem } from "~/types/settings";
 
 export interface Props {
@@ -22,7 +22,7 @@ const Train: React.VFC<Props> = ({
     unitId,
   },
 }) => {
-  const trainItemsSetting = useRecoilValue(trainItemsSettingState);
+  const [trainItemsSetting] = useAtom(trainItemsSettingAtom);
 
   const itemIdToValue = (itemId: TrainItem): string => {
     switch (itemId) {
