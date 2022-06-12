@@ -1,6 +1,5 @@
 import { useAuthState, useSignInWithGoogle } from "react-firebase-hooks/auth";
 import { getFirebaseAuth } from "~/utils/firebaseAuth";
-import H2 from "~/components/docs/H2";
 import { Avatar, Box, Button, Flex, Text } from "@chakra-ui/react";
 import { BsBoxArrowRight } from "react-icons/bs";
 import { GoogleIcon } from "~/components/Icons";
@@ -10,8 +9,8 @@ import { useEffect } from "react";
 const auth = getFirebaseAuth();
 
 const User: React.VFC = () => {
-  const [user, authLoading, authError] = useAuthState(auth);
-  const [signInWithGoogle, userCredential, signInLoading, signInError] =
+  const [user, authLoading] = useAuthState(auth);
+  const [signInWithGoogle, userCredential, signInLoading] =
     useSignInWithGoogle(auth);
 
   const login = async () => {

@@ -8,4 +8,10 @@ const API_ORIGIN = process.env.API_ORIGIN ?? "";
 const CLIENT_ORIGIN = process.env.CLIENT_ORIGIN ?? "";
 const API_ODPT_TOKEN = process.env.API_ODPT_TOKEN ?? "";
 
-export { API_SERVER_PORT, API_BASE_PATH, API_ORIGIN, CLIENT_ORIGIN, API_ODPT_TOKEN };
+export {
+  API_SERVER_PORT,
+  API_BASE_PATH,
+  API_ORIGIN,
+  CLIENT_ORIGIN,
+  API_ODPT_TOKEN,
+};
