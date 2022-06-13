@@ -157,7 +157,7 @@ const sectionIdToSection = (
   if (sectionId === "S002")
     return { direction: "West", section: { id: 4, type: "WayB", track: 1 } };
   // 調布
-  if (sectionId === "S018")
+  if (sectionId === "S016")
     return { direction: "East", section: { id: 18, type: "WayB", track: 2 } };
   // 東府中
   if (sectionId === "S021")
