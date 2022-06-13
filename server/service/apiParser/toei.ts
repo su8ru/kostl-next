@@ -60,19 +60,16 @@ const parseToei = (
         trainOwner,
       }) => {
         const direction = _direction === "Westbound" ? "West" : "East";
-        const operationId = toAltOperationId(
-          operationDict[id]?.operationId,
-          trainOwner
-        );
+        const rawOperationId = operationDict[id]?.operationId;
         return {
           id,
           type: type === "Express" ? "2" : "6",
           direction,
-          operationId,
+          operationId: toAltOperationId(rawOperationId, trainOwner),
           delay: delay ? delay / 60 : 0,
           dest: destToId(dest ?? "ERROR"),
           carCount: null,
-          unitId: operationId ? unitDict[operationId] ?? null : null,
+          unitId: rawOperationId ? unitDict[rawOperationId] ?? null : null,
           section: stationToSection(
             fromStation ?? "ERROR",
             toStation ?? null,
