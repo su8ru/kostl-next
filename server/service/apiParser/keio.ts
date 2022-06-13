@@ -38,7 +38,7 @@ const parseKeio = (
           return {
             id: train.tr.trim(),
             type: train.sy_tr !== "7" ? train.sy_tr : train.sy,
-            dest: dest ?? train.ik_tr !== "999" ? train.ik_tr : train.tr,
+            dest: dest ?? (train.ik_tr !== "999" ? train.ik_tr : train.tr),
             direction: (shouldReverse(id, +train.bs) ? !+train.ki : +train.ki)
               ? "West"
               : "East",
@@ -78,7 +78,7 @@ const parseKeio = (
           return {
             id: train.tr.trim(),
             type: train.sy_tr !== "7" ? train.sy_tr : train.sy,
-            dest: dest ?? train.ik_tr !== "999" ? train.ik_tr : train.tr,
+            dest: dest ?? (train.ik_tr !== "999" ? train.ik_tr : train.tr),
             direction,
             operationId,
             delay: +train.dl ?? 0,
