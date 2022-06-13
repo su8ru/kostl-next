@@ -37,13 +37,13 @@ const parseKeio = (
               : null;
           return {
             id: train.tr.trim(),
-            type: train.sy_tr,
+            type: train.sy_tr !== "7" ? train.sy_tr : train.sy,
+            dest: dest ?? train.ik_tr !== "999" ? train.ik_tr : train.tr,
             direction: (shouldReverse(id, +train.bs) ? !+train.ki : +train.ki)
               ? "West"
               : "East",
             operationId,
             delay: +train.dl ?? 0,
-            dest: dest ?? train.ik_tr,
             carCount: +train.sr,
             unitId: operationId ? unitDict[operationId] ?? null : null,
             section: {
@@ -77,11 +77,11 @@ const parseKeio = (
               : null;
           return {
             id: train.tr.trim(),
-            type: train.sy_tr,
+            type: train.sy_tr !== "7" ? train.sy_tr : train.sy,
+            dest: dest ?? train.ik_tr !== "999" ? train.ik_tr : train.tr,
             direction,
             operationId,
             delay: +train.dl ?? 0,
-            dest: dest ?? train.ik_tr,
             carCount: +train.sr,
             unitId: operationId ? unitDict[operationId] ?? null : null,
             section,
