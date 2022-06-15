@@ -4,6 +4,7 @@ import { useAtom } from "jotai";
 import { trainItemsSettingAtom } from "~/atoms";
 import KeioLine from "~/components/KeioLine";
 import ToeiLine from "~/components/ToeiLine";
+import TrainDetailsBottomSheet from "~/components/TrainDetailsBottomSheet";
 import Head from "next/head";
 import useRestoreScroll from "~/hooks/useRestoreScroll";
 
@@ -19,6 +20,7 @@ const Page: NextPage = () => {
       <Box p="4">
         <ToeiLine />
         <KeioLine />
+        <TrainDetailsBottomSheet />
       </Box>
     </Box>
   );

@@ -7,3 +7,15 @@ body {
   min-width: min-content;
   width: 100%;
 }
+
+// react-spring-bottom-sheet
+
+[data-rsbs-root] {
+  --rsbs-max-w: var(--chakra-sizes-xl);
+  --rsbs-ml: auto;
+  --rsbs-mr: auto;
+
+  [data-rsbs-backdrop], [data-rsbs-overlay], &:after {
+    z-index: var(--chakra-zIndices-overlay) !important;
+  }
+}

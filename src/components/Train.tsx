@@ -2,15 +2,15 @@ import { Flex, Text } from "@chakra-ui/react";
 import { Train, TrainDirection, TypeChange } from "$/types/train";
 import { destListKeio, stationNameCapitalList } from "$/service/data";
 import { useAtom } from "jotai";
-import { trainItemsSettingAtom } from "~/atoms";
+import { trainItemsSettingAtom, triggerDetailsAtom } from "~/atoms";
 import { TrainItem } from "~/types/settings";
 
 export interface Props {
   train: Train;
 }
 
-const Train: React.VFC<Props> = ({
-  train: {
+const Train: React.VFC<Props> = ({ train }) => {
+  const {
     id,
     type,
     dest,
@@ -20,9 +20,9 @@ const Train: React.VFC<Props> = ({
     typeChanges,
     carCount,
     unitId,
-  },
-}) => {
+  } = train;
   const [trainItemsSetting] = useAtom(trainItemsSettingAtom);
+  const [triggerDetails] = useAtom(triggerDetailsAtom);
 
   const itemIdToValue = (itemId: TrainItem): string => {
     switch (itemId) {
@@ -57,6 +57,10 @@ const Train: React.VFC<Props> = ({
         bg={getType(type, direction, typeChanges)}
         borderTopRadius={direction === "East" ? "md" : "sm"}
         borderBottomRadius={direction === "East" ? "sm" : "md"}
+        onClick={() => {
+          console.log("train click", triggerDetails);
+          if (triggerDetails) triggerDetails(train);
+        }}
       >
         {trainItemsSetting.map((itemId) => (
           <Text fontSize="sm" key={itemId}>
