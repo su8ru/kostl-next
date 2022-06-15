@@ -4,7 +4,7 @@ import { useAtom } from "jotai";
 import { trainItemsSettingAtom } from "~/atoms";
 import KeioLine from "~/components/KeioLine";
 import ToeiLine from "~/components/ToeiLine";
-import TrainDetailsBottomSheet from "~/components/TrainDetailsBottomSheet";
+import TrainDetailsBottomSheet from "~/components/trainDetails/TrainDetailsBottomSheet";
 import Head from "next/head";
 import useRestoreScroll from "~/hooks/useRestoreScroll";
 

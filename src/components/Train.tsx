@@ -57,8 +57,8 @@ const Train: React.VFC<Props> = ({ train }) => {
         bg={getType(type, direction, typeChanges)}
         borderTopRadius={direction === "East" ? "md" : "sm"}
         borderBottomRadius={direction === "East" ? "sm" : "md"}
+        cursor="pointer"
         onClick={() => {
-          console.log("train click", triggerDetails);
           if (triggerDetails) triggerDetails(train);
         }}
       >
