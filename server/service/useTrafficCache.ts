@@ -1,11 +1,11 @@
 import { FastifyInstance } from "fastify";
 import { PrismaClient } from "@prisma/client";
 import { Traffic } from "$/types/train";
-import parseKeio from "$/service/apiParser/keio";
-import parseToei from "$/service/apiParser/toei";
+import parseKeio from "$/service/apiParser/traffic/keio";
+import parseToei from "$/service/apiParser/traffic/toei";
 import fetch from "node-fetch";
-import Body from "$/types/keioApi";
-import OdptTrain from "$/types/toeiApi";
+import { Body } from "$/types/keioApi";
+import { Train as OdptTrain } from "$/types/toeiApi";
 import useCalendarCache from "$/service/useCalendarCache";
 
 const prisma = new PrismaClient();

@@ -1,6 +1,6 @@
 import { Section, Train, TrainDirection } from "$/types/train";
-import OdptTrain from "$/types/toeiApi";
-import { destListKeio, destListToei } from "$/service/data";
+import { Train as OdptTrain } from "$/types/toeiApi";
+import { destListKeio, destListToei, toeiStationsEn } from "$/service/data";
 import dayjs from "dayjs";
 import minMax from "dayjs/plugin/minMax";
 import timezone from "dayjs/plugin/timezone";
@@ -98,14 +98,14 @@ const stationToSection = (
   if (toStation)
     // 駅間走行中
     return {
-      id: toeiStations.indexOf(toStation) + 1,
+      id: toeiStationsEn.indexOf(toStation) + 1,
       type: "Way",
       track: direction === "West" ? 1 : 2,
     };
   // 駅停車中
   else
     return {
-      id: toeiStations.indexOf(fromStation) + 1,
+      id: toeiStationsEn.indexOf(fromStation) + 1,
       type: "Sta",
       track: direction === "West" ? 1 : 2,
     };
@@ -123,29 +123,5 @@ const toAltOperationId = (
   if (char !== owner) return `${num}${char.toLowerCase()}${owner}`;
   return operationId;
 };
-
-const toeiStations: ReadonlyArray<string> = [
-  "Shinjuku",
-  "ShinjukuSanchome",
-  "Akebonobashi",
-  "Ichigaya",
-  "Kudanshita",
-  "Jimbocho",
-  "Ogawamachi",
-  "Iwamotocho",
-  "BakuroYokoyama",
-  "Hamacho",
-  "Morishita",
-  "Kikukawa",
-  "Sumiyoshi",
-  "NishiOjima",
-  "Ojima",
-  "HigashiOjima",
-  "Funabori",
-  "Ichinoe",
-  "Mizue",
-  "Shinozaki",
-  "Motoyawata",
-] as const;
 
 export default parseToei;

@@ -1,4 +1,4 @@
-import Body, { Dt, TB, TS } from "$/types/keioApi";
+import { Body, Dt, TB, TS } from "$/types/keioApi";
 import {
   Section,
   SectionType,
