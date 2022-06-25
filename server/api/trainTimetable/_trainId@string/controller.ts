@@ -8,9 +8,15 @@ import parseKeio from "$/service/apiParser/trainTimetable/keio";
 import findNextTrainId from "$/service/findNextTrainId";
 import { TimetableRecord } from "$/types/trainTimetable";
 import fetch from "node-fetch";
+import { PrismaClient } from "@prisma/client";
+import useCalendarCache from "$/service/useCalendarCache";
+import { allKeioStationsJa, fullStationNameDict } from "$/service/data";
+
+const prisma = new PrismaClient();
 
 export default defineController((fastify) => ({
   get: async ({ params: { trainId } }) => {
+    const { day } = await useCalendarCache(fastify);
     const isToei = ["K", "T"].includes(trainId.slice(-1));
 
     const trainTimetable: TimetableRecord[] = [];
@@ -27,7 +33,34 @@ export default defineController((fastify) => ({
         trainTimetable.push(...others);
       }
     } else {
-      trainTimetable.push(...(await getKeioTimetable(trainId)));
+      const keioTimetable = await getKeioTimetable(trainId);
+
+      const train = await prisma.train.findFirst({
+        where: {
+          id: trainId,
+          day: day ?? undefined,
+        },
+        select: {
+          depSta: true,
+          depTime: true,
+        },
+      });
+
+      if (
+        train &&
+        fullStationNameDict[train.depSta] !== keioTimetable[0].staName
+      ) {
+        const { depSta, depTime } = train;
+        const staName = fullStationNameDict[depSta];
+        trainTimetable.push({
+          line: "keio",
+          staId: allKeioStationsJa.indexOf(staName) + 1,
+          staName,
+          depTime: `${depTime.slice(0, 2)}:${depTime.slice(2, 4)}`,
+        });
+      }
+
+      trainTimetable.push(...keioTimetable);
       const nextTrainId = await findNextTrainId(trainId, fastify);
       if (nextTrainId) {
         const [sjk, ...others] = await getToeiTimetable(nextTrainId, fastify);

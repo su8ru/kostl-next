@@ -144,7 +144,7 @@ export const allKeioStationsJa: ReadonlyArray<string> = [
   "新宿",
   "初台",
   "幡ヶ谷",
-  "笹塚",
+  "笹塚",
   "代田橋",
   "明大前",
   "下高井戸",

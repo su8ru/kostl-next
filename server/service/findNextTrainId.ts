@@ -51,8 +51,6 @@ const findNextTrainId = async (
 
   const nextTrain = operation.trains[index + 1];
 
-  console.log(nextTrain.id, nextTrain.depSta);
-
   if (
     nextTrain.depSta === "033" &&
     nextTrain.arrSta.slice(0, 1) === (isToei ? "0" : "1")
