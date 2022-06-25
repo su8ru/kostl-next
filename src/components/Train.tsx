@@ -1,6 +1,6 @@
 import { Flex, Text } from "@chakra-ui/react";
 import { Train, TrainDirection, TypeChange } from "$/types/train";
-import { destListKeio, stationNameCapitalList } from "$/service/data";
+import { simpleStationNameDict, capStationNameDict } from "$/service/data";
 import { useAtom } from "jotai";
 import { trainItemsSettingAtom, triggerDetailsAtom } from "~/atoms";
 import { TrainItem } from "~/types/settings";
@@ -83,9 +83,9 @@ const getDest = (dest: string, typeChanges?: TypeChange[]): string => {
   if (typeChanges && typeChanges.length) {
     const { dest: newDest } = typeChanges[0];
     // eslint-disable-next-line no-irregular-whitespace
-    return `${stationNameCapitalList[dest]}　${stationNameCapitalList[newDest]}`;
+    return `${capStationNameDict[dest]}　${capStationNameDict[newDest]}`;
   }
-  return destListKeio[dest] ?? "-";
+  return simpleStationNameDict[dest] ?? "-";
 };
 
 const getType = (

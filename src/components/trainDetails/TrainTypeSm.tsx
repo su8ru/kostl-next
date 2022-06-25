@@ -1,5 +1,5 @@
 import { typeColorList } from "~/utils/colors";
-import { typeList } from "$/service/data";
+import { trainTypeDict } from "$/service/data";
 import { Text } from "@chakra-ui/react";
 
 export type Props = {
@@ -17,7 +17,7 @@ const TrainTypeSm: React.VFC<Props> = ({ type }) => (
     display="inline-block"
     mx="2"
   >
-    {typeList[type]}
+    {trainTypeDict[type]}
   </Text>
 );
 

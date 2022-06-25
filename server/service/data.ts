@@ -1,4 +1,5 @@
-export const destListKeio: Record<string, string> = {
+// アイコン表示用
+export const simpleStationNameDict: Record<string, string> = {
   "001": "K新宿",
   "002": "笹塚",
   "006": "桜上水",
@@ -34,7 +35,8 @@ export const destListKeio: Record<string, string> = {
   "999": "-",
 };
 
-export const fullStationNameList: Record<string, string> = {
+// 詳細表示用
+export const fullStationNameDict: Record<string, string> = {
   "001": "京王線新宿",
   "002": "笹塚",
   "006": "桜上水",
@@ -70,7 +72,8 @@ export const fullStationNameList: Record<string, string> = {
   "999": "（情報なし）",
 };
 
-export const rawStationNameList: Record<string, string> = {
+// 種別変更パース用
+export const rawStationNameDict: Record<string, string> = {
   "001": "新宿",
   "016": "調布",
   "027": "高幡不動",
@@ -87,7 +90,8 @@ export const rawStationNameList: Record<string, string> = {
   "999": "-",
 };
 
-export const stationNameCapitalList: Record<string, string> = {
+// 種別変更表示用
+export const capStationNameDict: Record<string, string> = {
   "001": "新",
   "016": "調",
   "027": "高",
@@ -104,7 +108,8 @@ export const stationNameCapitalList: Record<string, string> = {
   "999": "-",
 };
 
-export const typeList: Record<string, string> = {
+// 種別
+export const trainTypeDict: Record<string, string> = {
   "1": "特急",
   "2": "急行",
   "3": "快速",
@@ -116,7 +121,7 @@ export const typeList: Record<string, string> = {
   "11": "Mt.TAKAO号",
 };
 
-export const destListToei: Record<string, string> = {
+export const stationNameEnToJaDict: Record<string, string> = {
   Shinjuku: "N新宿",
   Sasazuka: "笹塚",
   Sakurajosui: "桜上水",
@@ -135,7 +140,63 @@ export const destListToei: Record<string, string> = {
   Iwamotocho: "岩本町",
 };
 
-export const toeiStationsEn: ReadonlyArray<string> = [
+export const allKeioStationsJa: ReadonlyArray<string> = [
+  "新宿",
+  "初台",
+  "幡ヶ谷",
+  "笹塚",
+  "代田橋",
+  "明大前",
+  "下高井戸",
+  "桜上水",
+  "上北沢",
+  "八幡山",
+  "芦花公園",
+  "千歳烏山",
+  "仙川",
+  "つつじヶ丘",
+  "柴崎",
+  "国領",
+  "布田",
+  "調布",
+  "西調布",
+  "飛田給",
+  "武蔵野台",
+  "多磨霊園",
+  "東府中",
+  "府中",
+  "分倍河原",
+  "中河原",
+  "聖蹟桜ヶ丘",
+  "百草園",
+  "高幡不動",
+  "南平",
+  "平山城址公園",
+  "長沼",
+  "北野",
+  "京王八王子",
+  "京王多摩川",
+  "京王稲田堤",
+  "京王よみうりランド",
+  "稲城",
+  "若葉台",
+  "京王永山",
+  "京王多摩センター",
+  "京王堀之内",
+  "南大沢",
+  "多摩境",
+  "橋本",
+  "府中競馬正門前",
+  "多摩動物公園",
+  "京王片倉",
+  "山田",
+  "めじろ台",
+  "狭間",
+  "高尾",
+  "高尾山口",
+];
+
+export const allToeiStationsEn: ReadonlyArray<string> = [
   "Shinjuku",
   "ShinjukuSanchome",
   "Akebonobashi",
@@ -159,8 +220,8 @@ export const toeiStationsEn: ReadonlyArray<string> = [
   "Motoyawata",
 ] as const;
 
-export const toeiStationsJa: ReadonlyArray<string> = [
-  "N新宿",
+export const allToeiStationsJa: ReadonlyArray<string> = [
+  "新線新宿",
   "新宿三丁目",
   "曙橋",
   "市ヶ谷",

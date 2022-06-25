@@ -1,7 +1,7 @@
 import { Train } from "$/types/train";
 import { Box, Divider, Flex, Text } from "@chakra-ui/react";
 import TrainType from "~/components/trainDetails/TrainType";
-import { fullStationNameList } from "$/service/data";
+import { fullStationNameDict } from "$/service/data";
 
 export type Props = {
   train: Train;
@@ -17,7 +17,7 @@ const TrainDetailsHeader: React.VFC<Props> = ({ train }) => {
         <Divider mx="2" orientation="vertical" height="4" />
         <TrainType type={+train.type} />
         <Text fontWeight="500">
-          {fullStationNameList[getFinalDest(train)] ?? "（情報無し）"} 行
+          {fullStationNameDict[getFinalDest(train)] ?? "（情報無し）"} 行
         </Text>
       </Flex>
       <Flex fontSize="md" justifyContent="center" alignItems="center" mb="2">

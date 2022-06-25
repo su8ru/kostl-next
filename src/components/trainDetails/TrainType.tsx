@@ -1,5 +1,5 @@
 import { Flex, Image, Text } from "@chakra-ui/react";
-import { typeList } from "$/service/data";
+import { trainTypeDict } from "$/service/data";
 import { staticPath } from "~/utils/$path";
 import { typeColorList } from "~/utils/colors";
 
@@ -20,7 +20,7 @@ const TrainType: React.VFC<Props> = ({ type }) => {
         justifyContent="center"
         alignItems="center"
       >
-        <Image src={typeLogoList[type]} alt={typeList[type]} w="72px" />
+        <Image src={typeLogoList[type]} alt={trainTypeDict[type]} w="72px" />
       </Flex>
     );
 
@@ -36,7 +36,7 @@ const TrainType: React.VFC<Props> = ({ type }) => {
       lineHeight="8"
       fontWeight="500"
     >
-      {typeList[type]}
+      {trainTypeDict[type]}
     </Text>
   );
 };

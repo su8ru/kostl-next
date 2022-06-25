@@ -1,6 +1,10 @@
 import { Section, Train, TrainDirection } from "$/types/train";
 import { Train as OdptTrain } from "$/types/toeiApi";
-import { destListKeio, destListToei, toeiStationsEn } from "$/service/data";
+import {
+  simpleStationNameDict,
+  stationNameEnToJaDict,
+  allToeiStationsEn,
+} from "$/service/data";
 import dayjs from "dayjs";
 import minMax from "dayjs/plugin/minMax";
 import timezone from "dayjs/plugin/timezone";
@@ -86,8 +90,8 @@ const parseToei = (
 };
 
 const destToId = (dest: string): string => {
-  const destJa = destListToei[dest] ?? "ERROR";
-  return valueToKey(destListKeio, destJa) ?? "999";
+  const destJa = stationNameEnToJaDict[dest] ?? "ERROR";
+  return valueToKey(simpleStationNameDict, destJa) ?? "999";
 };
 
 const stationToSection = (
@@ -98,14 +102,14 @@ const stationToSection = (
   if (toStation)
     // 駅間走行中
     return {
-      id: toeiStationsEn.indexOf(toStation) + 1,
+      id: allToeiStationsEn.indexOf(toStation) + 1,
       type: "Way",
       track: direction === "West" ? 1 : 2,
     };
   // 駅停車中
   else
     return {
-      id: toeiStationsEn.indexOf(fromStation) + 1,
+      id: allToeiStationsEn.indexOf(fromStation) + 1,
       type: "Sta",
       track: direction === "West" ? 1 : 2,
     };

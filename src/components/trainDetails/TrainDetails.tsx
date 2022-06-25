@@ -1,5 +1,5 @@
 import { Box, Flex } from "@chakra-ui/react";
-import { fullStationNameList } from "$/service/data";
+import { fullStationNameDict } from "$/service/data";
 import { Train } from "$/types/train";
 import TrainTypeSm from "~/components/trainDetails/TrainTypeSm";
 
@@ -17,9 +17,9 @@ const TrainDetails: React.VFC<Props> = ({ train }) => {
           <Box fontSize="sm">
             {typeChanges.map(({ sta, type }, index) => (
               <Box key={index} my="1">
-                {fullStationNameList[sta]}から
+                {fullStationNameDict[sta]}から
                 <TrainTypeSm type={+type} />
-                {fullStationNameList[getFinalDest(train)] ?? "（情報無し）"} 行
+                {fullStationNameDict[getFinalDest(train)] ?? "（情報無し）"} 行
               </Box>
             ))}
           </Box>

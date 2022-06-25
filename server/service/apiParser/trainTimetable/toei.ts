@@ -1,4 +1,4 @@
-import { toeiStationsEn, toeiStationsJa } from "$/service/data";
+import { allToeiStationsEn, allToeiStationsJa } from "$/service/data";
 import { TrainTimetable as OdptTrainTimetable } from "$/types/toeiApi";
 import { TimetableRecord, TrainTimetable } from "$/types/trainTimetable";
 import { FastifyInstance } from "fastify";
@@ -30,11 +30,11 @@ const parseToei = async (
       "odpt:departureTime": depTime,
     }) => {
       const staNameEn = (depStation ?? arrStation ?? "").split(".").pop() ?? "";
-      const staId = toeiStationsEn.indexOf(staNameEn) + 1;
+      const staId = allToeiStationsEn.indexOf(staNameEn) + 1;
       return {
-        line: "toei",
+        line: staId === 1 ? "keio" : "toei",
         staId,
-        staName: toeiStationsJa[staId - 1],
+        staName: allToeiStationsJa[staId - 1],
         arrTime,
         depTime,
       };
