@@ -1,7 +1,7 @@
 // アイコン表示用
 export const simpleStationNameDict: Record<string, string> = {
   "001": "K新宿",
-  "002": "笹塚",
+  "002": "笹塚",
   "006": "桜上水",
   "008": "八幡山",
   "012": "つつじ",
@@ -38,7 +38,7 @@ export const simpleStationNameDict: Record<string, string> = {
 // 詳細表示用
 export const fullStationNameDict: Record<string, string> = {
   "001": "京王線新宿",
-  "002": "笹塚",
+  "002": "笹塚",
   "006": "桜上水",
   "008": "八幡山",
   "012": "つつじヶ丘",
@@ -123,7 +123,7 @@ export const trainTypeDict: Record<string, string> = {
 
 export const stationNameEnToJaDict: Record<string, string> = {
   Shinjuku: "N新宿",
-  Sasazuka: "笹塚",
+  Sasazuka: "笹塚",
   Sakurajosui: "桜上水",
   HachimanYama: "八幡山",
   Tsutsujigaoka: "つつじ",
@@ -144,7 +144,7 @@ export const allKeioStationsJa: ReadonlyArray<string> = [
   "新宿",
   "初台",
   "幡ヶ谷",
-  "笹塚",
+  "笹塚",
   "代田橋",
   "明大前",
   "下高井戸",

@@ -1,4 +1,5 @@
 import useAspidaSWR from "@aspida/swr";
+import { allToeiStationsJa } from "$/service/data";
 import { apiClient } from "~/utils/apiClient";
 import { useMemo } from "react";
 import { useAtom } from "jotai";
@@ -50,38 +51,18 @@ const ToeiLine: React.VFC = () => {
 
       <UpdateTime timestamp={data?.timestamp} gridArea="1 / 16 / 2 / 20" />
 
-      {stations.map((name, index) => (
-        <StationLabel
-          key={index}
-          name={name}
-          gridArea={`${index * 2 + 1} / 5 / ${index * 2 + 2} / 8`}
-        />
-      ))}
+      {allToeiStationsJa
+        .slice(1)
+        .reverse()
+        .map((name, index) => (
+          <StationLabel
+            key={index}
+            name={name}
+            gridArea={`${index * 2 + 1} / 5 / ${index * 2 + 2} / 8`}
+          />
+        ))}
     </SimpleGrid>
   );
 };
 
 export default ToeiLine;
-
-const stations = [
-  "本八幡",
-  "篠崎",
-  "瑞江",
-  "一之江",
-  "船堀",
-  "東大島",
-  "大島",
-  "西大島",
-  "住吉",
-  "菊川",
-  "森下",
-  "浜町",
-  "馬喰横山",
-  "岩本町",
-  "小川町",
-  "神保町",
-  "九段下",
-  "市ヶ谷",
-  "曙橋",
-  "新宿三丁目",
-] as const;
