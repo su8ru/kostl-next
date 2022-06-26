@@ -1,18 +1,32 @@
 import { Train } from "$/types/train";
-import { Box, Divider, Flex, Text } from "@chakra-ui/react";
+import { Box, Divider, Flex, Icon, Text } from "@chakra-ui/react";
 import { fullStationNameDict } from "$/service/data";
 import TrainType from "~/components/trainDetails/TrainType";
 import TrainTypeSm from "~/components/trainDetails/TrainTypeSm";
+import { BsXLg } from "react-icons/bs";
 
 export type Props = {
   train: Train;
+  onDismiss: () => void;
 };
 
-const TrainDetailsHeader: React.VFC<Props> = ({ train }) => {
+const TrainDetailsHeader: React.VFC<Props> = ({ train, onDismiss }) => {
   const typeChanges = getTypeChanges(train);
 
   return (
-    <Box mt="4">
+    <Box mt="4" position="relative">
+      <Box
+        position="absolute"
+        p="2"
+        w="8"
+        h="8"
+        right="0"
+        top="-6"
+        onClick={onDismiss}
+        cursor="pointer"
+      >
+        <Icon as={BsXLg} color="gray" />
+      </Box>
       <Flex fontSize="md" justifyContent="center" alignItems="center">
         <TrainType type={+train.type} />
         <Text fontWeight="500">

@@ -36,7 +36,9 @@ const TrainDetailsBottomSheet: React.VFC = () => {
         maxHeight / 2,
         maxHeight,
       ]}
-      header={train && <TrainDetailsHeader train={train} />}
+      header={
+        train && <TrainDetailsHeader train={train} onDismiss={onDismiss} />
+      }
     >
       {train ? (
         <TrainDetailsBody train={train} />
