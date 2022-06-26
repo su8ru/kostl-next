@@ -73,6 +73,19 @@ const TrainDetailsHeader: React.VFC<Props> = ({ train, onDismiss }) => {
         )}
         {train.operationId && <Text ml="2">{train.operationId}</Text>}
         {train.unitId && <Text ml="2">{train.unitId}</Text>}
+        {train.delay > 0 && (
+          <>
+            <Divider mx="2" orientation="vertical" height="4" />
+            <Text color="red">
+              <Text as="span" fontSize="lg" fontWeight="500">
+                {train.delay}
+              </Text>
+              <Text as="span" fontSize="xs" ml="1">
+                分遅れ
+              </Text>
+            </Text>
+          </>
+        )}
       </Flex>
     </Box>
   );

@@ -14,6 +14,9 @@ import {
   Tr,
 } from "@chakra-ui/react";
 import NumberingIcon from "~/components/trainDetails/NumberingIcon";
+import dayjs from "dayjs";
+import customParseFormat from "dayjs/plugin/customParseFormat";
+dayjs.extend(customParseFormat);
 
 export type Props = {
   train: Train;
@@ -30,8 +33,9 @@ const TrainTimetable: React.VFC<Props> = ({ train }) => {
         <Table size="sm">
           <Thead>
             <Tr>
-              <Th></Th>
-              <Th></Th>
+              <Th>停車駅</Th>
+              <Th>定刻</Th>
+              {train.delay > 0 && <Th>見込</Th>}
             </Tr>
           </Thead>
           <Tbody>
@@ -48,10 +52,26 @@ const TrainTimetable: React.VFC<Props> = ({ train }) => {
                     <Text>{staName}</Text>
                   </Flex>
                 </Td>
-                <Td>
+                <Td color={train.delay > 0 ? "gray" : undefined}>
                   <Box h="4">{arrTime && <Text>{arrTime} 着</Text>}</Box>
                   <Box h="4">{depTime && <Text>{depTime} 発</Text>}</Box>
                 </Td>
+                {train.delay > 0 && (
+                  <>
+                    <Td>
+                      <Box h="4">
+                        {arrTime && (
+                          <Text>{estimatedTime(arrTime, train.delay)}着</Text>
+                        )}
+                      </Box>
+                      <Box h="4">
+                        {depTime && (
+                          <Text>{estimatedTime(depTime, train.delay)}発</Text>
+                        )}
+                      </Box>
+                    </Td>
+                  </>
+                )}
               </Tr>
             ))}
           </Tbody>
@@ -66,5 +86,8 @@ const TrainTimetable: React.VFC<Props> = ({ train }) => {
 
   return null;
 };
+
+const estimatedTime = (time: string, delay: number): string =>
+  dayjs(time, "HH:mm").add(delay, "m").format("HH:mm");
 
 export default TrainTimetable;
