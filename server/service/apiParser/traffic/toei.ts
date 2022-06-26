@@ -1,15 +1,15 @@
-import { Section, Train, TrainDirection } from "$/types/train";
-import { Train as OdptTrain } from "$/types/toeiApi";
 import {
+  allToeiStationsEn,
   simpleStationNameDict,
   stationNameEnToJaDict,
-  allToeiStationsEn,
 } from "$/service/data";
+import { Train as OdptTrain } from "$/types/toeiApi";
+import { Section, Train, TrainDirection } from "$/types/train";
+import valueToKey from "$/utils/valueToKey";
 import dayjs from "dayjs";
 import minMax from "dayjs/plugin/minMax";
 import timezone from "dayjs/plugin/timezone";
 import utc from "dayjs/plugin/utc";
-import valueToKey from "$/utils/valueToKey";
 
 dayjs.extend(minMax);
 dayjs.extend(timezone);

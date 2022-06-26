@@ -1,19 +1,19 @@
 import { NextPage } from "next";
+import Head from "next/head";
 import {
   Box,
+  Spinner,
   Tab,
   TabList,
-  Tabs,
   TabPanel,
   TabPanels,
-  Spinner,
+  Tabs,
 } from "@chakra-ui/react";
-import H2 from "~/components/docs/H2";
-import Head from "next/head";
-import useAspidaSWR from "@aspida/swr";
-import { apiClient } from "~/utils/apiClient";
-import OperationList from "~/components/operations/OperationList";
 import PageWrapper from "~/components/PageWrapper";
+import H2 from "~/components/docs/H2";
+import OperationList from "~/components/operations/OperationList";
+import { apiClient } from "~/utils/apiClient";
+import useAspidaSWR from "@aspida/swr";
 
 const Operations: NextPage = () => {
   const { data } = useAspidaSWR(apiClient.operations);

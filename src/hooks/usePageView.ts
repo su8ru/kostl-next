@@ -1,7 +1,7 @@
-import { useRouter } from "next/router";
 import { useEffect } from "react";
-import { pageview } from "~/utils/gtag";
+import { useRouter } from "next/router";
 import { NEXT_PUBLIC_GA_ID as GA_ID } from "~/utils/envValues";
+import { pageview } from "~/utils/gtag";
 
 const usePageView = () => {
   const router = useRouter();

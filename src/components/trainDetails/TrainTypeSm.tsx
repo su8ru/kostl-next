@@ -1,6 +1,6 @@
-import { typeColorList } from "~/utils/colors";
-import { trainTypeDict } from "$/service/data";
 import { Text } from "@chakra-ui/react";
+import { trainTypeDict } from "$/service/data";
+import { typeColorList } from "~/utils/colors";
 
 export type Props = {
   type: number;

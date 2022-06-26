@@ -1,8 +1,8 @@
+import { FastifyInstance } from "fastify";
 import { allToeiStationsEn, allToeiStationsJa } from "$/service/data";
+import useCalendarCache from "$/service/useCalendarCache";
 import { TrainTimetable as OdptTrainTimetable } from "$/types/toeiApi";
 import { TimetableRecord, TrainTimetable } from "$/types/trainTimetable";
-import { FastifyInstance } from "fastify";
-import useCalendarCache from "$/service/useCalendarCache";
 
 const parseToei = async (
   raw: OdptTrainTimetable[],

@@ -1,6 +1,6 @@
-import { TrainItem } from "~/types/settings";
-import { Flex, Checkbox, Spacer, IconButton } from "@chakra-ui/react";
 import { BsFillCaretDownFill, BsFillCaretUpFill } from "react-icons/bs";
+import { Checkbox, Flex, IconButton, Spacer } from "@chakra-ui/react";
+import { TrainItem } from "~/types/settings";
 
 export type Props = {
   itemId: TrainItem;

@@ -9,4 +9,15 @@ module.exports = {
   bracketSpacing: true,
   bracketSameLine: false,
   arrowParens: "always",
+  importOrder: [
+    "^fastify",
+    "^react",
+    "^next",
+    "^@chakra-ui/(.*)$",
+    "^\\$/(.*)$",
+    "^~/(.*)$",
+    "<THIRD_PARTY_MODULES>",
+  ],
+  importOrderSeparation: false,
+  importOrderSortSpecifiers: true,
 };

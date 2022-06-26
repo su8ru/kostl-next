@@ -1,7 +1,7 @@
-import { Operation } from "$/types/operation";
+import { BsArrowLeft, BsArrowRight } from "react-icons/bs";
 import { Box, Flex, Text } from "@chakra-ui/react";
 import { simpleStationNameDict } from "$/service/data";
-import { BsArrowLeft, BsArrowRight } from "react-icons/bs";
+import { Operation } from "$/types/operation";
 
 export type Props = {
   operation: Operation;

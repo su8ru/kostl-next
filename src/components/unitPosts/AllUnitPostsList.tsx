@@ -1,5 +1,5 @@
-import { UnitPost } from "$/types/unit";
 import { Table, Tbody, Td, Th, Thead, Tr } from "@chakra-ui/react";
+import { UnitPost } from "$/types/unit";
 import dayjs from "dayjs";
 
 export type Props = {

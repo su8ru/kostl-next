@@ -1,4 +1,6 @@
+import { BsBoxArrowUpRight } from "react-icons/bs";
 import { NextPage } from "next";
+import Head from "next/head";
 import {
   Box,
   Divider,
@@ -9,11 +11,9 @@ import {
   Text,
   UnorderedList,
 } from "@chakra-ui/react";
+import PageWrapper from "~/components/PageWrapper";
 import H2 from "~/components/docs/H2";
 import H3 from "~/components/docs/H3";
-import PageWrapper from "~/components/PageWrapper";
-import Head from "next/head";
-import { BsBoxArrowUpRight } from "react-icons/bs";
 
 const Policy: NextPage = () => {
   return (

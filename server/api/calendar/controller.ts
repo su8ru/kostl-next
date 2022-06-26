@@ -1,5 +1,5 @@
-import { defineController } from "./$relay";
 import useCalendarCache from "$/service/useCalendarCache";
+import { defineController } from "./$relay";
 
 export default defineController((fastify) => ({
   get: async () => {

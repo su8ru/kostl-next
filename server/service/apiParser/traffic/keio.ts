@@ -1,3 +1,4 @@
+import { rawStationNameDict, trainTypeDict } from "$/service/data";
 import { Body, Dt, TB, TS } from "$/types/keioApi";
 import {
   Section,
@@ -6,7 +7,6 @@ import {
   TrainDirection,
   TypeChange,
 } from "$/types/train";
-import { rawStationNameDict, trainTypeDict } from "$/service/data";
 import valueToKey from "$/utils/valueToKey";
 import dayjs from "dayjs";
 import arraySupport from "dayjs/plugin/arraySupport";

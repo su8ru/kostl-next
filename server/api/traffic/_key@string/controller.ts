@@ -1,6 +1,6 @@
-import { defineController } from "./$relay";
-import useTrafficCache from "$/service/useTrafficCache";
 import { API_ODPT_TOKEN } from "$/service/envValues";
+import useTrafficCache from "$/service/useTrafficCache";
+import { defineController } from "./$relay";
 
 const apiUrl = {
   keio: "https://i.opentidkeio.jp/data/traffic_info.json",

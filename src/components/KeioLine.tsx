@@ -1,17 +1,17 @@
-import useAspidaSWR from "@aspida/swr";
-import { apiClient } from "~/utils/apiClient";
-import { Box, Flex, SimpleGrid, Text } from "@chakra-ui/react";
-import { getGridAreaKeio } from "~/utils/gridArea";
-import { groupBySection } from "~/utils/groupBySection";
 import { useMemo } from "react";
-import { useAtom } from "jotai";
+import { Box, Flex, SimpleGrid, Text } from "@chakra-ui/react";
+import { allKeioStationsJa } from "$/service/data";
 import { trainBoxHeightAtom } from "~/atoms";
-import Section from "~/components/Section";
-import LineBorderY from "~/components/LineBorderY";
 import LineBorderX from "~/components/LineBorderX";
+import LineBorderY from "~/components/LineBorderY";
+import Section from "~/components/Section";
 import StationLabel from "~/components/StationLabel";
 import UpdateTime from "~/components/UpdateTime";
-import { allKeioStationsJa } from "$/service/data";
+import { apiClient } from "~/utils/apiClient";
+import { getGridAreaKeio } from "~/utils/gridArea";
+import { groupBySection } from "~/utils/groupBySection";
+import useAspidaSWR from "@aspida/swr";
+import { useAtom } from "jotai";
 
 const KeioLine: React.VFC = () => {
   const { data } = useAspidaSWR(apiClient.traffic._key("keio"), {

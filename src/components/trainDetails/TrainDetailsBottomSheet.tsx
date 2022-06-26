@@ -1,12 +1,12 @@
 import { useEffect, useRef, useState } from "react";
 import { BottomSheet, BottomSheetRef } from "react-spring-bottom-sheet";
+import "react-spring-bottom-sheet/dist/style.css";
 import { Text } from "@chakra-ui/react";
-import { useAtom } from "jotai";
 import { Train } from "$/types/train";
 import { triggerDetailsAtom } from "~/atoms";
-import TrainDetailsHeader from "~/components/trainDetails/TrainDetailsHeader";
 import TrainDetailsBody from "~/components/trainDetails/TrainDetailsBody";
-import "react-spring-bottom-sheet/dist/style.css";
+import TrainDetailsHeader from "~/components/trainDetails/TrainDetailsHeader";
+import { useAtom } from "jotai";
 
 const TrainDetailsBottomSheet: React.VFC = () => {
   const [open, setOpen] = useState<boolean>(false);

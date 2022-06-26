@@ -19,8 +19,8 @@ import {
   useToast,
 } from "@chakra-ui/react";
 import { UnitPost, UnitPostBody } from "$/types/unit";
-import useAspidaSWR from "@aspida/swr";
 import { apiClient } from "~/utils/apiClient";
+import useAspidaSWR from "@aspida/swr";
 
 export type Props = {
   isOpen: boolean;

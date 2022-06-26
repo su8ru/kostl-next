@@ -1,6 +1,6 @@
+import { Flex } from "@chakra-ui/react";
 import { Operation } from "$/types/operation";
 import OperationCard from "~/components/operations/OperationCard";
-import { Flex } from "@chakra-ui/react";
 import { operationCompareFn } from "~/utils/compareFn";
 
 type Props = {

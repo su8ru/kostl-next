@@ -1,7 +1,7 @@
-import { Train as TrainType, TrainDirection } from "$/types/train";
 import { Stack, StackDirection } from "@chakra-ui/react";
-import Train from "~/components/Train";
 import { Token } from "@chakra-ui/styled-system/dist/declarations/src/utils";
+import { TrainDirection, Train as TrainType } from "$/types/train";
+import Train from "~/components/Train";
 import * as CSS from "csstype";
 
 type SectionType = "Sta" | "Way";

@@ -1,12 +1,12 @@
+import { useEffect } from "react";
 import type { AppProps } from "next/app";
 import Head from "next/head";
 import { Box, ChakraProvider, Flex } from "@chakra-ui/react";
-import Header from "~/components/Header";
-import Footer from "~/components/Footer";
-import { useEffect } from "react";
 import "~/aseets/global.scss";
-import theme from "~/utils/theme";
+import Footer from "~/components/Footer";
+import Header from "~/components/Header";
 import usePageView from "~/hooks/usePageView";
+import theme from "~/utils/theme";
 
 const MyApp = ({ Component, pageProps }: AppProps) => {
   usePageView();

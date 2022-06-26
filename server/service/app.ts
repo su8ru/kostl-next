@@ -1,14 +1,14 @@
 import Fastify, { FastifyServerFactory } from "fastify";
-import fp from "fastify-plugin";
-import helmet from "@fastify/helmet";
-import cors from "@fastify/cors";
-import cookie from "@fastify/cookie";
 import cron from "fastify-cron";
-import { API_BASE_PATH } from "$/service/envValues";
+import fp from "fastify-plugin";
 import server from "$/$server";
-import { kvsMemoryStorage } from "@kvs/memorystorage";
-import { CacheSchema } from "$/types/kvs";
 import { clearUnitPosts } from "$/service/cron";
+import { API_BASE_PATH } from "$/service/envValues";
+import { CacheSchema } from "$/types/kvs";
+import cookie from "@fastify/cookie";
+import cors from "@fastify/cors";
+import helmet from "@fastify/helmet";
+import { kvsMemoryStorage } from "@kvs/memorystorage";
 
 export const init = (serverFactory?: FastifyServerFactory) => {
   const app = Fastify({ serverFactory });

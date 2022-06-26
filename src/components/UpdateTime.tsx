@@ -1,6 +1,6 @@
+import { BsArrowRepeat } from "react-icons/bs";
 import { Flex, HStack, Text } from "@chakra-ui/react";
 import dayjs from "dayjs";
-import { BsArrowRepeat } from "react-icons/bs";
 
 export interface Props {
   timestamp?: string;

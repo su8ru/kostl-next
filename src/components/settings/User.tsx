@@ -1,10 +1,10 @@
+import { useEffect } from "react";
 import { useAuthState, useSignInWithGoogle } from "react-firebase-hooks/auth";
-import { getFirebaseAuth } from "~/utils/firebaseAuth";
-import { Avatar, Box, Button, Flex, Text } from "@chakra-ui/react";
 import { BsBoxArrowRight } from "react-icons/bs";
+import { Avatar, Box, Button, Flex, Text } from "@chakra-ui/react";
 import { GoogleIcon } from "~/components/Icons";
 import { apiClient } from "~/utils/apiClient";
-import { useEffect } from "react";
+import { getFirebaseAuth } from "~/utils/firebaseAuth";
 
 const auth = getFirebaseAuth();
 
