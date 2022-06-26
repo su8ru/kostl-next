@@ -4,9 +4,9 @@ import { Text } from "@chakra-ui/react";
 import { useAtom } from "jotai";
 import { Train } from "$/types/train";
 import { triggerDetailsAtom } from "~/atoms";
-import TrainDetails from "~/components/trainDetails/TrainDetails";
-import "react-spring-bottom-sheet/dist/style.css";
 import TrainDetailsHeader from "~/components/trainDetails/TrainDetailsHeader";
+import TrainDetailsBody from "~/components/trainDetails/TrainDetailsBody";
+import "react-spring-bottom-sheet/dist/style.css";
 
 const TrainDetailsBottomSheet: React.VFC = () => {
   const [open, setOpen] = useState<boolean>(false);
@@ -39,7 +39,7 @@ const TrainDetailsBottomSheet: React.VFC = () => {
       header={train && <TrainDetailsHeader train={train} />}
     >
       {train ? (
-        <TrainDetails train={train} />
+        <TrainDetailsBody train={train} />
       ) : (
         <>
           <Text>No Train Selected</Text>
