@@ -1,10 +1,10 @@
 import { FastifyInstance } from "fastify";
-import fetch from "node-fetch";
 import { API_ODPT_TOKEN } from "$/service/envValues";
 import { CalendarCache } from "$/types/kvs";
 import dayjs from "dayjs";
 import timezone from "dayjs/plugin/timezone";
 import utc from "dayjs/plugin/utc";
+import fetch from "node-fetch";
 
 dayjs.extend(timezone);
 dayjs.extend(utc);

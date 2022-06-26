@@ -1,7 +1,7 @@
+import * as React from "react";
 import { ComponentWithAs, HStack, IconProps } from "@chakra-ui/react";
 import BottomNavItem from "~/components/BottomNav/BottomNavItem";
 import { UrlObject } from "url";
-import * as React from "react";
 
 export type Props = {
   items: ReadonlyArray<{

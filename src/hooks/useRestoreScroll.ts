@@ -3,10 +3,9 @@
  *   【Next.js】ブラウザバック時にスクロール位置を強制的に元に戻す
  *   https://zenn.dev/catnose99/scraps/f9b00c9acf81b4
  */
-
+import { useEffect } from "react";
 import { Router, useRouter } from "next/router";
 import memoryCache, { CacheClass } from "memory-cache";
-import { useEffect } from "react";
 
 const scrollXCache: CacheClass<string, number> = new memoryCache.Cache();
 const scrollYCache: CacheClass<string, number> = new memoryCache.Cache();

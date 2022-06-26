@@ -1,6 +1,6 @@
+import { Operation } from "$/types/operation";
 import { defineController } from "./$relay";
 import { PrismaClient } from "@prisma/client";
-import { Operation } from "$/types/operation";
 
 const prisma = new PrismaClient();
 

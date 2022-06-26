@@ -1,9 +1,9 @@
-import { UnitPost } from "$/types/unit";
 import { Table, Tbody, Td, Th, Thead, Tr } from "@chakra-ui/react";
-import dayjs from "dayjs";
-import useAspidaSWR from "@aspida/swr";
+import { UnitPost } from "$/types/unit";
 import { apiClient } from "~/utils/apiClient";
 import { operationCompareFn } from "~/utils/compareFn";
+import useAspidaSWR from "@aspida/swr";
+import dayjs from "dayjs";
 
 export type Props = {
   unitPosts: UnitPost[];

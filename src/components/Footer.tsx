@@ -1,8 +1,8 @@
+import { BsFileEarmarkText, BsGear } from "react-icons/bs";
 import { Box } from "@chakra-ui/react";
 import BottomNav from "~/components/BottomNav/BottomNav";
-import { BsGear, BsFileEarmarkText } from "react-icons/bs";
-import { pagesPath } from "~/utils/$path";
 import { TrafficIcon, TrainIcon } from "~/components/Icons";
+import { pagesPath } from "~/utils/$path";
 
 const Footer: React.VFC = () => (
   <Box

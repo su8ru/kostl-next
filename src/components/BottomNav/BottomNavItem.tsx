@@ -1,7 +1,7 @@
+import * as React from "react";
 import { useRouter } from "next/router";
 import { Box, ComponentWithAs, Flex, Icon, IconProps } from "@chakra-ui/react";
 import { UrlObject } from "url";
-import * as React from "react";
 
 export type Props = {
   icon:

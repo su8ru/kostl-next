@@ -8,10 +8,10 @@ import {
   Textarea,
   useBoolean,
 } from "@chakra-ui/react";
-import UnitPostRuleModal from "~/components/unitPosts/UnitPostRuleModal";
-import UnitPostPreviewModal from "~/components/unitPosts/UnitPostPreviewModal";
-import normalizeOperationId from "$/utils/notmalizeOperationId";
 import { UnitPostBody } from "$/types/unit";
+import normalizeOperationId from "$/utils/notmalizeOperationId";
+import UnitPostPreviewModal from "~/components/unitPosts/UnitPostPreviewModal";
+import UnitPostRuleModal from "~/components/unitPosts/UnitPostRuleModal";
 
 type Props = {
   mutate?: () => void;

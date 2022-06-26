@@ -1,4 +1,4 @@
-import { Html, Head, Main, NextScript } from "next/document";
+import { Head, Html, Main, NextScript } from "next/document";
 import { staticPath } from "~/utils/$path";
 import { NEXT_PUBLIC_GA_ID as GA_ID } from "~/utils/envValues";
 

@@ -1,6 +1,6 @@
-import { defineController, defineHooks } from "./$relay";
 import { FastifyReply, FastifyRequest } from "fastify";
 import firebaseAdmin from "$/service/firebaseAdmin";
+import { defineController, defineHooks } from "./$relay";
 
 export type AdditionalRequest = Pick<FastifyRequest, "cookies"> & {
   setCookie: (...args: Parameters<FastifyReply["setCookie"]>) => void;

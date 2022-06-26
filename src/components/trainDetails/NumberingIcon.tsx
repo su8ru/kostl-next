@@ -1,5 +1,5 @@
-import { staticPath } from "~/utils/$path";
 import { Box, Image, LayoutProps } from "@chakra-ui/react";
+import { staticPath } from "~/utils/$path";
 
 export type Props = {
   line: "keio" | "toei";

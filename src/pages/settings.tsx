@@ -1,4 +1,5 @@
 import { NextPage } from "next";
+import Head from "next/head";
 import NextLink from "next/link";
 import {
   Box,
@@ -10,16 +11,15 @@ import {
   Text,
   UnorderedList,
 } from "@chakra-ui/react";
-import H2 from "~/components/docs/H2";
-import H3 from "src/components/docs/H3";
-import Head from "next/head";
-import User from "~/components/settings/User";
-import TrainItemList from "~/components/settings/TrainItemList";
 import ExampleTrain from "~/components/ExampleTrain";
 import PageWrapper from "~/components/PageWrapper";
-import useAspidaSWR from "@aspida/swr";
-import { apiClient } from "~/utils/apiClient";
+import H2 from "~/components/docs/H2";
+import TrainItemList from "~/components/settings/TrainItemList";
+import User from "~/components/settings/User";
 import { pagesPath } from "~/utils/$path";
+import { apiClient } from "~/utils/apiClient";
+import useAspidaSWR from "@aspida/swr";
+import H3 from "src/components/docs/H3";
 
 const Settings: NextPage = () => {
   const { data } = useAspidaSWR(apiClient.calendar);

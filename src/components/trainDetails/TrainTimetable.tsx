@@ -1,6 +1,3 @@
-import { Train } from "$/types/train";
-import useAspidaSWR from "@aspida/swr";
-import { apiClient } from "~/utils/apiClient";
 import {
   Box,
   Flex,
@@ -13,9 +10,13 @@ import {
   Thead,
   Tr,
 } from "@chakra-ui/react";
+import { Train } from "$/types/train";
 import NumberingIcon from "~/components/trainDetails/NumberingIcon";
+import { apiClient } from "~/utils/apiClient";
+import useAspidaSWR from "@aspida/swr";
 import dayjs from "dayjs";
 import customParseFormat from "dayjs/plugin/customParseFormat";
+
 dayjs.extend(customParseFormat);
 
 export type Props = {

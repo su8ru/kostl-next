@@ -1,16 +1,16 @@
-import useAspidaSWR from "@aspida/swr";
-import { allToeiStationsJa } from "$/service/data";
-import { apiClient } from "~/utils/apiClient";
 import { useMemo } from "react";
-import { useAtom } from "jotai";
-import { trainBoxHeightAtom } from "~/atoms";
-import { groupBySection } from "~/utils/groupBySection";
-import { getGridAreaToei } from "~/utils/gridArea";
 import { Box, Flex, SimpleGrid } from "@chakra-ui/react";
-import Section from "~/components/Section";
+import { allToeiStationsJa } from "$/service/data";
+import { trainBoxHeightAtom } from "~/atoms";
 import LineBorderY from "~/components/LineBorderY";
+import Section from "~/components/Section";
 import StationLabel from "~/components/StationLabel";
 import UpdateTime from "~/components/UpdateTime";
+import { apiClient } from "~/utils/apiClient";
+import { getGridAreaToei } from "~/utils/gridArea";
+import { groupBySection } from "~/utils/groupBySection";
+import useAspidaSWR from "@aspida/swr";
+import { useAtom } from "jotai";
 
 const ToeiLine: React.VFC = () => {
   const { data } = useAspidaSWR(apiClient.traffic._key("toei"), {

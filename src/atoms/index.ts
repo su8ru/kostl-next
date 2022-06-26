@@ -1,7 +1,7 @@
+import { Train } from "$/types/train";
+import { TrainItemsSetting } from "~/types/settings";
 import { atom } from "jotai";
 import { atomWithStorage } from "jotai/utils";
-import { TrainItemsSetting } from "~/types/settings";
-import { Train } from "$/types/train";
 
 export const trainItemsSettingAtom = atomWithStorage<TrainItemsSetting>(
   "trainItemsSetting",

@@ -1,6 +1,6 @@
+import { allKeioStationsJa } from "$/service/data";
 import { TrainTimetable as KeioTrainTimetable } from "$/types/keioApi";
 import { TimetableRecord, TrainTimetable } from "$/types/trainTimetable";
-import { allKeioStationsJa } from "$/service/data";
 
 const parseKeio = (
   raw: KeioTrainTimetable

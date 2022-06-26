@@ -1,12 +1,12 @@
 import { Flex, Text } from "@chakra-ui/react";
-import { Train, TrainDirection, TypeChange } from "$/types/train";
-import { simpleStationNameDict, capStationNameDict } from "$/service/data";
-import { useAtom } from "jotai";
+import { capStationNameDict, simpleStationNameDict } from "$/service/data";
+import { TrainDirection, Train as TrainType, TypeChange } from "$/types/train";
 import { trainItemsSettingAtom, triggerDetailsAtom } from "~/atoms";
 import { TrainItem } from "~/types/settings";
+import { useAtom } from "jotai";
 
 export interface Props {
-  train: Train;
+  train: TrainType;
 }
 
 const Train: React.VFC<Props> = ({ train }) => {

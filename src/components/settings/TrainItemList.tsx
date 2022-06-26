@@ -1,8 +1,8 @@
 import { Box, Divider } from "@chakra-ui/react";
-import { useAtom } from "jotai";
 import { trainItemsSettingAtom } from "~/atoms";
-import { TrainItem, trainItemArray } from "~/types/settings";
 import TrainItemCheckbox from "~/components/settings/TrainItemCheckbox";
+import { TrainItem, trainItemArray } from "~/types/settings";
+import { useAtom } from "jotai";
 
 const TrainItemList: React.VFC = () => {
   const [trainItemsSetting, setTrainItemsSetting] = useAtom(

@@ -1,9 +1,9 @@
-import { Train } from "$/types/train";
+import { BsXLg } from "react-icons/bs";
 import { Box, Divider, Flex, Icon, Text } from "@chakra-ui/react";
 import { fullStationNameDict } from "$/service/data";
+import { Train } from "$/types/train";
 import TrainType from "~/components/trainDetails/TrainType";
 import TrainTypeSm from "~/components/trainDetails/TrainTypeSm";
-import { BsXLg } from "react-icons/bs";
 
 export type Props = {
   train: Train;
