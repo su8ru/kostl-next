@@ -1,4 +1,4 @@
-import Body, { Dt, TB, TS } from "$/types/keioApi";
+import { Body, Dt, TB, TS } from "$/types/keioApi";
 import {
   Section,
   SectionType,
@@ -6,7 +6,7 @@ import {
   TrainDirection,
   TypeChange,
 } from "$/types/train";
-import { stationNameList, typeList } from "$/service/data";
+import { rawStationNameDict, trainTypeDict } from "$/service/data";
 import valueToKey from "$/utils/valueToKey";
 import dayjs from "dayjs";
 import arraySupport from "dayjs/plugin/arraySupport";
@@ -101,9 +101,9 @@ const parseInf = (
   const arr = inf.split(removeRegExp);
   if (arr.length === 5) {
     const [, _dest, _newType, _newDest] = arr;
-    const dest = valueToKey(stationNameList, _dest);
-    const newDest = valueToKey(stationNameList, _newDest);
-    const newType = valueToKey(typeList, _newType);
+    const dest = valueToKey(rawStationNameDict, _dest);
+    const newDest = valueToKey(rawStationNameDict, _newDest);
+    const newType = valueToKey(trainTypeDict, _newType);
     if (dest && newDest && newType)
       return { dest, typeChange: { type: newType, dest: newDest } };
   }

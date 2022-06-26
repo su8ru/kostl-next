@@ -1,6 +1,6 @@
 import { Operation } from "$/types/operation";
 import { Box, Flex, Text } from "@chakra-ui/react";
-import { destListKeio } from "$/service/data";
+import { simpleStationNameDict } from "$/service/data";
 import { BsArrowLeft, BsArrowRight } from "react-icons/bs";
 
 export type Props = {
@@ -17,7 +17,7 @@ const OperationCard: React.VFC<Props> = ({ operation: { id, trains } }) => {
         {trains.map(({ id, depSta, arrSta, depTime }) => (
           <Flex key={id}>
             <Text w="14" align="center">
-              {destListKeio[parseInt(id) % 2 ? arrSta : depSta]}
+              {simpleStationNameDict[parseInt(id) % 2 ? arrSta : depSta]}
             </Text>
             <Text w="12" align="right">
               {parseInt(id) % 2 ? "" : depTime}
@@ -26,7 +26,7 @@ const OperationCard: React.VFC<Props> = ({ operation: { id, trains } }) => {
               {parseInt(id) % 2 ? <BsArrowLeft /> : <BsArrowRight />}
             </Text>
             <Text w="14" align="center">
-              {destListKeio[parseInt(id) % 2 ? depSta : arrSta]}
+              {simpleStationNameDict[parseInt(id) % 2 ? depSta : arrSta]}
             </Text>
             <Text w="12" align="right">
               {parseInt(id) % 2 ? depTime : ""}

@@ -1,6 +1,9 @@
 import useAspidaSWR from "@aspida/swr";
+import { allToeiStationsJa } from "$/service/data";
 import { apiClient } from "~/utils/apiClient";
 import { useMemo } from "react";
+import { useAtom } from "jotai";
+import { trainBoxHeightAtom } from "~/atoms";
 import { groupBySection } from "~/utils/groupBySection";
 import { getGridAreaToei } from "~/utils/gridArea";
 import { Box, Flex, SimpleGrid } from "@chakra-ui/react";
@@ -8,14 +11,12 @@ import Section from "~/components/Section";
 import LineBorderY from "~/components/LineBorderY";
 import StationLabel from "~/components/StationLabel";
 import UpdateTime from "~/components/UpdateTime";
-import { useRecoilValue } from "recoil";
-import trainItemsSettingState from "~/states/atoms/trainItemsSettingState";
 
 const ToeiLine: React.VFC = () => {
   const { data } = useAspidaSWR(apiClient.traffic._key("toei"), {
     refreshInterval: 5000,
   });
-  const trainItemsSetting = useRecoilValue(trainItemsSettingState);
+  const [trainHeight] = useAtom(trainBoxHeightAtom);
 
   const sections = useMemo(
     () => (data ? groupBySection(data.trains, getGridAreaToei) : []),
@@ -24,9 +25,7 @@ const ToeiLine: React.VFC = () => {
 
   return (
     <SimpleGrid
-      templateRows={`repeat(40, minmax(${
-        trainItemsSetting.length * 21 + 12
-      }px, auto))`}
+      templateRows={`repeat(40, minmax(${trainHeight}px, auto))`}
       templateColumns="90px 10px 58px 58px 10px 58px 58px 10px 58px 10px 58px 10px 58px 58px 10px 58px 58px 10px 90px"
     >
       {[...Array(20)].map((_, index) => (
@@ -52,38 +51,18 @@ const ToeiLine: React.VFC = () => {
 
       <UpdateTime timestamp={data?.timestamp} gridArea="1 / 16 / 2 / 20" />
 
-      {stations.map((name, index) => (
-        <StationLabel
-          key={index}
-          name={name}
-          gridArea={`${index * 2 + 1} / 5 / ${index * 2 + 2} / 8`}
-        />
-      ))}
+      {allToeiStationsJa
+        .slice(1)
+        .reverse()
+        .map((name, index) => (
+          <StationLabel
+            key={index}
+            name={name}
+            gridArea={`${index * 2 + 1} / 5 / ${index * 2 + 2} / 8`}
+          />
+        ))}
     </SimpleGrid>
   );
 };
 
 export default ToeiLine;
-
-const stations = [
-  "本八幡",
-  "篠崎",
-  "瑞江",
-  "一之江",
-  "船堀",
-  "東大島",
-  "大島",
-  "西大島",
-  "住吉",
-  "菊川",
-  "森下",
-  "浜町",
-  "馬喰横山",
-  "岩本町",
-  "小川町",
-  "神保町",
-  "九段下",
-  "市ヶ谷",
-  "曙橋",
-  "新宿三丁目",
-] as const;

@@ -1,16 +1,16 @@
 import { Flex, Text } from "@chakra-ui/react";
 import { Train, TrainDirection, TypeChange } from "$/types/train";
-import { destListKeio, stationNameCapitalList } from "$/service/data";
-import { useRecoilValue } from "recoil";
-import trainItemsSettingState from "~/states/atoms/trainItemsSettingState";
+import { simpleStationNameDict, capStationNameDict } from "$/service/data";
+import { useAtom } from "jotai";
+import { trainItemsSettingAtom, triggerDetailsAtom } from "~/atoms";
 import { TrainItem } from "~/types/settings";
 
 export interface Props {
   train: Train;
 }
 
-const Train: React.VFC<Props> = ({
-  train: {
+const Train: React.VFC<Props> = ({ train }) => {
+  const {
     id,
     type,
     dest,
@@ -20,9 +20,9 @@ const Train: React.VFC<Props> = ({
     typeChanges,
     carCount,
     unitId,
-  },
-}) => {
-  const trainItemsSetting = useRecoilValue(trainItemsSettingState);
+  } = train;
+  const [trainItemsSetting] = useAtom(trainItemsSettingAtom);
+  const [triggerDetails] = useAtom(triggerDetailsAtom);
 
   const itemIdToValue = (itemId: TrainItem): string => {
     switch (itemId) {
@@ -57,6 +57,10 @@ const Train: React.VFC<Props> = ({
         bg={getType(type, direction, typeChanges)}
         borderTopRadius={direction === "East" ? "md" : "sm"}
         borderBottomRadius={direction === "East" ? "sm" : "md"}
+        cursor="pointer"
+        onClick={() => {
+          if (triggerDetails) triggerDetails(train);
+        }}
       >
         {trainItemsSetting.map((itemId) => (
           <Text fontSize="sm" key={itemId}>
@@ -79,9 +83,9 @@ const getDest = (dest: string, typeChanges?: TypeChange[]): string => {
   if (typeChanges && typeChanges.length) {
     const { dest: newDest } = typeChanges[0];
     // eslint-disable-next-line no-irregular-whitespace
-    return `${stationNameCapitalList[dest]}　${stationNameCapitalList[newDest]}`;
+    return `${capStationNameDict[dest]}　${capStationNameDict[newDest]}`;
   }
-  return destListKeio[dest] ?? "-";
+  return simpleStationNameDict[dest] ?? "-";
 };
 
 const getType = (
