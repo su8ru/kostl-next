@@ -54,7 +54,10 @@ export default defineController((fastify) => ({
         const staName = fullStationNameDict[depSta];
         trainTimetable.push({
           line: "keio",
-          staId: allKeioStationsJa.indexOf(staName) + 1,
+          staId:
+            staName === "京王線新宿"
+              ? 1
+              : allKeioStationsJa.indexOf(staName) + 1,
           staName,
           depTime: `${depTime.slice(0, 2)}:${depTime.slice(2, 4)}`,
         });
