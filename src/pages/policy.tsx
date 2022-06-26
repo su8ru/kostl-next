@@ -60,6 +60,12 @@ const Policy: NextPage = () => {
               <ListItem>京王線運用：非公式の運用番号</ListItem>
             </UnorderedList>
           </ListItem>
+          <ListItem>
+            列車時刻表：公式の列車時刻表を使用
+            <Text lineHeight="1.5" color="gray">
+              ＊京王線内は発車時刻のみ対応
+            </Text>
+          </ListItem>
         </UnorderedList>
         <H3>途中駅における種別変更</H3>
         <Text mt="4">公式に提供されている種別変更にのみ対応しています。</Text>
