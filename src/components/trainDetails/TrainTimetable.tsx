@@ -28,7 +28,7 @@ const TrainTimetable: React.VFC<Props> = ({ train }) => {
     apiClient.trainTimetable._trainId(train.id)
   );
 
-  if (data)
+  if (data && !error)
     return (
       <TableContainer>
         <Table size="sm">
@@ -80,12 +80,11 @@ const TrainTimetable: React.VFC<Props> = ({ train }) => {
       </TableContainer>
     );
 
-  if (error)
+  return (
     <Box>
       <Text>列車時刻表がみつかりませんでした。</Text>
-    </Box>;
-
-  return null;
+    </Box>
+  );
 };
 
 const estimatedTime = (time: string, delay: number): string =>

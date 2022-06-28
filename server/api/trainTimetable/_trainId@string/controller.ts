@@ -54,10 +54,9 @@ export default defineController((fastify) => ({
         const staName = fullStationNameDict[depSta];
         trainTimetable.push({
           line: "keio",
-          staId:
-            staName === "京王線新宿"
-              ? 1
-              : allKeioStationsJa.indexOf(staName) + 1,
+          staId: ["京王線新宿", "新線新宿"].includes(staName)
+            ? 1
+            : allKeioStationsJa.indexOf(staName) + 1,
           staName,
           depTime: `${depTime.slice(0, 2)}:${depTime.slice(2, 4)}`,
         });
@@ -65,7 +64,7 @@ export default defineController((fastify) => ({
 
       trainTimetable.push(...keioTimetable);
       const nextTrain = await findNextTrain(trainId, fastify);
-      if (nextTrain) {
+      if (nextTrain && ["K", "T"].includes(nextTrain.id.slice(-1))) {
         const [sjk, ...others] = await getToeiTimetable(nextTrain.id, fastify);
         trainTimetable[trainTimetable.length - 1] = {
           ...trainTimetable[trainTimetable.length - 1],
