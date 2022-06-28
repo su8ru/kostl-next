@@ -13,7 +13,7 @@ const parseToei = async (
   const { day } = await useCalendarCache(fastify);
   const _raw: OdptTrainTimetable | undefined = raw.find(
     ({ "odpt:calendar": calendar }) => {
-      const apiCalendar = calendar?.split(".")?.pop()?.toLowerCase();
+      const apiCalendar = calendar?.split(":")?.pop()?.toLowerCase();
       return day === "WEEKDAY"
         ? apiCalendar === "weekday"
         : apiCalendar !== "weekday";

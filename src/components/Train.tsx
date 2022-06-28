@@ -1,6 +1,6 @@
 import { Flex, Text } from "@chakra-ui/react";
 import { capStationNameDict, simpleStationNameDict } from "$/service/data";
-import { TrainDirection, Train as TrainType, TypeChange } from "$/types/train";
+import { Train as TrainType } from "$/types/train";
 import { trainItemsSettingAtom, triggerDetailsAtom } from "~/atoms";
 import { TrainItem } from "~/types/settings";
 import { useAtom } from "jotai";
@@ -10,17 +10,7 @@ export interface Props {
 }
 
 const Train: React.VFC<Props> = ({ train }) => {
-  const {
-    id,
-    type,
-    dest,
-    operationId,
-    delay,
-    direction,
-    typeChanges,
-    carCount,
-    unitId,
-  } = train;
+  const { id, operationId, delay, direction, carCount, unitId } = train;
   const [trainItemsSetting] = useAtom(trainItemsSettingAtom);
   const [triggerDetails] = useAtom(triggerDetailsAtom);
 
@@ -31,7 +21,7 @@ const Train: React.VFC<Props> = ({ train }) => {
       case "operationId":
         return operationId ?? "-";
       case "destination":
-        return getDest(dest, typeChanges);
+        return getDest(train);
       case "unitId":
         return unitId ?? "-";
       case "carCount":
@@ -54,7 +44,7 @@ const Train: React.VFC<Props> = ({ train }) => {
         borderColor="#fff"
         boxShadow="base"
         direction={direction === "East" ? "column" : "column-reverse"}
-        bg={getType(type, direction, typeChanges)}
+        bg={getType(train)}
         borderTopRadius={direction === "East" ? "md" : "sm"}
         borderBottomRadius={direction === "East" ? "sm" : "md"}
         cursor="pointer"
@@ -79,20 +69,16 @@ const Train: React.VFC<Props> = ({ train }) => {
 
 export default Train;
 
-const getDest = (dest: string, typeChanges?: TypeChange[]): string => {
-  if (typeChanges && typeChanges.length) {
-    const { dest: newDest } = typeChanges[0];
+const getDest = ({ dest, typeChanges }: TrainType): string => {
+  if (typeChanges && typeChanges.length > 0) {
+    const { sta } = typeChanges[0];
     // eslint-disable-next-line no-irregular-whitespace
-    return `${capStationNameDict[dest]}　${capStationNameDict[newDest]}`;
+    return `${capStationNameDict[sta]}　${capStationNameDict[dest]}`;
   }
   return simpleStationNameDict[dest] ?? "-";
 };
 
-const getType = (
-  type: string,
-  direction: TrainDirection,
-  typeChanges?: TypeChange[]
-): string => {
+const getType = ({ type, direction, typeChanges }: TrainType): string => {
   if (typeChanges && typeChanges.length) {
     const { type: newType } = typeChanges[0];
     const colorL = typeColorList[+type];

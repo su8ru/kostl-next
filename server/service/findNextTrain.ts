@@ -1,14 +1,14 @@
 import { FastifyInstance } from "fastify";
 import useCalendarCache from "$/service/useCalendarCache";
+import { TrainWithInfo } from "$/types/operation";
 import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
-const findNextTrainId = async (
+const findNextTrain = async (
   trainId: string,
   fastify: FastifyInstance
-): Promise<string | null> => {
-  const isToei = ["K", "T"].includes(trainId.slice(-1));
+): Promise<Pick<TrainWithInfo, "id" | "depSta" | "arrSta"> | null> => {
   const { day } = await useCalendarCache(fastify);
 
   const train = await prisma.train.findFirst({
@@ -32,7 +32,6 @@ const findNextTrainId = async (
       trains: {
         select: {
           id: true,
-          depTime: true,
           depSta: true,
           arrSta: true,
         },
@@ -49,15 +48,16 @@ const findNextTrainId = async (
 
   if (index === operation.trains.length - 1) return null;
 
+  const currTrain = operation.trains[index];
   const nextTrain = operation.trains[index + 1];
 
   if (
-    nextTrain.depSta === "033" &&
-    nextTrain.arrSta.slice(0, 1) === (isToei ? "0" : "1")
+    nextTrain.depSta === currTrain.arrSta &&
+    parseInt(trainId) % 2 === parseInt(nextTrain.id) % 2
   ) {
-    return nextTrain.id;
+    return nextTrain;
   }
   return null;
 };
 
-export default findNextTrainId;
+export default findNextTrain;

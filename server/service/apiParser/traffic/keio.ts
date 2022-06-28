@@ -30,7 +30,7 @@ const parseKeio = (
       .filter(({ id, sn }) => sn !== "I" && id.substring(1, 2) !== "1")
       .flatMap(({ id, ps }: TS) =>
         ps.map<Train>((train) => {
-          const { dest, typeChange } = parseInf(train.inf);
+          const typeChange = parseInf(train.inf);
           const operationId =
             train.tr.trim() in operationDict
               ? operationDict[train.tr.trim()]?.operationId
@@ -38,7 +38,7 @@ const parseKeio = (
           return {
             id: train.tr.trim(),
             type: train.sy_tr !== "7" ? train.sy_tr : train.sy,
-            dest: dest ?? (train.ik_tr !== "999" ? train.ik_tr : train.tr),
+            dest: train.ik_tr !== "999" ? train.ik_tr : train.tr,
             direction: (shouldReverse(id, +train.bs) ? !+train.ki : +train.ki)
               ? "West"
               : "East",
@@ -70,7 +70,7 @@ const parseKeio = (
       .flatMap(({ id, ps }: TB) =>
         ps.map<Train>((train) => {
           const { direction, section } = sectionIdToSection(id);
-          const { dest, typeChange } = parseInf(train.inf);
+          const typeChange = parseInf(train.inf);
           const operationId =
             train.tr.trim() in operationDict
               ? operationDict[train.tr.trim()]?.operationId
@@ -78,7 +78,7 @@ const parseKeio = (
           return {
             id: train.tr.trim(),
             type: train.sy_tr !== "7" ? train.sy_tr : train.sy,
-            dest: dest ?? (train.ik_tr !== "999" ? train.ik_tr : train.tr),
+            dest: train.ik_tr !== "999" ? train.ik_tr : train.tr,
             direction,
             operationId,
             delay: +train.dl ?? 0,
@@ -94,20 +94,16 @@ const parseKeio = (
   return { timestamp: dtToTime(raw.up[0].dt), trains };
 };
 
-const parseInf = (
-  inf: string
-): { dest: string | null; typeChange: TypeChange | null } => {
+const parseInf = (inf: string): TypeChange | null => {
   const removeRegExp = /この列車は|駅で|\s|行きとなります。/;
   const arr = inf.split(removeRegExp);
   if (arr.length === 5) {
-    const [, _dest, _newType, _newDest] = arr;
-    const dest = valueToKey(rawStationNameDict, _dest);
-    const newDest = valueToKey(rawStationNameDict, _newDest);
-    const newType = valueToKey(trainTypeDict, _newType);
-    if (dest && newDest && newType)
-      return { dest, typeChange: { type: newType, dest: newDest } };
+    const [, _sta, _type] = arr;
+    const sta = valueToKey(rawStationNameDict, _sta);
+    const type = valueToKey(trainTypeDict, _type);
+    if (sta && type) return { sta, type };
   }
-  return { dest: null, typeChange: null };
+  return null;
 };
 
 const shouldReverse = (sectionId: string, track: number): boolean => {

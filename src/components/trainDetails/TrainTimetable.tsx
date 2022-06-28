@@ -1,6 +1,9 @@
+import { BsExclamationTriangle } from "react-icons/bs";
 import {
   Box,
   Flex,
+  Icon,
+  Spinner,
   Table,
   TableContainer,
   Tbody,
@@ -28,7 +31,7 @@ const TrainTimetable: React.VFC<Props> = ({ train }) => {
     apiClient.trainTimetable._trainId(train.id)
   );
 
-  if (data)
+  if (data && !error)
     return (
       <TableContainer>
         <Table size="sm">
@@ -81,11 +84,18 @@ const TrainTimetable: React.VFC<Props> = ({ train }) => {
     );
 
   if (error)
-    <Box>
-      <Text>列車時刻表がみつかりませんでした。</Text>
-    </Box>;
+    return (
+      <Box textAlign="center" color="gray" pt="10">
+        <Icon as={BsExclamationTriangle} w="8" h="8" />
+        <Text mt="2">列車時刻表がみつかりませんでした…</Text>
+      </Box>
+    );
 
-  return null;
+  return (
+    <Box textAlign="center" color="gray" pt="10">
+      <Spinner size="lg" />
+    </Box>
+  );
 };
 
 const estimatedTime = (time: string, delay: number): string =>

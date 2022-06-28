@@ -1,10 +1,13 @@
+import { FastifyInstance } from "fastify";
 import {
   allToeiStationsEn,
   simpleStationNameDict,
   stationNameEnToJaDict,
 } from "$/service/data";
+import findNextTrain from "$/service/findNextTrain";
+import trainIdToType from "$/service/trainIdToType";
 import { Train as OdptTrain } from "$/types/toeiApi";
-import { Section, Train, TrainDirection } from "$/types/train";
+import { Section, Train, TrainDirection, TypeChange } from "$/types/train";
 import valueToKey from "$/utils/valueToKey";
 import dayjs from "dayjs";
 import minMax from "dayjs/plugin/minMax";
@@ -16,14 +19,15 @@ dayjs.extend(timezone);
 dayjs.extend(utc);
 dayjs.tz.setDefault("Asia/Tokyo");
 
-const parseToei = (
+const parseToei = async (
   raw: OdptTrain[],
   operationDict: Record<string, { operationId: string }>,
-  unitDict: Record<string, string>
-): { timestamp: string; trains: Train[] } => {
+  unitDict: Record<string, string>,
+  fastify: FastifyInstance
+): Promise<{ timestamp: string; trains: Train[] }> => {
   let date = dayjs(0);
 
-  const trains: Train[] = raw
+  const _trains: Train[] = raw
     // 不要な部分を削ぎ落とし
     .map(
       ({
@@ -84,9 +88,44 @@ const parseToei = (
     )
     .filter(({ section: { id, type } }) => !(id === 1 && type === "Sta"));
 
+  // type changes
+  const trains: Train[] = await Promise.all(
+    _trains.map(async (train) => {
+      const typeChanges = await getTypeChanges(train.id, train.type, fastify);
+      return { ...train, typeChanges };
+    })
+  );
+
   if (date.unix() === 0) date = dayjs();
 
   return { timestamp: date.local().format(), trains };
+};
+
+const getTypeChanges = async (
+  id: string,
+  type: string,
+  fastify: FastifyInstance
+): Promise<TypeChange[]> => {
+  const typeChanges: TypeChange[] = [];
+
+  const secondTrain = await findNextTrain(id, fastify);
+
+  if (!secondTrain) return typeChanges;
+  if (type !== trainIdToType(secondTrain.id))
+    typeChanges.push({
+      type: trainIdToType(secondTrain.id),
+      sta: secondTrain.depSta,
+    });
+
+  const thirdTrain = await findNextTrain(secondTrain.id, fastify);
+
+  if (!thirdTrain) return typeChanges;
+  typeChanges.push({
+    type: trainIdToType(thirdTrain.id),
+    sta: thirdTrain.depSta,
+  });
+
+  return typeChanges;
 };
 
 const destToId = (dest: string): string => {
