@@ -11,7 +11,8 @@ export type Props = {
 };
 
 const TrainDetailsHeader: React.VFC<Props> = ({ train, onDismiss }) => {
-  const typeChanges = getTypeChanges(train);
+  const { id, type, dest, operationId, delay, typeChanges, carCount, unitId } =
+    train;
 
   return (
     <Box mt="4" position="relative">
@@ -28,21 +29,21 @@ const TrainDetailsHeader: React.VFC<Props> = ({ train, onDismiss }) => {
         <Icon as={BsXLg} color="gray" />
       </Box>
       <Flex fontSize="md" justifyContent="center" alignItems="center">
-        <TrainType type={+train.type} />
+        <TrainType type={+type} />
         <Text fontWeight="500">
           <Text as="span" fontSize="md" fontWeight="500">
-            {fullStationNameDict[getFinalDest(train)] ?? "（情報無し）"}
+            {fullStationNameDict[dest] ?? "（情報無し）"}
           </Text>
           <Text as="span" fontSize="xs" ml="1">
             行き
           </Text>
         </Text>
-        {train.carCount && (
+        {carCount && (
           <>
             <Divider mx="2" orientation="vertical" height="4" />
             <Text>
               <Text as="span" fontWeight="500" fontSize="lg">
-                {train.carCount}
+                {carCount}
               </Text>
               <Text as="span" fontSize="xs" ml="1">
                 両編成
@@ -51,14 +52,14 @@ const TrainDetailsHeader: React.VFC<Props> = ({ train, onDismiss }) => {
           </>
         )}
       </Flex>
-      {!!typeChanges.length && (
+      {typeChanges && typeChanges.length > 0 && (
         <Flex justifyContent="center" mt="1.5">
           <Box fontSize="sm">
             {typeChanges.map(({ sta, type }, index) => (
               <Box key={index} my="1">
                 {fullStationNameDict[sta]}から
                 <TrainTypeSm type={+type} />
-                {fullStationNameDict[getFinalDest(train)] ?? "（情報無し）"} 行
+                {fullStationNameDict[dest] ?? "（情報無し）"} 行
               </Box>
             ))}
           </Box>
@@ -66,19 +67,17 @@ const TrainDetailsHeader: React.VFC<Props> = ({ train, onDismiss }) => {
       )}
       <Flex fontSize="md" justifyContent="center" alignItems="center" mt="2">
         <Text>
-          {train.id} {!/^\d+[TK]$/.test(train.id) && "ﾚ"}
+          {id} {!/^\d+[TK]$/.test(id) && "ﾚ"}
         </Text>
-        {train.operationId && (
-          <Divider ml="2" orientation="vertical" height="4" />
-        )}
-        {train.operationId && <Text ml="2">{train.operationId}</Text>}
-        {train.unitId && <Text ml="2">{train.unitId}</Text>}
-        {train.delay > 0 && (
+        {operationId && <Divider ml="2" orientation="vertical" height="4" />}
+        {operationId && <Text ml="2">{operationId}</Text>}
+        {unitId && <Text ml="2">{unitId}</Text>}
+        {delay > 0 && (
           <>
             <Divider mx="2" orientation="vertical" height="4" />
             <Text color="red">
               <Text as="span" fontSize="lg" fontWeight="500">
-                {train.delay}
+                {delay}
               </Text>
               <Text as="span" fontSize="xs" ml="1">
                 分遅れ
@@ -92,21 +91,3 @@ const TrainDetailsHeader: React.VFC<Props> = ({ train, onDismiss }) => {
 };
 
 export default TrainDetailsHeader;
-
-const getFinalDest = (train: Train) => {
-  const { dest, typeChanges } = train;
-  const finalTypeChange = [...(typeChanges ?? [])].pop();
-  return finalTypeChange?.dest ?? dest;
-};
-
-const getTypeChanges = (train: Train): { sta: string; type: string }[] => {
-  const { dest, typeChanges } = train;
-  if (!typeChanges) return [];
-  return typeChanges.map((curr, index, arr) => {
-    if (index === 0) return { sta: dest, type: curr.type };
-    return {
-      sta: arr[index - 1].dest,
-      type: curr.type,
-    };
-  });
-};

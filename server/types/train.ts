@@ -14,8 +14,8 @@ export type Train = {
 };
 
 export type TypeChange = {
+  sta: string;
   type: string;
-  dest: string;
 };
 
 export type SectionType = "Sta" | "Way" | "WayB";
