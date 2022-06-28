@@ -1,6 +1,6 @@
 import { Flex, Text } from "@chakra-ui/react";
 import { capStationNameDict, simpleStationNameDict } from "$/service/data";
-import { TrainDirection, Train as TrainType, TypeChange } from "$/types/train";
+import { Train as TrainType } from "$/types/train";
 import { trainItemsSettingAtom, triggerDetailsAtom } from "~/atoms";
 import { TrainItem } from "~/types/settings";
 import { useAtom } from "jotai";
