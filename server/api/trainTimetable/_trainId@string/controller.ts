@@ -3,7 +3,7 @@ import parseKeio from "$/service/apiParser/trainTimetable/keio";
 import parseToei from "$/service/apiParser/trainTimetable/toei";
 import { allKeioStationsJa, fullStationNameDict } from "$/service/data";
 import { API_ODPT_TOKEN } from "$/service/envValues";
-import findNextTrainId from "$/service/findNextTrainId";
+import findNextTrain from "$/service/findNextTrain";
 import useCalendarCache from "$/service/useCalendarCache";
 import { TrainTimetable as KeioTrainTimetable } from "$/types/keioApi";
 import { TrainTimetable as ToeiTrainTimetable } from "$/types/toeiApi";
@@ -23,9 +23,9 @@ export default defineController((fastify) => ({
 
     if (isToei) {
       trainTimetable.push(...(await getToeiTimetable(trainId, fastify)));
-      const nextTrainId = await findNextTrainId(trainId, fastify);
-      if (nextTrainId) {
-        const [sjk, ...others] = await getKeioTimetable(nextTrainId);
+      const nextTrain = await findNextTrain(trainId, fastify);
+      if (nextTrain) {
+        const [sjk, ...others] = await getKeioTimetable(nextTrain.id);
         trainTimetable[trainTimetable.length - 1] = {
           ...trainTimetable[trainTimetable.length - 1],
           depTime: sjk.depTime,
@@ -64,9 +64,9 @@ export default defineController((fastify) => ({
       }
 
       trainTimetable.push(...keioTimetable);
-      const nextTrainId = await findNextTrainId(trainId, fastify);
-      if (nextTrainId) {
-        const [sjk, ...others] = await getToeiTimetable(nextTrainId, fastify);
+      const nextTrain = await findNextTrain(trainId, fastify);
+      if (nextTrain) {
+        const [sjk, ...others] = await getToeiTimetable(nextTrain.id, fastify);
         trainTimetable[trainTimetable.length - 1] = {
           ...trainTimetable[trainTimetable.length - 1],
           depTime: sjk.depTime,

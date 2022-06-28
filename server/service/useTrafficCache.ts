@@ -65,7 +65,8 @@ const useTrafficCache = async (
       return await parseToei(
         (await res.json()) as OdptTrain[],
         operationDict,
-        unitDict
+        unitDict,
+        fastify
       );
     return { timestamp: "", trains: [] };
   })();

@@ -7,7 +7,7 @@ const ExampleTrain: React.VFC = () => (
       train={{
         id: "1800",
         type: "2",
-        dest: "033",
+        dest: "120",
         direction: "East",
         delay: 0,
         carCount: 10,
@@ -16,7 +16,7 @@ const ExampleTrain: React.VFC = () => (
         typeChanges: [
           {
             type: "6",
-            dest: "120",
+            sta: "033",
           },
         ],
         section: {
@@ -30,7 +30,7 @@ const ExampleTrain: React.VFC = () => (
       train={{
         id: "3203",
         type: "4",
-        dest: "027",
+        dest: "032",
         direction: "West",
         delay: 1,
         carCount: 10,
@@ -39,7 +39,7 @@ const ExampleTrain: React.VFC = () => (
         typeChanges: [
           {
             type: "6",
-            dest: "032",
+            sta: "027",
           },
         ],
         section: {
