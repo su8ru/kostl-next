@@ -44,7 +44,7 @@ const Policy: NextPage = () => {
           <ListItem>
             列車種別：公式の列車種別を使用
             <Text lineHeight="1.5" color="gray">
-              ＊種別変更については後述
+              ＊種別変更については時刻表などの情報も利用しています。
             </Text>
           </ListItem>
           <ListItem>行き先：公式の行き先を使用</ListItem>
@@ -66,16 +66,6 @@ const Policy: NextPage = () => {
               ＊京王線内は発車時刻のみ対応
             </Text>
           </ListItem>
-        </UnorderedList>
-        <H3>途中駅における種別変更</H3>
-        <Text mt="4">公式に提供されている種別変更にのみ対応しています。</Text>
-        <Text mt="4">対応していない例:</Text>
-        <UnorderedList spacing="2" mt="3">
-          <ListItem>
-            都営新宿線から京王線への直通列車の、新線新宿駅での種別変更の表示
-          </ListItem>
-          <ListItem>京王線内での種別変更の、都営新宿線内での表示</ListItem>
-          <ListItem>種別変更後の表示</ListItem>
         </UnorderedList>
         <H3>連絡先</H3>
         <UnorderedList spacing="2" mt="4">
