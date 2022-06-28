@@ -8,7 +8,6 @@ const findNextTrainId = async (
   trainId: string,
   fastify: FastifyInstance
 ): Promise<string | null> => {
-  const isToei = ["K", "T"].includes(trainId.slice(-1));
   const { day } = await useCalendarCache(fastify);
 
   const train = await prisma.train.findFirst({
@@ -49,11 +48,12 @@ const findNextTrainId = async (
 
   if (index === operation.trains.length - 1) return null;
 
+  const currTrain = operation.trains[index];
   const nextTrain = operation.trains[index + 1];
 
   if (
-    nextTrain.depSta === "033" &&
-    nextTrain.arrSta.slice(0, 1) === (isToei ? "0" : "1")
+    nextTrain.depSta === currTrain.arrSta &&
+    parseInt(trainId) % 2 === parseInt(nextTrain.id) % 2
   ) {
     return nextTrain.id;
   }
