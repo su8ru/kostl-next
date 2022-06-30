@@ -75,7 +75,7 @@ const TrainDetailsHeader: React.VFC<Props> = ({ train, onDismiss }) => {
         {delay > 0 && (
           <>
             <Divider mx="2" orientation="vertical" height="4" />
-            <Text color="red">
+            <Text color="#cf167c">
               <Text as="span" fontSize="lg" fontWeight="500">
                 {delay}
               </Text>

@@ -5,6 +5,7 @@ import { trainBoxHeightAtom } from "~/atoms";
 import LineBorderY from "~/components/LineBorderY";
 import Section from "~/components/Section";
 import StationLabel from "~/components/StationLabel";
+import StationLine from "~/components/StationLine";
 import UpdateTime from "~/components/UpdateTime";
 import { apiClient } from "~/utils/apiClient";
 import { getGridAreaToei } from "~/utils/gridArea";
@@ -34,7 +35,7 @@ const ToeiLine: React.VFC = () => {
           gridArea={`${index * 2 + 1} / 1 / ${index * 2 + 2} / 20`}
           alignItems="center"
         >
-          <Box bg="#f5f5f5" h="8px" w="100%" />
+          <StationLine />
         </Flex>
       ))}
 

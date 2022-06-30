@@ -17,7 +17,16 @@ const NumberingIcon: React.VFC<Props> = ({ line, id, w, h }) => {
   };
 
   if (isValidFileName(fileName))
-    return <Image src={basePath[fileName]} alt={`${line}-${id}`} w={w} h={h} />;
+    return (
+      <Image
+        src={basePath[fileName]}
+        alt={`${line}-${id}`}
+        w={w}
+        h={h}
+        border="1px solid #fff"
+        borderRadius="50%"
+      />
+    );
 
   return <Box w={w} h={h} />;
 };

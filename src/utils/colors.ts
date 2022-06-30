@@ -1,3 +1,5 @@
+import { useColorModeValue } from "@chakra-ui/react";
+
 export const typeColorList: Record<number, string> = {
   1: "#cf167c",
   2: "#05b08d",
@@ -10,4 +12,9 @@ export const typeColorList: Record<number, string> = {
   9: "#d5007f",
   10: "#808285",
   11: "#57a100",
+};
+
+export const useBgColor = () => {
+  const bgColor = useColorModeValue("#fff", "#000");
+  return bgColor;
 };
