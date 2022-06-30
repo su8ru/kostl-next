@@ -15,6 +15,9 @@ export const typeColorList: Record<number, string> = {
 };
 
 export const useBgColor = () => {
-  const bgColor = useColorModeValue("#fff", "#000");
-  return bgColor;
+  return useColorModeValue("#fff", "#000");
+};
+
+export const useKeioPink = () => {
+  return useColorModeValue("#cf167c", "#f51a92");
 };

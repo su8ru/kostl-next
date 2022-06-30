@@ -3,6 +3,7 @@ import { capStationNameDict, simpleStationNameDict } from "$/service/data";
 import { Train as TrainType } from "$/types/train";
 import { trainItemsSettingAtom, triggerDetailsAtom } from "~/atoms";
 import { TrainItem } from "~/types/settings";
+import { useKeioPink } from "~/utils/colors";
 import { useAtom } from "jotai";
 
 export interface Props {
@@ -13,6 +14,7 @@ const Train: React.VFC<Props> = ({ train }) => {
   const { id, operationId, delay, direction, carCount, unitId } = train;
   const [trainItemsSetting] = useAtom(trainItemsSettingAtom);
   const [triggerDetails] = useAtom(triggerDetailsAtom);
+  const keioPink = useKeioPink();
 
   const itemIdToValue = (itemId: TrainItem): string => {
     switch (itemId) {
@@ -59,7 +61,7 @@ const Train: React.VFC<Props> = ({ train }) => {
         ))}
       </Flex>
       {delay > 0 && (
-        <Text color="#cf167c" fontWeight="900" fontSize="sm">
+        <Text color={keioPink} fontWeight="900" fontSize="sm">
           + {delay}
         </Text>
       )}
