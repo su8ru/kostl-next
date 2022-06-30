@@ -14,6 +14,7 @@ import {
 import ExampleTrain from "~/components/ExampleTrain";
 import PageWrapper from "~/components/PageWrapper";
 import H2 from "~/components/docs/H2";
+import ColorModeSelector from "~/components/settings/ColorModeSelector";
 import TrainItemList from "~/components/settings/TrainItemList";
 import User from "~/components/settings/User";
 import { pagesPath } from "~/utils/$path";
@@ -46,6 +47,12 @@ const Settings: NextPage = () => {
             <TrainItemList />
             <ExampleTrain />
           </Flex>
+        </Box>
+        <Box as="section" mt="8">
+          <H3>外観テーマ</H3>
+          <Box mt="4">
+            <ColorModeSelector />
+          </Box>
         </Box>
         <Box as="section" mt="8">
           <H3>アカウント</H3>

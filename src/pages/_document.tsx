@@ -1,6 +1,8 @@
 import { Head, Html, Main, NextScript } from "next/document";
+import { ColorModeScript } from "@chakra-ui/react";
 import { staticPath } from "~/utils/$path";
 import { NEXT_PUBLIC_GA_ID as GA_ID } from "~/utils/envValues";
+import { config as themeConfig } from "~/utils/theme";
 
 export default function Document() {
   return (
@@ -28,6 +30,7 @@ export default function Document() {
         )}
       </Head>
       <body>
+        <ColorModeScript initialColorMode={themeConfig.initialColorMode} />
         <Main />
         <NextScript />
       </body>
