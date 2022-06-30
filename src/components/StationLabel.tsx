@@ -1,10 +1,4 @@
-import {
-  Flex,
-  Text,
-  Theme,
-  useColorModeValue,
-  useTheme,
-} from "@chakra-ui/react";
+import { Flex, Text } from "@chakra-ui/react";
 
 interface Props {
   name: string;
@@ -13,11 +7,6 @@ interface Props {
 }
 
 const StationLabel: React.VFC<Props> = ({ name, gridArea, alignCenter }) => {
-  const theme = useTheme<Theme>();
-  const color = useColorModeValue(
-    theme.colors.blackAlpha["700"],
-    theme.colors.whiteAlpha["800"]
-  );
   return (
     <Flex
       gridArea={gridArea}
@@ -25,7 +14,7 @@ const StationLabel: React.VFC<Props> = ({ name, gridArea, alignCenter }) => {
       justifyContent={alignCenter ? "center" : "flex-start"}
     >
       <Flex h="42px" alignItems={alignCenter ? "center" : "flex-start"}>
-        <Text fontSize="sm" fontWeight="500" color={color}>
+        <Text fontSize="sm" fontWeight="500" color="gray.500">
           {name}
         </Text>
       </Flex>

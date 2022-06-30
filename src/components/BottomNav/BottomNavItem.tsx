@@ -26,7 +26,7 @@ const BottomNavItem: React.VFC<Props> = ({ icon, href, label }) => {
   return (
     <Box
       onClick={() => router.push(href)}
-      color={router.pathname === href.pathname ? color : "gray"}
+      color={router.pathname === href.pathname ? color : "gray.500"}
       w="60px"
       p="2"
       role="button"

@@ -9,7 +9,7 @@ export interface Props {
 
 const UpdateTime: React.VFC<Props> = ({ timestamp, gridArea }) => (
   <Flex gridArea={gridArea} justifyContent="flex-end" alignItems="center">
-    <HStack mb="8">
+    <HStack mb="8" color="gray.500">
       <BsArrowRepeat />
       <Text>
         {timestamp
