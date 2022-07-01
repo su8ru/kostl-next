@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { BottomSheet, BottomSheetRef } from "react-spring-bottom-sheet";
 import "react-spring-bottom-sheet/dist/style.css";
-import { Text, Theme, useColorModeValue, useTheme } from "@chakra-ui/react";
+import { Text } from "@chakra-ui/react";
 import { Train } from "$/types/train";
 import { triggerDetailsAtom } from "~/atoms";
 import TrainDetailsBody from "~/components/trainDetails/TrainDetailsBody";
@@ -43,8 +43,8 @@ const TrainDetailsBottomSheet: React.VFC = () => {
         train && <TrainDetailsHeader train={train} onDismiss={onDismiss} />
       }
       style={{
-        ["--rsbs-bg" as any]: bgColor,
-        ["--rsbs-handle-bg" as any]: handleColor,
+        ["--rsbs-bg" as never]: bgColor,
+        ["--rsbs-handle-bg" as never]: handleColor,
       }}
     >
       {train ? (

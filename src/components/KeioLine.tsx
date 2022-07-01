@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import { Box, Flex, SimpleGrid, Text } from "@chakra-ui/react";
+import { Box, Flex, SimpleGrid } from "@chakra-ui/react";
 import { allKeioStationsJa } from "$/service/data";
 import { trainBoxHeightAtom } from "~/atoms";
 import LineBorderX from "~/components/LineBorderX";
