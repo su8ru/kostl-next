@@ -4,7 +4,7 @@ import { fullStationNameDict } from "$/service/data";
 import { Train } from "$/types/train";
 import TrainType from "~/components/trainDetails/TrainType";
 import TrainTypeSm from "~/components/trainDetails/TrainTypeSm";
-import { useKeioPink } from "~/utils/colors";
+import { useGray, useKeioPink } from "~/utils/colors";
 
 export type Props = {
   train: Train;
@@ -15,6 +15,7 @@ const TrainDetailsHeader: React.VFC<Props> = ({ train, onDismiss }) => {
   const { id, type, dest, operationId, delay, typeChanges, carCount, unitId } =
     train;
   const keioPink = useKeioPink();
+  const closeButtonColor = useGray();
 
   return (
     <Box mt="4" position="relative">
@@ -28,7 +29,7 @@ const TrainDetailsHeader: React.VFC<Props> = ({ train, onDismiss }) => {
         onClick={onDismiss}
         cursor="pointer"
       >
-        <Icon as={BsXLg} color="gray" />
+        <Icon as={BsXLg} color={closeButtonColor} />
       </Box>
       <Flex fontSize="md" justifyContent="center" alignItems="center">
         <TrainType type={+type} />

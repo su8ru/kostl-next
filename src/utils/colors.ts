@@ -1,4 +1,4 @@
-import { useColorModeValue } from "@chakra-ui/react";
+import { Theme, useColorModeValue, useTheme } from "@chakra-ui/react";
 
 export const typeColorList: Record<number, string> = {
   1: "#cf167c",
@@ -20,4 +20,14 @@ export const useBgColor = () => {
 
 export const useKeioPink = () => {
   return useColorModeValue("#cf167c", "#f51a92");
+};
+
+export const useGray = () => {
+  const theme = useTheme<Theme>();
+  return useColorModeValue(theme.colors.gray["300"], theme.colors.gray["700"]);
+};
+
+export const useLightGray = () => {
+  const theme = useTheme<Theme>();
+  return useColorModeValue(theme.colors.gray["100"], theme.colors.gray["900"]);
 };
