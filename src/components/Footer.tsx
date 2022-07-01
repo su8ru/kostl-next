@@ -3,10 +3,10 @@ import { Box } from "@chakra-ui/react";
 import BottomNav from "~/components/BottomNav/BottomNav";
 import { TrafficIcon, TrainIcon } from "~/components/Icons";
 import { pagesPath } from "~/utils/$path";
-import { useBgColor } from "~/utils/colors";
+import { useFloatingBgColor } from "~/utils/colors";
 
 const Footer: React.VFC = () => {
-  const bgColor = useBgColor();
+  const bgColor = useFloatingBgColor();
 
   return (
     <Box

@@ -14,6 +14,7 @@ import {
   useColorModeValue,
   useTheme,
 } from "@chakra-ui/react";
+import { useFloatingBgColor } from "~/utils/colors";
 
 export type Props = {
   isOpen: boolean;
@@ -22,15 +23,16 @@ export type Props = {
 
 const UnitPostRuleModal: React.VFC<Props> = ({ isOpen, onClose }) => {
   const theme = useTheme<Theme>();
+  const bgColor = useFloatingBgColor();
   const preBgColor = useColorModeValue(
     theme.colors.gray["100"],
-    theme.colors.gray["600"]
+    theme.colors.gray["700"]
   );
 
   return (
     <Modal isOpen={isOpen} onClose={onClose} isCentered>
       <ModalOverlay />
-      <ModalContent>
+      <ModalContent bg={bgColor}>
         <ModalHeader>編成運用投稿 入力ルール</ModalHeader>
         <ModalCloseButton />
         <ModalBody>

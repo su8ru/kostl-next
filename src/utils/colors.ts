@@ -18,6 +18,10 @@ export const useBgColor = () => {
   return useColorModeValue("#fff", "#000");
 };
 
+export const useFloatingBgColor = () => {
+  return useColorModeValue("white", "gray.900");
+};
+
 export const useKeioPink = () => {
   return useColorModeValue("#cf167c", "#f51a92");
 };
