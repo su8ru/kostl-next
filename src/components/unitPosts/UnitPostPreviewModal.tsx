@@ -20,6 +20,7 @@ import {
 } from "@chakra-ui/react";
 import { UnitPost, UnitPostBody } from "$/types/unit";
 import { apiClient } from "~/utils/apiClient";
+import { useFloatingBgColor } from "~/utils/colors";
 import useAspidaSWR from "@aspida/swr";
 
 export type Props = {
@@ -42,6 +43,7 @@ const UnitPostPreviewModal: React.VFC<Props> = ({
   const [postStatus, setPostStatus] = useState<"loading" | "error" | null>(
     null
   );
+  const bgColor = useFloatingBgColor();
 
   const post = async () => {
     setPostStatus("loading");
@@ -69,7 +71,7 @@ const UnitPostPreviewModal: React.VFC<Props> = ({
   return (
     <Modal isOpen={isOpen} onClose={onClose} isCentered scrollBehavior="inside">
       <ModalOverlay />
-      <ModalContent>
+      <ModalContent bg={bgColor}>
         <ModalHeader>投稿プレビュー</ModalHeader>
         <ModalCloseButton />
         <ModalBody>

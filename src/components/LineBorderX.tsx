@@ -19,7 +19,6 @@ const LineBorderX: React.VFC<Props> = ({ gridArea, align, round }) => {
         h="6px"
         mr={round === "right" ? "2px" : 0}
         ml={round === "left" ? "2px" : 0}
-        borderColor="#fff"
         borderBottomRightRadius={
           align === "top" && round === "right" ? "6px" : 0
         }

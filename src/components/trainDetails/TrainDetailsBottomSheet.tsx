@@ -6,6 +6,7 @@ import { Train } from "$/types/train";
 import { triggerDetailsAtom } from "~/atoms";
 import TrainDetailsBody from "~/components/trainDetails/TrainDetailsBody";
 import TrainDetailsHeader from "~/components/trainDetails/TrainDetailsHeader";
+import { useBgColor, useGray } from "~/utils/colors";
 import { useAtom } from "jotai";
 
 const TrainDetailsBottomSheet: React.VFC = () => {
@@ -13,6 +14,8 @@ const TrainDetailsBottomSheet: React.VFC = () => {
   const [train, setTrain] = useState<Train | null>(null);
   const [, setTriggerDetails] = useAtom(triggerDetailsAtom);
   const sheetRef = useRef<BottomSheetRef>(null);
+  const bgColor = useBgColor();
+  const handleColor = useGray();
 
   useEffect(() => {
     const triggerFn = (_train: Train) => {
@@ -39,6 +42,10 @@ const TrainDetailsBottomSheet: React.VFC = () => {
       header={
         train && <TrainDetailsHeader train={train} onDismiss={onDismiss} />
       }
+      style={{
+        ["--rsbs-bg" as never]: bgColor,
+        ["--rsbs-handle-bg" as never]: handleColor,
+      }}
     >
       {train ? (
         <TrainDetailsBody train={train} />
