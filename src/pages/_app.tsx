@@ -1,24 +1,15 @@
-import { useEffect } from "react";
 import type { AppProps } from "next/app";
 import Head from "next/head";
 import { ChakraProvider } from "@chakra-ui/react";
 import "~/aseets/global.scss";
+import use100vh from "~/hooks/use100vh";
 import usePageView from "~/hooks/usePageView";
 import MainLayout from "~/layouts/main";
 import theme from "~/utils/theme";
 
 const MyApp = ({ Component, pageProps }: AppProps) => {
   usePageView();
-
-  useEffect(() => {
-    handleResize();
-    window.addEventListener("resize", handleResize);
-    window.addEventListener("orientationchange", handleResize);
-    return () => {
-      window.removeEventListener("resize", handleResize);
-      window.removeEventListener("orientationchange", handleResize);
-    };
-  }, []);
+  use100vh();
 
   return (
     <>
@@ -38,8 +29,3 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
 };
 
 export default MyApp;
-
-const handleResize = () => {
-  const height = window.innerHeight;
-  document.documentElement.style.setProperty("--100vh", `${height}px`);
-};
