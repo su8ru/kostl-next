@@ -2,8 +2,11 @@ import { PropsWithChildren } from "react";
 import { Box, Flex } from "@chakra-ui/react";
 import Footer from "~/components/Footer";
 import Header from "~/components/Header";
+import useSyncBgColor from "~/hooks/useSyncBgColor";
 
 const MainLayout: React.VFC<PropsWithChildren<unknown>> = ({ children }) => {
+  useSyncBgColor();
+
   return (
     <Flex
       minW="100%"
