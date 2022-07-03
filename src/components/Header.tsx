@@ -10,7 +10,7 @@ const Header: React.VFC = () => {
       left="0"
       right="0"
       justifyContent="center"
-      bg="linear-gradient(0deg,#00205b 46%,#fff 0,#fff 54%,#ab035c 0)"
+      bg="linear-gradient(0deg,#0d3870 46%,#fff 0,#fff 54%,#cf167c 0)"
       boxShadow="lg"
       zIndex="sticky"
     >
@@ -18,7 +18,7 @@ const Header: React.VFC = () => {
         alignItems="baseline"
         pt="1"
         px="3"
-        bg="#ab035c"
+        bg="#cf167c"
         color="#fff"
         borderX="3px solid #fff"
       >
