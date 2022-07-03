@@ -1,11 +1,10 @@
 import { useEffect } from "react";
 import type { AppProps } from "next/app";
 import Head from "next/head";
-import { Box, ChakraProvider, Flex } from "@chakra-ui/react";
+import { ChakraProvider } from "@chakra-ui/react";
 import "~/aseets/global.scss";
-import Footer from "~/components/Footer";
-import Header from "~/components/Header";
 import usePageView from "~/hooks/usePageView";
+import MainLayout from "~/layouts/main";
 import theme from "~/utils/theme";
 
 const MyApp = ({ Component, pageProps }: AppProps) => {
@@ -30,18 +29,9 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
         />
       </Head>
       <ChakraProvider theme={theme}>
-        <Flex
-          minW="100%"
-          minH="var(--100vh)"
-          direction="column"
-          alignItems="center"
-        >
-          <Header />
-          <Box as="main" flexGrow="1" pt="10" pb="20" overflowX="auto">
-            <Component {...pageProps} />
-          </Box>
-          <Footer />
-        </Flex>
+        <MainLayout>
+          <Component {...pageProps} />
+        </MainLayout>
       </ChakraProvider>
     </>
   );
