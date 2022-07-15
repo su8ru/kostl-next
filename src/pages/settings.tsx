@@ -16,6 +16,7 @@ import CopyButton from "~/components/CopyButton";
 import ExampleTrain from "~/components/ExampleTrain";
 import PageWrapper from "~/components/PageWrapper";
 import H2 from "~/components/docs/H2";
+import H3 from "~/components/docs/H3";
 import ColorModeSelector from "~/components/settings/ColorModeSelector";
 import TrainItemList from "~/components/settings/TrainItemList";
 import User from "~/components/settings/User";
@@ -24,14 +25,18 @@ import { apiClient } from "~/utils/apiClient";
 import { NEXT_PUBLIC_VERCEL_GIT_COMMIT_SHA } from "~/utils/envValues";
 import useAspidaSWR from "@aspida/swr";
 import dayjs from "dayjs";
-import H3 from "src/components/docs/H3";
+import timezone from "dayjs/plugin/timezone";
+import utc from "dayjs/plugin/utc";
+
+dayjs.extend(utc);
+dayjs.extend(timezone);
 
 export type StaticProps = {
   buildDateTime: string;
 };
 
 export const getStaticProps: GetStaticProps<StaticProps> = async () => {
-  const buildDateTime = dayjs().format("YYMMDD-HHmmss");
+  const buildDateTime = dayjs().tz("Asia/Tokyo").format("YYMMDD-HHmmss");
   return { props: { buildDateTime } };
 };
 
