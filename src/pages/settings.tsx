@@ -1,8 +1,9 @@
-import { NextPage } from "next";
+import { GetStaticProps, NextPage } from "next";
 import Head from "next/head";
 import NextLink from "next/link";
 import {
   Box,
+  Button,
   Code,
   Divider,
   Flex,
@@ -19,11 +20,27 @@ import TrainItemList from "~/components/settings/TrainItemList";
 import User from "~/components/settings/User";
 import { pagesPath } from "~/utils/$path";
 import { apiClient } from "~/utils/apiClient";
+import { NEXT_PUBLIC_VERCEL_GIT_COMMIT_SHA } from "~/utils/envValues";
 import useAspidaSWR from "@aspida/swr";
+import dayjs from "dayjs";
 import H3 from "src/components/docs/H3";
 
-const Settings: NextPage = () => {
+export type StaticProps = {
+  buildDateTime: string;
+};
+
+export const getStaticProps: GetStaticProps<StaticProps> = async () => {
+  const buildDateTime = dayjs().format("YYMMDD-HHmmss");
+  return { props: { buildDateTime } };
+};
+
+const Settings: NextPage<StaticProps> = ({ buildDateTime }) => {
   const { data } = useAspidaSWR(apiClient.calendar);
+  const version = `${
+    NEXT_PUBLIC_VERCEL_GIT_COMMIT_SHA
+      ? NEXT_PUBLIC_VERCEL_GIT_COMMIT_SHA.slice(7)
+      : "local"
+  }-${buildDateTime}`;
 
   return (
     <PageWrapper>
@@ -70,6 +87,24 @@ const Settings: NextPage = () => {
       <Divider my="12" />
       <Box as="section" mt="12">
         <H2>デバッグ情報</H2>
+        <H3>バージョン</H3>
+        <UnorderedList spacing="2" mt="3">
+          <ListItem>
+            <Text>
+              <Code>{version}</Code>
+            </Text>
+            <Button
+              colorScheme="blue"
+              size="xs"
+              variant="link"
+              onClick={() => {
+                navigator.clipboard.writeText(version);
+              }}
+            >
+              Copy
+            </Button>
+          </ListItem>
+        </UnorderedList>
         <H3>日付・曜日</H3>
         <UnorderedList spacing="2" mt="3">
           <ListItem>
