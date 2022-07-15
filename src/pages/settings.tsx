@@ -3,15 +3,16 @@ import Head from "next/head";
 import NextLink from "next/link";
 import {
   Box,
-  Button,
   Code,
   Divider,
   Flex,
   Link,
   ListItem,
+  Spacer,
   Text,
   UnorderedList,
 } from "@chakra-ui/react";
+import CopyButton from "~/components/CopyButton";
 import ExampleTrain from "~/components/ExampleTrain";
 import PageWrapper from "~/components/PageWrapper";
 import H2 from "~/components/docs/H2";
@@ -38,7 +39,7 @@ const Settings: NextPage<StaticProps> = ({ buildDateTime }) => {
   const { data } = useAspidaSWR(apiClient.calendar);
   const version = `${
     NEXT_PUBLIC_VERCEL_GIT_COMMIT_SHA
-      ? NEXT_PUBLIC_VERCEL_GIT_COMMIT_SHA.slice(7)
+      ? NEXT_PUBLIC_VERCEL_GIT_COMMIT_SHA.slice(0, 7)
       : "local"
   }-${buildDateTime}`;
 
@@ -90,19 +91,11 @@ const Settings: NextPage<StaticProps> = ({ buildDateTime }) => {
         <H3>バージョン</H3>
         <UnorderedList spacing="2" mt="3">
           <ListItem>
-            <Text>
+            <Flex>
               <Code>{version}</Code>
-            </Text>
-            <Button
-              colorScheme="blue"
-              size="xs"
-              variant="link"
-              onClick={() => {
-                navigator.clipboard.writeText(version);
-              }}
-            >
-              Copy
-            </Button>
+              <Spacer />
+              <CopyButton value={version} />
+            </Flex>
           </ListItem>
         </UnorderedList>
         <H3>日付・曜日</H3>
