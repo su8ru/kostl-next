@@ -97,7 +97,7 @@ const Settings: NextPage<StaticProps> = ({ buildDateTime }) => {
         <UnorderedList spacing="2" mt="3">
           <ListItem>
             <Flex>
-              <Code>{version}</Code>
+              <Text>{version}</Text>
               <Spacer />
               <CopyButton value={version} />
             </Flex>
