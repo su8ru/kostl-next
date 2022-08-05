@@ -14,7 +14,7 @@ const LineBorderX: React.VFC<Props> = ({ gridArea, align, round }) => {
       h="100%"
     >
       <Box
-        bg="#cf167c"
+        bg="#d6007f"
         w="100%"
         h="6px"
         mr={round === "right" ? "2px" : 0}

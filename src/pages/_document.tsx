@@ -9,6 +9,21 @@ export default function Document() {
     <Html>
       <Head>
         <link rel="icon" href={staticPath.favicon_ico} />
+        <link rel="manifest" href="/manifest.json" />
+        <link
+          rel="apple-touch-icon"
+          type="image/png"
+          href={staticPath.apple_touch_icon_png}
+        />
+        <link
+          rel="icon"
+          type="image/png"
+          href={staticPath.icons.icon_192x192_png}
+        />
+        <meta name="apple-mobile-web-app-title" content="こすとれ - kostl" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+        <meta name="theme-color" content="#fff" />
         {GA_ID && (
           <>
             <script

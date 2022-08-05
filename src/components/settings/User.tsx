@@ -1,7 +1,8 @@
 import { useEffect } from "react";
 import { useAuthState, useSignInWithGoogle } from "react-firebase-hooks/auth";
 import { BsBoxArrowRight } from "react-icons/bs";
-import { Avatar, Box, Button, Flex, Text } from "@chakra-ui/react";
+import { Avatar, Box, Button, Flex, Spacer, Text } from "@chakra-ui/react";
+import CopyButton from "~/components/CopyButton";
 import { GoogleIcon } from "~/components/Icons";
 import { apiClient } from "~/utils/apiClient";
 import { getFirebaseAuth } from "~/utils/firebaseAuth";
@@ -54,17 +55,12 @@ const User: React.VFC = () => {
         </Box>
         <Box mt="4">
           <Text fontSize="sm">ID</Text>
-          <Text fontSize="md">{user.uid}</Text>
-          <Button
-            colorScheme="blue"
-            size="xs"
-            variant="link"
-            onClick={() => {
-              navigator.clipboard.writeText(user.uid);
-            }}
-          >
-            Copy
-          </Button>
+
+          <Flex>
+            <Text fontSize="md">{user.uid}</Text>
+            <Spacer />
+            <CopyButton value={user.uid} />
+          </Flex>
         </Box>
       </Box>
     );

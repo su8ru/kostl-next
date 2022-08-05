@@ -1,55 +1,31 @@
-import { useEffect } from "react";
 import type { AppProps } from "next/app";
 import Head from "next/head";
-import { Box, ChakraProvider, Flex } from "@chakra-ui/react";
+import { ChakraProvider } from "@chakra-ui/react";
 import "~/aseets/global.scss";
-import Footer from "~/components/Footer";
-import Header from "~/components/Header";
+import use100vh from "~/hooks/use100vh";
 import usePageView from "~/hooks/usePageView";
+import MainLayout from "~/layouts/main";
 import theme from "~/utils/theme";
 
 const MyApp = ({ Component, pageProps }: AppProps) => {
   usePageView();
-
-  useEffect(() => {
-    handleResize();
-    window.addEventListener("resize", handleResize);
-    window.addEventListener("orientationchange", handleResize);
-    return () => {
-      window.removeEventListener("resize", handleResize);
-      window.removeEventListener("orientationchange", handleResize);
-    };
-  }, []);
+  use100vh();
 
   return (
     <>
       <Head>
         <meta
           name="viewport"
-          content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0"
+          content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,viewport-fit=cover"
         />
       </Head>
       <ChakraProvider theme={theme}>
-        <Flex
-          minW="100%"
-          minH="var(--100vh)"
-          direction="column"
-          alignItems="center"
-        >
-          <Header />
-          <Box as="main" flexGrow="1" pt="10" pb="20" overflowX="auto">
-            <Component {...pageProps} />
-          </Box>
-          <Footer />
-        </Flex>
+        <MainLayout>
+          <Component {...pageProps} />
+        </MainLayout>
       </ChakraProvider>
     </>
   );
 };
 
 export default MyApp;
-
-const handleResize = () => {
-  const height = window.innerHeight;
-  document.documentElement.style.setProperty("--100vh", `${height}px`);
-};

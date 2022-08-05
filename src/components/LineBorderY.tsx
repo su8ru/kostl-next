@@ -7,7 +7,7 @@ interface Props {
 }
 
 const color = {
-  keio: "#cf167c",
+  keio: "#d6007f",
   toei: "#7eb500",
 } as const;
 

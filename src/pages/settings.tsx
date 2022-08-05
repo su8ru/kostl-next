@@ -1,4 +1,4 @@
-import { NextPage } from "next";
+import { GetStaticProps, NextPage } from "next";
 import Head from "next/head";
 import NextLink from "next/link";
 import {
@@ -8,22 +8,45 @@ import {
   Flex,
   Link,
   ListItem,
+  Spacer,
   Text,
   UnorderedList,
 } from "@chakra-ui/react";
+import CopyButton from "~/components/CopyButton";
 import ExampleTrain from "~/components/ExampleTrain";
 import PageWrapper from "~/components/PageWrapper";
 import H2 from "~/components/docs/H2";
+import H3 from "~/components/docs/H3";
 import ColorModeSelector from "~/components/settings/ColorModeSelector";
 import TrainItemList from "~/components/settings/TrainItemList";
 import User from "~/components/settings/User";
 import { pagesPath } from "~/utils/$path";
 import { apiClient } from "~/utils/apiClient";
+import { NEXT_PUBLIC_VERCEL_GIT_COMMIT_SHA } from "~/utils/envValues";
 import useAspidaSWR from "@aspida/swr";
-import H3 from "src/components/docs/H3";
+import dayjs from "dayjs";
+import timezone from "dayjs/plugin/timezone";
+import utc from "dayjs/plugin/utc";
 
-const Settings: NextPage = () => {
+dayjs.extend(utc);
+dayjs.extend(timezone);
+
+export type StaticProps = {
+  buildDateTime: string;
+};
+
+export const getStaticProps: GetStaticProps<StaticProps> = async () => {
+  const buildDateTime = dayjs().tz("Asia/Tokyo").format("YYMMDD-HHmmss");
+  return { props: { buildDateTime } };
+};
+
+const Settings: NextPage<StaticProps> = ({ buildDateTime }) => {
   const { data } = useAspidaSWR(apiClient.calendar);
+  const version = `${
+    NEXT_PUBLIC_VERCEL_GIT_COMMIT_SHA
+      ? NEXT_PUBLIC_VERCEL_GIT_COMMIT_SHA.slice(0, 7)
+      : "local"
+  }-${buildDateTime}`;
 
   return (
     <PageWrapper>
@@ -70,6 +93,16 @@ const Settings: NextPage = () => {
       <Divider my="12" />
       <Box as="section" mt="12">
         <H2>デバッグ情報</H2>
+        <H3>バージョン</H3>
+        <UnorderedList spacing="2" mt="3">
+          <ListItem>
+            <Flex>
+              <Text>{version}</Text>
+              <Spacer />
+              <CopyButton value={version} />
+            </Flex>
+          </ListItem>
+        </UnorderedList>
         <H3>日付・曜日</H3>
         <UnorderedList spacing="2" mt="3">
           <ListItem>

@@ -23,7 +23,7 @@ export const useFloatingBgColor = () => {
 };
 
 export const useKeioPink = () => {
-  return useColorModeValue("#cf167c", "#f51a92");
+  return useColorModeValue("#d6007f", "#f51a92");
 };
 
 export const useGray = () => {
