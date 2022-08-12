@@ -18,9 +18,7 @@ export const getFirebaseApp = (): FirebaseApp =>
 export const getFirebaseAuth = (): FirebaseAuth => {
   const auth = getAuth(getFirebaseApp());
   auth.onAuthStateChanged((user) => {
-    console.log("auth status changed");
     if (user) {
-      console.log("user found", user.uid);
       user.getIdToken().then((token) => {
         apiClient.auth.session.$post({
           body: { token },
