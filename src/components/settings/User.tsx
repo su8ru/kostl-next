@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { useAuthState, useSignInWithGoogle } from "react-firebase-hooks/auth";
 import { BsBoxArrowRight } from "react-icons/bs";
 import { Avatar, Box, Button, Flex, Spacer, Text } from "@chakra-ui/react";
@@ -11,8 +10,7 @@ const auth = getFirebaseAuth();
 
 const User: React.VFC = () => {
   const [user, authLoading] = useAuthState(auth);
-  const [signInWithGoogle, userCredential, signInLoading] =
-    useSignInWithGoogle(auth);
+  const [signInWithGoogle, , signInLoading] = useSignInWithGoogle(auth);
 
   const login = async () => {
     auth.languageCode = "ja";
@@ -23,15 +21,6 @@ const User: React.VFC = () => {
     auth.signOut();
     await apiClient.auth.session.$delete({ body: {} });
   };
-
-  useEffect(() => {
-    if (userCredential)
-      userCredential.user.getIdToken().then((token) =>
-        apiClient.auth.session.$post({
-          body: { token },
-        })
-      );
-  }, [userCredential]);
 
   if (user)
     return (
