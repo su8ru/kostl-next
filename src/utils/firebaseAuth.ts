@@ -1,3 +1,4 @@
+import { apiClient } from "~/utils/apiClient";
 import { FirebaseApp, getApps, initializeApp } from "firebase/app";
 import { Auth as FirebaseAuth, getAuth } from "firebase/auth";
 
@@ -14,4 +15,18 @@ const firebaseConfig = {
 export const getFirebaseApp = (): FirebaseApp =>
   getApps()[0] || initializeApp(firebaseConfig);
 
-export const getFirebaseAuth = (): FirebaseAuth => getAuth(getFirebaseApp());
+export const getFirebaseAuth = (): FirebaseAuth => {
+  const auth = getAuth(getFirebaseApp());
+  auth.onAuthStateChanged((user) => {
+    console.log("auth status changed");
+    if (user) {
+      console.log("user found", user.uid);
+      user.getIdToken().then((token) => {
+        apiClient.auth.session.$post({
+          body: { token },
+        });
+      });
+    }
+  });
+  return auth;
+};
