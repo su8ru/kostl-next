@@ -1,48 +1,43 @@
-name: Deploy Server
+name: Deploy
 
 on:
   push:
     branches:
       - main
 
+env:
+  IMAGE_NAME: su8ru/kostl-next/server-prod-image
+
 jobs:
-  deploy:
-    name: Deploy
+  deploy-docker:
     runs-on: ubuntu-latest
-    environment:
-      name: Server
     steps:
-      - uses: actions/checkout@v2
-      - name: prepare .ssh dir
-        run: mkdir -p .ssh && chmod 700 .ssh
-      - name: prepare ssh key
-        run: echo "$SSH_KEY" > .ssh/id_rsa && chmod 600 .ssh/id_rsa
-        env:
-          SSH_KEY: ${{ secrets.SSH_KEY }}
-      - name: set permission
-        run: chmod -R 775 * && sudo groupadd -f docker && sudo useradd deploy -g docker && sudo chown -R deploy:docker *
-      - name: push with rsync
-        run: |
-          rsync -rlptgoD -O --delete --exclude ".git/" --exclude "server/.env" \
-          -e "ssh -i .ssh/id_rsa -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -p ${SSH_PORT}" \
-          * $SSH_USER@$SSH_HOST:$DIR
-        env:
-          DIR: ${{ secrets.DEPLOY_DIR }}
-          SSH_HOST: ${{ secrets.SSH_HOST }}
-          SSH_USER: ${{ secrets.SSH_USER }}
-          SSH_PORT: ${{ secrets.SSH_PORT }}
-      - name: build & up -d
-        uses: appleboy/ssh-action@master
+      - uses: actions/checkout@v3
+      - name: Build and Publish to GitHub Container Registry
+        uses: elgohr/Publish-Docker-Github-Action@v4
         with:
-          host:     ${{ secrets.SSH_HOST }}
-          username: ${{ secrets.SSH_USER }}
-          key:      ${{ secrets.SSH_KEY }}
-          port:     ${{ secrets.SSH_PORT }}
-          envs: DIR
-          script_stop: true
-          script: |
-            cd $DIR
-            docker-compose build
-            docker-compose up -d
+          name: ${{ env.IMAGE_NAME }}
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+          default_branch: main
+          tags: latest
+          workdir: server
+      - name: Deploy to VPS
+        uses: appleboy/ssh-action@master
         env:
-          DIR: ${{ secrets.DEPLOY_DIR }}
+          GITHUB_USERNAME: ${{ github.actor }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          DEPLOY_DIR: ${{ secrets.DEPLOY_DIR }}
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          port: ${{ secrets.SSH_PORT }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          passphrase: ${{ secrets.SSH_PRIVATE_KEY_PASSPHRASE }}
+          envs: GITHUB_USERNAME, GITHUB_TOKEN, DEPLOY_DIR
+          script: |
+            cd $DEPLOY_DIR
+            docker login ghcr.io -u $GITHUB_USERNAME -p $GITHUB_TOKEN
+            docker compose pull
+            docker compose up -d
