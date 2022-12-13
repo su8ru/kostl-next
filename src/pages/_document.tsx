@@ -43,6 +43,11 @@ export default function Document() {
             />
           </>
         )}
+        <script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9762344007433225"
+          crossOrigin="anonymous"
+        ></script>
       </Head>
       <body>
         <ColorModeScript initialColorMode={themeConfig.initialColorMode} />
