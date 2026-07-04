@@ -1,0 +1,10 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "kostl-api",
+  "main": "src/index.ts",
+  "compatibility_date": "2026-07-02",
+  "routes": [{ "pattern": "api.kostl.info", "custom_domain": true }],
+  "vars": {
+    "CLIENT_ORIGIN": "https://kostl.info"
+  }
+}
