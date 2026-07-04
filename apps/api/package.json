@@ -8,8 +8,9 @@
   "scripts": {
     "dev": "wrangler dev",
     "build": "tsc --noEmit",
-    "deploy": "wrangler deploy",
-    "deploy:dry-run": "wrangler deploy --dry-run",
+    "build:worker": "pnpm build",
+    "deploy": "pnpm build:worker && wrangler deploy",
+    "deploy:dry-run": "pnpm build:worker && wrangler deploy --dry-run",
     "lint": "eslint --max-warnings 0 --ext .ts src && prettier --config ../../.prettierrc.js --ignore-path ../../.prettierignore --plugin ../../node_modules/@trivago/prettier-plugin-sort-imports/lib/src/index.js --check \"src/**/*.ts\"",
     "lint:fix": "eslint --ext .ts src --fix && prettier --config ../../.prettierrc.js --ignore-path ../../.prettierignore --plugin ../../node_modules/@trivago/prettier-plugin-sort-imports/lib/src/index.js --write \"src/**/*.ts\"",
     "typecheck": "tsc --noEmit"
@@ -26,6 +27,6 @@
     "eslint": "^7.24.0",
     "eslint-config-prettier": "^8.3.0",
     "typescript": "~5.9.3",
-    "wrangler": "^4.0.0"
+    "wrangler": "^4.106.0"
   }
 }

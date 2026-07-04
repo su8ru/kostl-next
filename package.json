@@ -9,8 +9,12 @@
     "lint": "pnpm -r lint",
     "lint:fix": "pnpm -r lint:fix",
     "typecheck": "pnpm -r typecheck",
-    "deploy:api": "pnpm --filter @kostl/api deploy",
-    "deploy:api:dry-run": "pnpm --filter @kostl/api deploy:dry-run"
+    "deploy": "pnpm deploy:api && pnpm deploy:web",
+    "deploy:dry-run": "pnpm deploy:api:dry-run && pnpm deploy:web:dry-run",
+    "deploy:api": "pnpm --filter @kostl/api run deploy",
+    "deploy:api:dry-run": "pnpm --filter @kostl/api run deploy:dry-run",
+    "deploy:web": "pnpm --filter @kostl/web run deploy",
+    "deploy:web:dry-run": "pnpm --filter @kostl/web run deploy:dry-run"
   },
   "devDependencies": {
     "@trivago/prettier-plugin-sort-imports": "^3.2.0",

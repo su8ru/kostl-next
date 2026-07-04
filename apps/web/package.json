@@ -5,7 +5,11 @@
   "scripts": {
     "dev": "next dev -p 8000",
     "build": "next build",
+    "build:worker": "pnpm build && pnpm export",
+    "export": "next export",
     "start": "next start",
+    "deploy": "pnpm build:worker && wrangler deploy",
+    "deploy:dry-run": "pnpm build:worker && wrangler deploy --dry-run",
     "generate": "pathpida --enableStatic",
     "pregenerate": "pnpm --filter @kostl/shared build && pnpm --filter @kostl/api build",
     "prebuild": "pnpm generate",
@@ -51,6 +55,7 @@
     "eslint-plugin-react": "^7.28.0",
     "notios": "^0.4.0",
     "sass": "^1.49.9",
-    "typescript": "~5.9.3"
+    "typescript": "~5.9.3",
+    "wrangler": "^4.106.0"
   }
 }
