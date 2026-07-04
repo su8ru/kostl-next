@@ -1,11 +1,4 @@
-node_modules
-.next
-dist
-out
-server/migration
-server/index.js
-server/lambda.js
-server/lambda_migration.js
-
-src/**/$*.ts
-server/**/$*.ts
+apps/web/src/utils/$path.ts
+apps/web/src/**/$*.ts
+apps/*/dist
+packages/*/dist
