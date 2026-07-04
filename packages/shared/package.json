@@ -1,0 +1,41 @@
+{
+  "name": "@kostl/shared",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    "./data": {
+      "types": "./dist/data.d.ts",
+      "default": "./dist/data.js"
+    },
+    "./types/keioApi": {
+      "types": "./dist/types/keioApi.d.ts",
+      "default": "./dist/types/keioApi.js"
+    },
+    "./types/toeiApi": {
+      "types": "./dist/types/toeiApi.d.ts",
+      "default": "./dist/types/toeiApi.js"
+    },
+    "./types/train": {
+      "types": "./dist/types/train.d.ts",
+      "default": "./dist/types/train.js"
+    },
+    "./types/trainTimetable": {
+      "types": "./dist/types/trainTimetable.d.ts",
+      "default": "./dist/types/trainTimetable.js"
+    }
+  },
+  "scripts": {
+    "build": "tsc",
+    "lint": "eslint --max-warnings 0 --ext .ts src && prettier --config ../../.prettierrc.js --ignore-path ../../.prettierignore --plugin ../../node_modules/@trivago/prettier-plugin-sort-imports/lib/src/index.js --check \"src/**/*.ts\"",
+    "lint:fix": "eslint --ext .ts src --fix && prettier --config ../../.prettierrc.js --ignore-path ../../.prettierignore --plugin ../../node_modules/@trivago/prettier-plugin-sort-imports/lib/src/index.js --write \"src/**/*.ts\"",
+    "typecheck": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^5.10.2",
+    "@typescript-eslint/parser": "^5.10.2",
+    "eslint": "^7.24.0",
+    "eslint-config-prettier": "^8.3.0",
+    "typescript": "~5.9.3"
+  }
+}

@@ -9,8 +9,8 @@ node_modules
 /coverage
 
 # next.js
-/.next/
-/out/
+**/.next/
+**/out/
 
 # production
 /build
@@ -30,20 +30,17 @@ tsconfig.tsbuildinfo
 .env.development.local
 .env.test.local
 .env.production.local
+.dev.vars
 
-# client
-
-src/**/$*.ts
-
-# server
-server/**/$*.ts
-server/**/*.db
-server/index.js
-server/upload/
+# generated
+apps/web/src/**/$*.ts
+packages/*/dist/
+apps/*/dist/
+apps/api/.wrangler/
 
 ## service worker
 
-public/sw.js
-public/sw.js.map
-public/workbox-*.js
-public/workbox-*.js.map
+apps/web/public/sw.js
+apps/web/public/sw.js.map
+apps/web/public/workbox-*.js
+apps/web/public/workbox-*.js.map
