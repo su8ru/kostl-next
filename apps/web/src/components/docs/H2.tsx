@@ -1,6 +1,8 @@
 import { Heading } from "@chakra-ui/react";
 
-const H2: React.FC = ({ children }) => (
+type Props = React.PropsWithChildren;
+
+const H2 = ({ children }: Props) => (
   <Heading as="h2" fontSize="3xl" textAlign="center">
     {children}
   </Heading>

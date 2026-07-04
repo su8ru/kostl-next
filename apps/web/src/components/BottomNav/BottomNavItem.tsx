@@ -1,19 +1,10 @@
 import * as React from "react";
 import { useRouter } from "next/router";
-import {
-  Box,
-  ComponentWithAs,
-  Flex,
-  Icon,
-  IconProps,
-  useColorModeValue,
-} from "@chakra-ui/react";
+import { Box, Flex, Icon, useColorModeValue } from "@chakra-ui/react";
 import { UrlObject } from "url";
 
 export type Props = {
-  icon:
-    | ((props: React.SVGAttributes<SVGElement>) => JSX.Element)
-    | ComponentWithAs<"svg", IconProps>;
+  icon: React.ElementType;
   label: string;
   href: UrlObject;
 };
