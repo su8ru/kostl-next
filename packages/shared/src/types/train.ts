@@ -9,6 +9,7 @@ export type Train = {
   dest: string;
   carCount: number | null;
   unitId: string | null;
+  vehicleModel: string | null;
   section: Section;
   typeChanges?: TypeChange[];
 };

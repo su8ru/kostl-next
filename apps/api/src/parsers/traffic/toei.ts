@@ -74,6 +74,7 @@ const parseToei = async (
           dest: destToId(dest ?? "ERROR"),
           carCount: null,
           unitId: rawOperationId ? unitDict[rawOperationId] ?? null : null,
+          vehicleModel: null,
           section: stationToSection(
             fromStation ?? "ERROR",
             toStation ?? null,

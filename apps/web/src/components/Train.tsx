@@ -1,7 +1,11 @@
 import { trainItemsSettingAtom, triggerDetailsAtom } from "~/atoms";
 import { TrainItem } from "~/types/settings";
 import { useKeioPink } from "~/utils/colors";
-import { capStationNameDict, simpleStationNameDict } from "@kostl/shared/data";
+import {
+  capStationNameDict,
+  simpleStationNameDict,
+  vehicleModelDict,
+} from "@kostl/shared/data";
 import { Train as TrainType } from "@kostl/shared/types/train";
 import { useAtom } from "jotai";
 
@@ -10,7 +14,7 @@ export interface Props {
 }
 
 const Train: React.VFC<Props> = ({ train }) => {
-  const { id, delay, direction, carCount } = train;
+  const { id, delay, direction, carCount, vehicleModel } = train;
   const [trainItemsSetting] = useAtom(trainItemsSettingAtom);
   const [triggerDetails] = useAtom(triggerDetailsAtom);
   const keioPink = useKeioPink();
@@ -22,7 +26,9 @@ const Train: React.VFC<Props> = ({ train }) => {
       case "destination":
         return getDest(train);
       case "carCount":
-        return carCount?.toString() ?? "-";
+        return carCount !== null ? `${carCount}両` : "-";
+      case "vehicleModel":
+        return vehicleModel ? vehicleModelDict[vehicleModel] ?? "-" : "-";
     }
   };
 

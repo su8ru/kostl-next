@@ -46,6 +46,7 @@ const parseKeio = (
             delay: Number(train.dl) || 0,
             carCount: +train.sr,
             unitId: operationId ? unitDict[operationId] ?? null : null,
+            vehicleModel: train.sk ?? null,
             section: {
               id: sectionIdToNumber(id),
               type: "Sta",
@@ -84,6 +85,7 @@ const parseKeio = (
             delay: Number(train.dl) || 0,
             carCount: +train.sr,
             unitId: operationId ? unitDict[operationId] ?? null : null,
+            vehicleModel: train.sk ?? null,
             section,
             ...(typeChange ? { typeChanges: [typeChange] } : {}),
           };

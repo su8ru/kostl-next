@@ -121,6 +121,16 @@ export const trainTypeDict: Record<string, string> = {
   "11": "Mt.TAKAO号",
 };
 
+export const vehicleModelDict: Record<string, string> = {
+  "0": "10-300",
+  "2": "2000",
+  "4": "9000?",
+  "5": "5000",
+  "7": "7000",
+  "8": "8000",
+  "9": "9000",
+};
+
 export const stationNameEnToJaDict: Record<string, string> = {
   Shinjuku: "N新宿",
   Sasazuka: "笹塚",

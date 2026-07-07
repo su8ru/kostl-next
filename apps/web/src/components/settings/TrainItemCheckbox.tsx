@@ -53,4 +53,5 @@ const itemName: Record<TrainItem, string> = {
   trainId: "列車番号",
   destination: "行き先",
   carCount: "編成両数",
+  vehicleModel: "車種（β版）",
 };

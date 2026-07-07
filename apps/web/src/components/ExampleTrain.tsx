@@ -12,6 +12,7 @@ const ExampleTrain: React.VFC = () => (
         delay: 0,
         carCount: 10,
         unitId: "9730F",
+        vehicleModel: "9",
         operationId: "69K",
         typeChanges: [
           {
@@ -35,6 +36,7 @@ const ExampleTrain: React.VFC = () => (
         delay: 1,
         carCount: 10,
         unitId: "8712F",
+        vehicleModel: "8",
         operationId: "No.1",
         typeChanges: [
           {

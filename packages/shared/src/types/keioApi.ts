@@ -29,6 +29,7 @@ interface P {
   ik_tr: string;
   inf: string;
   sr: string;
+  sk?: string;
 }
 
 type Sn = "I" | "K" | "S";

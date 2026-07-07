@@ -3,7 +3,7 @@ import { Box, Divider, Flex, Icon, Text } from "@chakra-ui/react";
 import TrainType from "~/components/trainDetails/TrainType";
 import TrainTypeSm from "~/components/trainDetails/TrainTypeSm";
 import { useGray, useKeioPink } from "~/utils/colors";
-import { fullStationNameDict } from "@kostl/shared/data";
+import { fullStationNameDict, vehicleModelDict } from "@kostl/shared/data";
 import { Train } from "@kostl/shared/types/train";
 
 export type Props = {
@@ -12,8 +12,20 @@ export type Props = {
 };
 
 const TrainDetailsHeader: React.VFC<Props> = ({ train, onDismiss }) => {
-  const { id, type, dest, operationId, delay, typeChanges, carCount, unitId } =
-    train;
+  const {
+    id,
+    type,
+    dest,
+    operationId,
+    delay,
+    typeChanges,
+    carCount,
+    unitId,
+    vehicleModel,
+  } = train;
+  const vehicleModelLabel = vehicleModel
+    ? vehicleModelDict[vehicleModel]
+    : null;
   const keioPink = useKeioPink();
   const closeButtonColor = useGray();
 
@@ -41,6 +53,19 @@ const TrainDetailsHeader: React.VFC<Props> = ({ train, onDismiss }) => {
             行き
           </Text>
         </Text>
+        {vehicleModelLabel && (
+          <>
+            <Divider mx="2" orientation="vertical" height="4" />
+            <Text>
+              <Text as="span" fontWeight="500" fontSize="lg">
+                {vehicleModelLabel}
+              </Text>
+              <Text as="span" fontSize="xs" ml="1">
+                系
+              </Text>
+            </Text>
+          </>
+        )}
         {carCount && (
           <>
             <Divider mx="2" orientation="vertical" height="4" />
@@ -49,7 +74,7 @@ const TrainDetailsHeader: React.VFC<Props> = ({ train, onDismiss }) => {
                 {carCount}
               </Text>
               <Text as="span" fontSize="xs" ml="1">
-                両編成
+                両
               </Text>
             </Text>
           </>
@@ -70,7 +95,14 @@ const TrainDetailsHeader: React.VFC<Props> = ({ train, onDismiss }) => {
       )}
       <Flex fontSize="md" justifyContent="center" alignItems="center" mt="2">
         <Text>
-          {id} {!/^\d+[TK]$/.test(id) && "ﾚ"}
+          <Text as="span" fontWeight="500" fontSize="lg">
+            {id}
+          </Text>
+          {!/^\d+[TK]$/.test(id) && (
+            <Text as="span" fontSize="xs" ml="1">
+              列車
+            </Text>
+          )}
         </Text>
         {operationId && <Divider ml="2" orientation="vertical" height="4" />}
         {operationId && <Text ml="2">{operationId}</Text>}
